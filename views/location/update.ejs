@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label>Velg dager</label>
                         <div class="checkbox-group">
-                            <label class="checkbox-label"><input type="checkbox" name="days[]" value="lørdag" <% if (location.days.includes('saturday')) { %>checked<% } %>> Lørdag</label>
+                            <label class="checkbox-label"><input type="checkbox" name="days[]" value="lørdag" <% if (location.days.includes('saturday') || location.days.includes('lørdag')) { %>checked<% } %>> Lørdag</label>
                             <label class="checkbox-label"><input type="checkbox" name="days[]" value="søndag" <% if (location.days.includes('sunday')) { %>checked<% } %>> Søndag</label>
                             <label class="checkbox-label"><input type="checkbox" name="days[]" value="mandag" <% if (location.days.includes('monday')) { %>checked<% } %>> Mandag</label>
                             <label class="checkbox-label"><input type="checkbox" name="days[]" value="tirsdag" <% if (location.days.includes('tuesday')) { %>checked<% } %>> Tirsdag</label>
@@ -37,7 +37,7 @@
                         <div class="checkbox-group">
                             <label class="checkbox-label"><input type="checkbox" name="shifts[]" value="dag" <% if (location.shifts.includes('day') || location.shifts.includes('dag')) { %>checked<% } %>> Dag</label>
                             <label class="checkbox-label"><input type="checkbox" name="shifts[]" value="natt" <% if (location.shifts.includes('night') || location.shifts.includes('natt')) { %>checked<% } %>> Natt</label>
-                            <label class="checkbox-label"><input type="checkbox" name="shifts[]" value="kveld" <% if (location.shifts.includes('evening') || location.shifts.includes('')) { %>checked<% } %>> Kveld</label>
+                            <label class="checkbox-label"><input type="checkbox" name="shifts[]" value="kveld" <% if (location.shifts.includes('evening') || location.shifts.includes('kveld')) { %>checked<% } %>> Kveld</label>
                         </div>
                     </div>
                 </div>
