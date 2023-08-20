@@ -15,7 +15,7 @@ const PDFSchema = new mongoose.Schema({
     },
     createdAt: {
         type: String,
-        default: new Date().toISOString().split('T')[0]
+        default: new Date().getUTCFullYear() + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay()
     },
 })
 
