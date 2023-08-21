@@ -98,9 +98,9 @@ const createNewDriver = async (req,res) =>{
         now = now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
         let correctDate = new Date(now)
 
-        const year = now.getFullYear();
-        const month = (now.getMonth() + 1).toString().padStart(2, '0');
-        const day = now.getDate().toString().padStart(2, '0');
+        const year = correctDate.getFullYear();
+        const month = (correctDate.getMonth() + 1).toString().padStart(2, '0');
+        const day = correctDate.getDate().toString().padStart(2, '0');
 
         const formattedDate = `${year}-${month}-${day}`;
         let pdf = new PDF({
