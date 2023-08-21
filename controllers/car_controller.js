@@ -53,9 +53,27 @@ const getAllCars = async (req,res) =>{
 const updateCar = async (req,res) =>{
     try{
         const { id } = req.params
-        const { boardNumber, privateNumber } = req.body
+        const { boardNumber, privateNumber,kilometers } = req.body
+
+        const data = JSON.stringify({
+            boardNumber,privateNumber,kilometers: +kilometers
+        }); // URL or any data you want to encode
+        const qrCode = qr.image(data, { type: 'png' });
+
+
+        // Generate a unique filename
+        const filename = `qrcode_${Date.now()}.png`;
+        const filePath = `public/qrcodes/${filename}`;
+
+        const qrStream = qrCode.pipe(fs.createWriteStream(filePath));
+
+        qrStream.on('finish', () => {
+            console.log(`QR Code saved as ${filename}`);
+        });
+
         await Car.findOneAndUpdate({ _id: id },{
-            boardNumber, privateNumber
+            boardNumber, privateNumber,kilometers,
+            qrcode: process.env.BASE_URL  + `qrcodes/${filename}`
         },{ $new: true })
 
         return res.status(200).send("Car Was Updated")
