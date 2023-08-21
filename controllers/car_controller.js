@@ -9,7 +9,7 @@ const createNewCar = async (req,res) =>{
         const { boardNumber, privateNumber, kilometers } = req.body
 
         const data = JSON.stringify({
-            boardNumber,privateNumber,kilometers
+            boardNumber,privateNumber,kilometers: +kilometers
         }); // URL or any data you want to encode
         const qrCode = qr.image(data, { type: 'png' });
 
