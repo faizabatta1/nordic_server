@@ -13,12 +13,9 @@ const puppeteer = require('puppeteer')
 
 const createNewDriver = async (req,res) =>{
     try{
-        console.log(req.headers)
-        console.log(req.body)
         const { data, token } = req.headers
         const information = JSON.parse(decodeURIComponent(data))
 
-        console.log(information)
 
         let values = Object.values(req.body).map(e => JSON.parse(e))
 
@@ -41,7 +38,6 @@ const createNewDriver = async (req,res) =>{
         // Load the HTML template
         const htmlTemplate = fs.readFileSync('templates/driver.html', 'utf8');
         let decodedToken = jwt.verify(token,'your-secret-key')
-        console.log(decodedToken)
         let user = await User.findOne({ _id: decodedToken.userId })
 
         const imagesAlias = req.headers.files
@@ -61,6 +57,18 @@ const createNewDriver = async (req,res) =>{
                      originals[original] = savedImages
          *
          */
+
+        const groupedImages = {};
+
+        for (const image of req.files) {
+            const fieldname = decodeURIComponent(image.fieldname);
+            if (!groupedImages[fieldname]) {
+                groupedImages[fieldname] = [];
+            }
+            groupedImages[fieldname].push(image);
+        }
+
+        console.log(groupedImages);
 
         // Replace placeholders with dynamic data
         const template_data = {
