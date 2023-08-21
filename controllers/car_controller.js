@@ -16,7 +16,7 @@ const createNewCar = async (req,res) =>{
 
         // Generate a unique filename
         const filename = `qrcode_${Date.now()}.png`;
-        const filePath = `../public/qrcodes/${filename}`;
+        const filePath = `public/qrcodes/${filename}`;
 
         const qrStream = qrCode.pipe(fs.createWriteStream(filePath));
 
