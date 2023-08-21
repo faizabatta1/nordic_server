@@ -1,12 +1,35 @@
 const Car = require('../models/Car')
+const qr = require("qr-image");
+const fs = require("fs");
 
 
 const createNewCar = async (req,res) =>{
     try{
         console.log(req.body)
-        const { boardNumber, privateNumber } = req.body
-        const car = new Car({ boardNumber, privateNumber })
+        const { boardNumber, privateNumber, kilometers } = req.body
+
+        const data = JSON.stringify({
+            boardNumber,privateNumber,kilometers
+        }); // URL or any data you want to encode
+        const qrCode = qr.image(data, { type: 'png' });
+
+        // Generate a unique filename
+        const filename = `qrcode_${Date.now()}.png`;
+        const filePath = `./public/qrcodes/${filename}`;
+
+        const qrStream = qrCode.pipe(fs.createWriteStream(filePath));
+
+        qrStream.on('finish', () => {
+            res.send(`QR Code saved as ${filename}`);
+        });
+
+        const car = new Car({
+            boardNumber, privateNumber, kilometers,
+            qrcode: process.env.BASE_URL  + `qrcodes/${filename}`
+        })
         await car.save()
+
+
 
         return res.status(200).send("Car Was Created")
     }catch (error){

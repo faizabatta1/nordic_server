@@ -38,6 +38,8 @@
             <tr>
                 <th>Regnr.</th>
                 <th>Tjenstebilnr.</th>
+                <th>Kilometers.</th>
+                <th>QrCode.</th>
                 <th>Handlinger</th>
             </tr>
             </thead>
@@ -47,6 +49,10 @@
                     <tr>
                         <td><%= car.boardNumber %></td>
                         <td><%= car.privateNumber %></td>
+                        <td><%= car.kilometers %></td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-secondary">Se QR-kode</a>
+                        </td>
                         <td class="controls">
                             <a href="/cars/<%= car._id %>/update" class="btn btn-sm btn-primary">Redigere</a>
                             <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal<%= car._id %>">Slett</button>

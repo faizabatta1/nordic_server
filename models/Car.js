@@ -8,6 +8,14 @@ const CarSchema = new mongoose.Schema({
     privateNumber:{
         type:String,
         required: true
+    },
+    kilometers:{
+        type:Number,
+        required: true
+    },
+    qrcode:{
+        type:String,
+        required:true
     }
 })
 
