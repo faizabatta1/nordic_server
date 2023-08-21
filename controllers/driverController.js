@@ -96,13 +96,18 @@ const createNewDriver = async (req,res) =>{
 
         let now = new Date();
         now = now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        let correctDate = new Date(now)
 
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
 
+        const formattedDate = `${year}-${month}-${day}`;
         let pdf = new PDF({
             name: filename,
             link: process.env.BASE_URL + 'profiles/' + filename,
             userId: decodedToken.userId,
-            createdAt:now
+            createdAt:formattedDate
         })
 
         await pdf.save()
