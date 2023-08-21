@@ -13,6 +13,7 @@ const createNewCar = async (req,res) =>{
         }); // URL or any data you want to encode
         const qrCode = qr.image(data, { type: 'png' });
 
+
         // Generate a unique filename
         const filename = `qrcode_${Date.now()}.png`;
         const filePath = `./public/qrcodes/${filename}`;
