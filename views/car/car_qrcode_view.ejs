@@ -15,8 +15,8 @@
             <img src="<%= car.qrcode %>" alt="QR Code" class="img-fluid">
             <div class="mt-3">
                 <a href="/cars/update/<%= car._id %>" class="btn btn-primary">Oppdatere</a>
-                <a href="/cars" class="btn btn-secondary">Avbrytt</a>
-                <a href="<%= car.qrcode %>" download="">Download</a>
+                <a href="/cars" class="btn btn-secondary mr-2">Avbrytt</a>
+                <a href="<%= car.qrcode %>" class="btn btn-info" download>Download</a>
             </div>
         </div>
     </div>
