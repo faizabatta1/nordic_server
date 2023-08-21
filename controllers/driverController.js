@@ -86,13 +86,7 @@ const createNewDriver = async (req,res) =>{
                     positive: e.value != 'Ja' && e.value != 'Nei' ? 'red' : 'green'
                 };
             }),
-            images: req.files.map(file =>{
-
-                return {
-                    fieldname: decodeURIComponent(file.fieldname),
-                    path: process.env.BASE_URL + file.path.split('public')[1].replaceAll('\\','/')
-                }
-            }),
+            groupedImages:groupedImages,
         };
         const filledTemplate = Handlebars.compile(htmlTemplate)(template_data);
 
