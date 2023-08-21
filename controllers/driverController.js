@@ -94,10 +94,15 @@ const createNewDriver = async (req,res) =>{
         await page.setContent(filledTemplate);
         await page.pdf({ path: `./public/profiles/${filename}`, format: 'A4' });
 
+        let now = new Date();
+        now = now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+
         let pdf = new PDF({
             name: filename,
             link: process.env.BASE_URL + 'profiles/' + filename,
-            userId: decodedToken.userId
+            userId: decodedToken.userId,
+            createdAt:now
         })
 
         await pdf.save()
