@@ -21,7 +21,7 @@ const createNewCar = async (req,res) =>{
         const qrStream = qrCode.pipe(fs.createWriteStream(filePath));
 
         qrStream.on('finish', () => {
-            res.send(`QR Code saved as ${filename}`);
+            console.log(`QR Code saved as ${filename}`);
         });
 
         const car = new Car({
