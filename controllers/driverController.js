@@ -65,7 +65,9 @@ const createNewDriver = async (req,res) =>{
             if (!groupedImages[fieldname]) {
                 groupedImages[fieldname] = [];
             }
-            groupedImages[fieldname].push(image);
+            groupedImages[fieldname].push({
+                path: process.env.BASE_URL + image.path.split('public')[1].replaceAll('\\','/'),
+            });
         }
 
         console.log(groupedImages);
@@ -88,6 +90,20 @@ const createNewDriver = async (req,res) =>{
             }),
             groupedImages:groupedImages,
         };
+
+/*
+
+images: req.files.map(file =>{
+
+                return {
+                    fieldname: decodeURIComponent(file.fieldname),
+                    path: 
+                }
+            })
+
+ */
+
+
         const filledTemplate = Handlebars.compile(htmlTemplate)(template_data);
 
         let filename = `driver_${Date.now()}.pdf`
