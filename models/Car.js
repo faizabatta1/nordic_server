@@ -13,6 +13,10 @@ const CarSchema = new mongoose.Schema({
         type:Number,
         required: true
     },
+    currentKilometers:{
+        type: Number,
+        default:0
+    },
     qrcode:{
         type:String,
         default:null

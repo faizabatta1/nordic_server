@@ -16,6 +16,18 @@ const createNewDriver = async (req,res) =>{
     try{
         const { data, token } = req.headers
         const information = JSON.parse(decodeURIComponent(data))
+        console.log(information)
+        if(information.carId != undefined){
+            let existingCar = await Car.findOne({ _id: carId })
+            if(+information.kilometers + +existingCar.currentKilometers >= +existingCar.kilometers){
+                sendAlertMail({
+                    to:'Me@mutaz.no',
+                    subject:'Car kilometer limit',
+                    text:`Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`
+                    html:`Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`
+                })
+            }
+        }
 
 
         let values = Object.values(req.body).map(e => JSON.parse(e))
