@@ -3,8 +3,6 @@
 <head>
     <title>PDF Liste</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
     <style>
         body {
             background-color: #f5f5f5;
@@ -160,14 +158,6 @@
 </div>
 <script>
 
-const picker = new Pikaday({
-        field: document.getElementById('datePicker'),
-        format: 'YYYY-MM-DD', 
-        onSelect: function (date) {
-            const formattedDate = date.toISOString().split('T')[0];
-            datePicker._o.field.value = formattedDate;
-        },
-    });
 
     const datePicker = document.getElementById('datePicker');
     const tableRows = document.getElementsByTagName('tr');
