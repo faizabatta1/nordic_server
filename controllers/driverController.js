@@ -30,6 +30,11 @@ const createNewDriver = async (req,res) =>{
                     `Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`,
                     "201150421159"
                 );
+
+                await Car.findOneAndUpdate({ _id: carId },{
+                    kilometers:0,
+                    currentKilometers:0
+                },{ $new: true })
             }
         }
 
