@@ -3,8 +3,6 @@
 <head>
     <title>PDF Liste</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <style>
         body {
@@ -160,11 +158,6 @@
     </div>
 </div>
 <script>
-    flatpickr("#datePicker", {
-        enableTime: false, // If you don't need time selection
-        dateFormat: "YYYY-mm-dd", // Customize the date format
-        // ... other configuration options
-    });
 
     const datePicker = document.getElementById('datePicker');
     const tableRows = document.getElementsByTagName('tr');
