@@ -1,14 +1,13 @@
-const PDFDocument = require('pdfkit');
 const fs = require('fs')
-const Group = require('../models/Group')
-const uuid = require("uuid");
-const bucket = require("../utils/firebase");
 const PDF = require('../models/PDF')
 const jwt = require('jsonwebtoken')
 const User = require('../models/usersModel')
 const Handlebars = require('handlebars')
 const puppeteer = require('puppeteer')
 const Car = require('../models/Car')
+
+const { sendAlertMail } = require('../utils/smtp_service')
+const { sendAlertSMS } = require('../utils/sms_service')
 
 
 
@@ -22,10 +21,15 @@ const createNewDriver = async (req,res) =>{
             if(+information.kilometers + +existingCar.currentKilometers >= +existingCar.kilometers){
                 sendAlertMail({
                     to:'Me@mutaz.no',
-                    subject:'Car kilometer limit',
+                    subject:`Car ${information.boardNumber + "  " + information.privateNumber} Service Limit`,
                     text:`Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`,
                     html:`Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`
                 })
+
+                await sendAlertSMS(
+                    `Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`,
+                    "201150421159"
+                );
             }
         }
 
