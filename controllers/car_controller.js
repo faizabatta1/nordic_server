@@ -121,10 +121,25 @@ const deleteAllCars = async (req,res) =>{
     }
 }
 
+const resetCarKilometers = async (req,res) =>{
+    try{
+        const { id } = req.params
+        await Car.findOneAndUpdate({ _id:id },{
+            currentKilometers:0,
+            kilometers:0
+        },{ $new: true })
+
+        return res.sendStatus(200)
+    }catch(error){
+        return res.status(500).send(error.message)
+    }
+}
+
 module.exports = {
     createNewCar,
     getAllCars,
     updateCar,
     deleteCar,
-    deleteAllCars
+    deleteAllCars,
+    resetCarKilometers
 }
