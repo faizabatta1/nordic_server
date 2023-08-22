@@ -15,7 +15,7 @@ const CarSchema = new mongoose.Schema({
     },
     qrcode:{
         type:String,
-        required:true
+        default:null
     }
 })
 

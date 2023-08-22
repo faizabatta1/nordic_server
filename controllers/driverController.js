@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/usersModel')
 const Handlebars = require('handlebars')
 const puppeteer = require('puppeteer')
+const Car = require('../models/Car')
 
 
 

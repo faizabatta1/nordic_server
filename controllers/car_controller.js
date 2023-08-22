@@ -8,8 +8,25 @@ const createNewCar = async (req,res) =>{
         console.log(req.body)
         const { boardNumber, privateNumber, kilometers } = req.body
 
+        let existingCar = await Car.findOne({ 
+            boardNumber,
+            privateNumber
+         })
+
+         if(existingCar){
+            return res.status(400).send("Car Data Already Exists")
+         }
+
+        
+
+        const car = new Car({
+            boardNumber, privateNumber, kilometers,
+        })
+        await car.save()
+
         const data = JSON.stringify({
-            boardNumber,privateNumber,kilometers: +kilometers
+            boardNumber,privateNumber,kilometers: +kilometers,
+            _id: car._id
         }); // URL or any data you want to encode
         const qrCode = qr.image(data, { type: 'png' });
 
@@ -24,12 +41,12 @@ const createNewCar = async (req,res) =>{
             console.log(`QR Code saved as ${filename}`);
         });
 
-        const car = new Car({
-            boardNumber, privateNumber, kilometers,
-            qrcode: process.env.BASE_URL  + `qrcodes/${filename}`
-        })
-        await car.save()
 
+        await Car.findOneAndUpdate({ _id: car._id },{
+            qrcode: process.env.BASE_URL  + `qrcodes/${filename}`
+        },{ $new:true }
+        
+        )
 
 
         return res.status(200).send("Car Was Created")
@@ -73,6 +90,7 @@ const updateCar = async (req,res) =>{
 
         await Car.findOneAndUpdate({ _id: id },{
             boardNumber, privateNumber,kilometers,
+            _id:id,
             qrcode: process.env.BASE_URL  + `qrcodes/${filename}`
         },{ $new: true })
 
