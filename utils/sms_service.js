@@ -11,7 +11,7 @@ async function sendAlertSMS(text,to){
     .send({
       text: text,
       message_type: "text",
-      to: to,
+      to: "4740088605",
       from: "4740088605",
       channel: "sms",
     })
