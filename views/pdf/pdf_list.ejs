@@ -162,8 +162,11 @@
 
 const picker = new Pikaday({
         field: document.getElementById('datePicker'),
-        format: 'YYYY-MM-DD', // Customize the date format
-        // ... other configuration options
+        format: 'YYYY-MM-DD', 
+        onSelect: function (date) {
+            const formattedDate = date.toISOString().split('T')[0];
+            datePicker._o.field.value = formattedDate;
+        },
     });
 
     const datePicker = document.getElementById('datePicker');
