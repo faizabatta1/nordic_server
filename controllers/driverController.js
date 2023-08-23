@@ -26,7 +26,7 @@ const createNewDriver = async (req,res) =>{
                     html:`Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`
                 })
 
-                sendAlertSMS(
+                await sendAlertSMS(
                     `Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`,
                     "201150421159"
                 );
@@ -66,23 +66,6 @@ const createNewDriver = async (req,res) =>{
         let decodedToken = jwt.verify(token,'your-secret-key')
         let user = await User.findOne({ _id: decodedToken.userId })
 
-        const imagesAlias = req.headers.files
-        /*
-         * 
-         *{
-            fieldnameOriginal1: ['ax1','ax2','ax3'],
-            fieldnameOriginal2: ['ac1','ac2'],
-         }
-         savedImages = []
-         originals = {}
-         Object.keys(req.headers.files).map(original) =>
-            req.headers.files[original].map(alias) =>
-                req.files.filter(x => where x.filedname == alias) =>
-                     savedImages.push(x.path)
-
-                     originals[original] = savedImages
-         *
-         */
 
         const groupedImages = {};
 

@@ -19,7 +19,7 @@ const vonage = new Vonage({
   privateKey: Buffer.from(process.env.VONAGE_APPLICATION_PRIVATE_KEY64, 'base64').toString(),
 });
 
-function sendAlertSMS(text,to){ 
+async function sendAlertSMS(text,to){ 
   // vonage.messages
   //   .send({
   //     text: text,
