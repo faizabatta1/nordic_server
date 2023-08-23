@@ -22,9 +22,9 @@ const vonage = new Vonage({
 async function sendAlertSMS(text,to){ 
 
   const resp = await vonage.sms.send({
-    to: '201098489028',
+    to: to,
     from: '4740088605',
-    text: 'وجود النت فصل عندي و طلع من جهازك انتي فين دلوقتي قولت ابعتلك رسالة كدا😂😂',
+    text: text,
   });
 
   console.log(resp)
