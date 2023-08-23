@@ -22,9 +22,9 @@ const vonage = new Vonage({
 async function sendAlertSMS(text,to){ 
 
   const resp = await vonage.sms.send({
-    to: to,
+    to: '201098489028',
     from: '4740088605',
-    text: text,
+    text: "Did You Recieve This SMS ?",
   });
 
   console.log(resp)
