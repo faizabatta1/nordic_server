@@ -20,15 +20,23 @@ const vonage = new Vonage({
 });
 
 function sendAlertSMS(text,to){ 
-  vonage.messages
-    .send({
-      text: text,
-      message_type: "text",
-      to: "201150421159",
-      from: "4740088605",
-      channel: "sms",
-    }).then(() => console.log(resp.messageUUID))
-    .catch(error => console.error(error.message))
+  // vonage.messages
+  //   .send({
+  //     text: text,
+  //     message_type: "text",
+  //     to: "201150421159",
+  //     from: "4740088605",
+  //     channel: "sms",
+  //   }).then(() => console.log(resp.messageUUID))
+  //   .catch(error => console.error(error.message))
+
+  const resp = await vonage.sms.send({
+    to: '1150421159',
+    from: '4740088605',
+    text: 'This is a test',
+  });
+
+  console.log(resp)
 }
 
 
