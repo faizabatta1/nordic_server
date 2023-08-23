@@ -17,7 +17,7 @@ const createNewDriver = async (req,res) =>{
         const information = JSON.parse(decodeURIComponent(data))
         console.log(information)
         if(information.carId != undefined){
-            let existingCar = await Car.findOne({ _id: carId })
+            let existingCar = await Car.findOne({ _id: information.carId })
             if(+information.kilometers + +existingCar.currentKilometers >= +existingCar.kilometers){
                 sendAlertMail({
                     to:'Me@mutaz.no',
