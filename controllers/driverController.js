@@ -26,7 +26,7 @@ const createNewDriver = async (req,res) =>{
                     html:`Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`
                 })
 
-                await sendAlertSMS(
+                sendAlertSMS(
                     `Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`,
                     "201150421159"
                 );
