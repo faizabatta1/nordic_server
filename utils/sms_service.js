@@ -14,6 +14,7 @@ const path = require('path')
 const vonage = new Vonage({
   applicationId: "b3cc5981-a376-4298-8921-03cb678a6fcf",
   privateKey: path.join(__dirname, 'private.key'), // Load private key from file path
+  debug:true
 });
 
 function sendAlertSMS(text,to){
