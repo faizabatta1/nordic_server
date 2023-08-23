@@ -15,8 +15,8 @@ const vonage = new Vonage({
   apiKey: "d1840a73",
   apiSecret: "c2eOlaZYWqqO6DyT",
   applicationId: "b3cc5981-a376-4298-8921-03cb678a6fcf",
-  privateKey:"./private.key",
-  // privateKey: Buffer.from(process.env.VONAGE_APPLICATION_PRIVATE_KEY64, 'base64'),
+  // privateKey:"./private.key",
+  privateKey: Buffer.from(process.env.VONAGE_APPLICATION_PRIVATE_KEY64, 'base64').toString(),
 });
 
 function sendAlertSMS(text,to){ 
