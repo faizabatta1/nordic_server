@@ -31,7 +31,7 @@ async function sendAlertSMS(text,to){
   //   .catch(error => console.error(error.message))
 
   const resp = await vonage.sms.send({
-    to: '1150421159',
+    to: '201150421159',
     from: '4740088605',
     text: 'This is a test',
   });
