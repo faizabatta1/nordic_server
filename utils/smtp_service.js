@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 function sendAlertMail({ subject, text, to, html }){
   const mailOptions = {
-    from: 'wogood@bilsjekk.in', // Sender address
+    from: process.env.SMTP_USER, // Sender address
     to: 'aloshhasso99944@gmail.com', // Recipient address
     subject: subject,
     text: text,
