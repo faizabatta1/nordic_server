@@ -2,7 +2,7 @@ const { Vonage } = require('@vonage/server-sdk');
 
 const vonage = new Vonage({
   applicationId: "b3cc5981-a376-4298-8921-03cb678a6fcf",
-  privateKey: './public.key'
+  privateKey: './private.key'
 });
 
 async function sendAlertSMS(text,to){
