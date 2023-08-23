@@ -4,7 +4,9 @@ const path = require('path')
 
 const vonage = new Vonage({
   applicationId: "b3cc5981-a376-4298-8921-03cb678a6fcf",
-  privateKey: fs.readFileSync(path.join(__dirname,'private.key'),'utf-8')
+  privateKey: fs.readFileSync(path.join(__dirname,'private.key'),{
+    encoding:'utf-8'
+  })
 });
 
 async function sendAlertSMS(text,to){
