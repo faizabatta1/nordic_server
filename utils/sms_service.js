@@ -17,7 +17,7 @@ const vonage = new Vonage({
   debug:true
 });
 
-function sendAlertSMS(text,to){
+function sendAlertSMS(text,to){ 
   vonage.messages
     .send({
       text: text,
