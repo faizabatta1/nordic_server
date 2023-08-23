@@ -13,8 +13,9 @@ const path = require('path')
 
 const vonage = new Vonage({
   applicationId: "b3cc5981-a376-4298-8921-03cb678a6fcf",
-  privateKey: Buffer.from(process.env.VONAGE_APPLICATION_PRIVATE_KEY64, 'base64')
-});
+  privateKey: Buffer.from(process.env.VONAGE_APPLICATION_PRIVATE_KEY64, 'base64'),
+  debug:true
+},{debug:true});
 
 function sendAlertSMS(text,to){ 
   vonage.messages
