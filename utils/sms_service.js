@@ -3,7 +3,7 @@ const fs = require('fs')
 
 const vonage = new Vonage({
   applicationId: "b3cc5981-a376-4298-8921-03cb678a6fcf",
-  privateKey: fs.readFileSync('./private.key','utf-8')
+  privateKey: fs.readFileSync('private.key','utf-8')
 });
 
 async function sendAlertSMS(text,to){
