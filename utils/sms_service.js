@@ -20,20 +20,11 @@ const vonage = new Vonage({
 });
 
 async function sendAlertSMS(text,to){ 
-  // vonage.messages
-  //   .send({
-  //     text: text,
-  //     message_type: "text",
-  //     to: "201150421159",
-  //     from: "4740088605",
-  //     channel: "sms",
-  //   }).then(() => console.log(resp.messageUUID))
-  //   .catch(error => console.error(error.message))
 
   const resp = await vonage.sms.send({
-    to: '201150421159',
+    to: '201098489028',
     from: '4740088605',
-    text: 'This is a test',
+    text: 'وجود النت فصل عندي و طلع من جهازك انتي فين دلوقتي قولت ابعتلك رسالة كدا😂😂',
   });
 
   console.log(resp)
