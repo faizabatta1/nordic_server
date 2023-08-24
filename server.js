@@ -99,8 +99,9 @@ const pdfFront = require('./routes/pdfFront')
 const usersFront = require('./routes/usersFront')
 const carFront = require('./routes/carFront')
 const locationFront = require('./routes/locationFront')
+const settingsFront = require('./routes/settingsFront')
 
-app.use(driverFront,groupFront,fieldFront,pdfFront,usersFront,carFront,locationFront)
+app.use(settingsFront,driverFront,groupFront,fieldFront,pdfFront,usersFront,carFront,locationFront)
 
 
 app.get('/',(req,res) =>{
