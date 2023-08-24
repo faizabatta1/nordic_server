@@ -78,12 +78,14 @@
                 <label for="emailSubject">Subject:</label>
                 <input type="text" id="emailSubject" name="emailSubject" value="<%= emailTemplate.subject %>" required>
                 <label for="emailText">Text:</label>
-                <textarea id="emailText" name="emailText" required><%= emailTemplate.text %></textarea>
+                <textarea id="emailText" name="emailText" required>
+                  Test
+                </textarea>
                 <button type="submit">Save</button>
             </form>
             <div class="preview">
                 <h3>Email Template Preview:</h3>
-                <h4>Subject: <%= emailTemplate.subject %></h4>
+                <!-- <h4>Subject: <%= emailTemplate.subject %></h4> -->
                 <!-- <p><%= emailTemplate.text %></p> -->
             </div>
         </div>
@@ -92,7 +94,7 @@
             <h2>SMS Template</h2>
             <form action="/updateSmsTemplate" method="post">
                 <label for="smsText">Text:</label>
-                <textarea id="smsText" name="smsText" required><%= smsTemplate.text %></textarea>
+                <textarea id="smsText" name="smsText" required>'Test</textarea>
                 <button type="submit">Save</button>
             </form>
             <div class="preview">
