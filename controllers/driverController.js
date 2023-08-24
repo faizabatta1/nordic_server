@@ -140,6 +140,15 @@ images: req.files.map(file =>{
             createdAt:formattedDate
         })
 
+        await storeArcieve({
+            id: decodedToken.userId,
+            pdfData:{
+                name: filename,
+                link: process.env.BASE_URL + 'profiles/' + filename,
+                createdAt:formattedDate
+            }
+        })
+
         await pdf.save()
         console.log(`PDF saved: ${process.env.BASE_URL + 'profiles/' + filename}`);
 
@@ -152,16 +161,5 @@ images: req.files.map(file =>{
     }
 }
 
-const getAllDrivers = async (req,res) =>{
-    return res.status(200).json([])
-}
 
-const getDriverFile = async () =>{
-    try{
-
-    }catch (error){
-
-    }
-}
-
-module.exports = { createNewDriver, getAllDrivers, getDriverFile }
+module.exports = { createNewDriver }
