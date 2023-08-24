@@ -65,9 +65,9 @@
             <h2>Admin Credentials</h2>
             <form action="/updateAdminCredentials" method="post">
                 <label for="adminUsername">Username:</label>
-                <input type="text" id="adminUsername" name="adminUsername" value="<%= admin.username %>" required>
+                <input type="text" id="adminUsername" name="adminUsername" value="USERNAME" required>
                 <label for="adminPassword">Password:</label>
-                <input type="password" id="adminPassword" name="adminPassword" value="<%= admin.password %>" required>
+                <input type="password" id="adminPassword" name="adminPassword" value="PASSWORD" required>
                 <button type="submit">Save</button>
             </form>
         </div>
@@ -84,7 +84,7 @@
             <div class="preview">
                 <h3>Email Template Preview:</h3>
                 <h4>Subject: <%= emailTemplate.subject %></h4>
-                <p><%= emailTemplate.text %></p>
+                <!-- <p><%= emailTemplate.text %></p> -->
             </div>
         </div>
 
@@ -97,7 +97,7 @@
             </form>
             <div class="preview">
                 <h3>SMS Template Preview:</h3>
-                <p><%= smsTemplate.text %></p>
+                <!-- <p><%= smsTemplate.text %></p> -->
             </div>
         </div>
     </div>
