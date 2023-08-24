@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+    <style>
+        /* Add your CSS styling here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+        .section h2 {
+            margin-top: 0;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .preview {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Settings</h1>
+        
+        <div class="section">
+            <h2>Admin Credentials</h2>
+            <form action="/updateAdminCredentials" method="post">
+                <label for="adminUsername">Username:</label>
+                <input type="text" id="adminUsername" name="adminUsername" value="<%= admin.username %>" required>
+                <label for="adminPassword">Password:</label>
+                <input type="password" id="adminPassword" name="adminPassword" value="<%= admin.password %>" required>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <h2>Email Template</h2>
+            <form action="/updateEmailTemplate" method="post">
+                <label for="emailSubject">Subject:</label>
+                <input type="text" id="emailSubject" name="emailSubject" value="<%= emailTemplate.subject %>" required>
+                <label for="emailText">Text:</label>
+                <textarea id="emailText" name="emailText" required><%= emailTemplate.text %></textarea>
+                <button type="submit">Save</button>
+            </form>
+            <div class="preview">
+                <h3>Email Template Preview:</h3>
+                <h4>Subject: <%= emailTemplate.subject %></h4>
+                <p><%= emailTemplate.text %></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>SMS Template</h2>
+            <form action="/updateSmsTemplate" method="post">
+                <label for="smsText">Text:</label>
+                <textarea id="smsText" name="smsText" required><%= smsTemplate.text %></textarea>
+                <button type="submit">Save</button>
+            </form>
+            <div class="preview">
+                <h3>SMS Template Preview:</h3>
+                <p><%= smsTemplate.text %></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

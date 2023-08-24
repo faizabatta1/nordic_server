@@ -29,10 +29,10 @@ const createNewDriver = async (req,res) =>{
                     
                 })
 
-                await sendAlertSMS(
-                    `Bilen med skilt nr:${information.boardNumber} Og tjenesternr ${information.privateNumber} Har nå gått over service. Service blir i ${existingCar.kilometers} Kilometer`,
-                    "4747931499"
-                );
+                await sendAlertSMS({
+                    text:`Bilen med skilt nr:${information.boardNumber} Og tjenesternr ${information.privateNumber} Har nå gått over service. Service blir i ${existingCar.kilometers} Kilometer`,
+                    to:"4747931499"
+                });
 
                 await Car.findOneAndUpdate({ _id: information.carId },{
                     kilometers:0,
