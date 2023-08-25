@@ -76,16 +76,16 @@
       const previewText = document.querySelector('.email-preview-text');
 
       previewText.textContent = '<%=email_template%>'
-              .replace('{private}', 'EL 01')
-              .replace('{board}', 'Ec65656')
-              .replace('{kilometers}', '2000');
+              .replace('/{private}/g', 'EL 01')
+              .replace('/{board}/g', 'Ec65656')
+              .replace('/{kilometers}/g', '2000');
       
       emailText.addEventListener('input', function() {
           const template = emailText.value;
           const updatedPreview = template
-              .replace('{private}', 'EL 01')
-              .replace('{board}', 'Ec65656')
-              .replace('{kilometers}', '2000');
+              .replace('/{private}/g', 'EL 01')
+              .replace('/{board}/g', 'Ec65656')
+              .replace('/{kilometers}/g', '2000');
           
           previewText.textContent = updatedPreview;
       });
