@@ -25,7 +25,7 @@ app.get('/login', (req,res) =>{
 })
 
 app.get('/archieve',async (req,res) =>{
-    return res.status(200).send('<h1>Archieve</h1>')
+    return res.status(200).render('pdfArchieve/pdf_list')
 })
 
 app.get('/api/logout',(req,res) =>{

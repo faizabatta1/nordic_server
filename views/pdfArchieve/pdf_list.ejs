@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Archieve Liste</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .custom-pdf-container {
+            padding-top: 20px;
+        }
+
+        .custom-pdf-table {
+            border-radius: 5px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .custom-pdf-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .custom-pdf-table td {
+            vertical-align: middle;
+        }
+
+        .custom-pdf-table td a {
+            margin-right: 5px;
+        }
+
+        .custom-pdf-controls > :first-child {
+            flex-grow: 1;
+        }
+
+        .custom-pdf-controls > :last-child {
+            flex-grow: 1;
+        }
+
+        .container{
+            width: 90% !important;
+        }
+
+        /* Media query for screen width less than 980px */
+        @media (max-width: 980px) {
+            .form-group {
+                flex-direction: column;
+                align-items: stretch; /* Align items to stretch the full width */
+            }
+
+            .form-group input,
+            .form-group button {
+                margin-bottom: 10px;
+            }
+
+            .form-group button{
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<%- include('../components/navbar') %>
+<div class="container custom-pdf-container">
+
+
+    <div class="form-group d-flex justify-content-between">
+        <input type="text" class="form-control mr-2" id="searchInput" placeholder="Søk etter dato, navn, bruker, ID eller lenke">
+        <input type="date" class="form-control mr-2" id="datePicker" placeholder="Select a date">
+    </div>
+    <div class="table-responsive text-center">
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Dato</th>
+                <th>Navn</th>
+                <th>Bruker</th>
+                <th>ID</th>
+                <th>Link</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%if(pdfs.length == 0){%>
+                <tr>
+                    <td colspan="6">No Pdfs Yet</td>
+                </tr>
+            <%} else{%>
+                <% pdfs.forEach(pdf => { %>
+                    <tr>
+                        <td><%= pdf.createdAt %></td>
+                        <td><%= pdf.name %></td>
+                        <td><%= pdf.userId?.name ?? 'Removed'  %></td>
+                        <td><%= pdf.userId?.accountId ?? "Unknown"  %></td>
+                        <td><a href="/pdfs/<%= pdf._id %>">Se PDF</a></td>
+                    </tr>
+
+                <% }); %>
+            <%}%>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+
+
+    const datePicker = document.getElementById('datePicker');
+    const tableRows = document.getElementsByTagName('tr');
+
+    datePicker.addEventListener('change', function () {
+        const selectedDate = datePicker.value;
+        console.log(selectedDate)
+
+        for (let i = 1; i < tableRows.length; i++) {
+            const dateCell = tableRows[i].getElementsByTagName('td')[0]; // Adjust the index as per your table structure
+            console.log(dateCell.innerText)
+            if (dateCell && dateCell.innerText == selectedDate) {
+                tableRows[i].style.display = '';
+            } else {
+                tableRows[i].style.display = 'none';
+            }
+        }
+    });
+
+
+
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('keyup', function () {
+        const filter = searchInput.value.toLowerCase();
+
+        for (let i = 1; i < tableRows.length; i++) {
+            const columns = tableRows[i].getElementsByTagName('td');
+            let rowContent = "";
+            for (let j = 0; j < columns.length; j++) {
+                rowContent += columns[j].innerText.toLowerCase() + " ";
+            }
+
+            if (rowContent.includes(filter)) {
+                tableRows[i].style.display = '';
+            } else {
+                tableRows[i].style.display = 'none';
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
