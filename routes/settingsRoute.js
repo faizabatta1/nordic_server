@@ -39,7 +39,7 @@ router.put('/settings/emailTemplate', async (req,res) =>{
   }
 })
 
-router.put('/settings/smsTable', async (req,res) =>{
+router.put('/settings/smsTemplate', async (req,res) =>{
   try{
     const { text } = req.body
 
