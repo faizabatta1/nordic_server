@@ -92,7 +92,7 @@
     const date = new Date().toISOString().split('T')[0]
 
     for (let i = 0; i < cards.length; i++) {
-            const dateInfo = cards[i].querySelector('.card-text:nth-child(2)').textContent;
+            const dateInfo = cards[i].querySelector('.card-title').textContent;
             if (dateInfo.includes(date)) {
                 cards[i].style.display = '';
             } else {
