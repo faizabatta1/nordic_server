@@ -171,8 +171,8 @@
             'Content-Type': 'application/json; charset=utf-8'
           },
           body:JSON.stringify({
-            subject: subject.value,
-            text: text.value
+            subject: subject.textContent,
+            text: text.textContent
           })
         })
 
@@ -190,7 +190,7 @@
             'Content-Type': 'application/json; charset=utf-8'
           },
           body:JSON.stringify({
-            text: text.value
+            text: text.textContent
           })
         })
 
