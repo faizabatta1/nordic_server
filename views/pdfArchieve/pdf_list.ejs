@@ -88,6 +88,17 @@
         }
     });
 
+    const date = new Date().toISOString().split('T')[0]
+
+    for (let i = 0; i < cards.length; i++) {
+            const dateInfo = cards[i].querySelector('.card-text:nth-child(2)').textContent;
+            if (dateInfo.includes(date)) {
+                cards[i].style.display = '';
+            } else {
+                cards[i].style.display = 'none';
+            }
+        }
+
     const searchInput = document.getElementById('searchInput');
 
     searchInput.addEventListener('keyup', function () {

@@ -42,10 +42,20 @@ app.post('/api/archieves', async (req,res) =>{
         })
 
         for(let pdf of pdfs){
+            let isExisting = await PDFArchieve.find({
+                accountId: pdf.userId.accountId,
+                link:pdf.link,
+                createdAt:pdf.createdAt
+            })
+
+            if(isExisting){
+                continue;
+            }
+
             let archieve = new PDFArchieve({
                 name:pdf.name,
                 username:pdf.userId.name,
-                accountId:pdf.userId.accountId + Math.random().toString(),
+                accountId:pdf.userId.accountId,
                 link:pdf.link,
                 createdAt:pdf.createdAt,
             })
