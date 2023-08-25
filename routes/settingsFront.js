@@ -8,6 +8,8 @@ router.get('/settings',(req,res) =>{
     encoding: 'utf8',
     flag: 'r'
    })
+   console.log(data)
+   console.log(data.text)
 
    let json = JSON.parse(data)
 
