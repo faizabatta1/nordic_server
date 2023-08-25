@@ -70,5 +70,19 @@
     
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const emailText = document.getElementById('emailText');
+      const previewText = document.querySelector('.preview-text');
+      
+      emailText.addEventListener('input', function() {
+          const template = emailText.value;
+          const updatedPreview = template
+              .replace('{private}', 'EL 01')
+              .replace('{board}', 'Ec65656')
+              .replace('{kilometers}', '2000');
+          
+          previewText.textContent = updatedPreview;
+      });
+  </script>
 </body>
 </html>
