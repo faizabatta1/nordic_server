@@ -53,9 +53,9 @@ app.post('/api/archieves', async (req,res) =>{
             await archieve.save()
         }
 
-        return res.sendStatus(200)
+        return res.sendStatus(200) 
     }catch(error){
-        console.log(error.)
+        console.log(error.message)
         return res.status(500).send(error.message)
     }
 })
