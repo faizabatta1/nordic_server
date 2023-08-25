@@ -145,7 +145,7 @@
         let username = document.getElementById('username')
         let password = document.getElementById('password')
 
-        let response = await fetch('/settings/credentials',{
+        let response = await fetch('/api/settings/credentials',{
           method:'PUT',
           headers:{
             'Content-Type': 'application/json; charset=utf-8'
