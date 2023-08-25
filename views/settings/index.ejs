@@ -33,7 +33,7 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h2 class="card-title">Email Template</h2>
-                <p class="card-text">Use placeholders for dynamic content: {private}, {board}, {kilometers}</p>
+                <p class="card-text">Use placeholders for dynamic content: {private}, {board}, {kilometers}, {pnid}</p>
 
                 <div>
                     <div class="mb-3">
@@ -59,7 +59,7 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">SMS Template</h2>
-                <p class="card-text">Use placeholders for dynamic content: {private}, {board}, {kilometers}</p>
+                <p class="card-text">Use placeholders for dynamic content: {private}, {board}, {kilometers}, {pnid}</p>
                 <div>
                     <div class="mb-3">
                         <label for="smsText" class="form-label">Text</label>
@@ -99,6 +99,7 @@
           const updatedPreview = template
               .replace(/{private}/g, 'EL 01')
               .replace(/{board}/g, 'Ec65656')
+              .replace(/{pnid}/g, 'pn167')
               .replace(/{kilometers}/g, '2000');
           
           smsTestPreview.textContent = updatedPreview;
@@ -108,11 +109,13 @@
       smsTestPreview.textContent = '<%=sms_template%>'
               .replace(/{private}/g, 'EL 01')
               .replace(/{board}/g, 'Ec65656')
+              .replace(/{pnid}/g, 'pn167')
               .replace(/{kilometers}/g, '2000');
 
       emailSubjectPreview.textContent = '<%=email_subject%>'
               .replace(/{private}/g, 'EL 01')
               .replace(/{board}/g, 'Ec65656')
+              .replace(/{pnid}/g, 'pn167')
               .replace(/{kilometers}/g, '2000');
       
       emailSubject.addEventListener('input', function() {
@@ -120,6 +123,7 @@
           const updatedPreview = template
               .replace(/{private}/g, 'EL 01')
               .replace(/{board}/g, 'Ec65656')
+              .replace(/{pnid}/g, 'pn167')
               .replace(/{kilometers}/g, '2000');
           
           emailSubjectPreview.textContent = updatedPreview;
@@ -129,6 +133,7 @@
       emailPreviewText.textContent = '<%=email_template%>'
               .replace(/{private}/g, 'EL 01')
               .replace(/{board}/g, 'Ec65656')
+              .replace(/{pnid}/g, 'pn167')
               .replace(/{kilometers}/g, '2000');
       
       emailText.addEventListener('input', function() {
@@ -136,6 +141,7 @@
           const updatedPreview = template
               .replace(/{private}/g, 'EL 01')
               .replace(/{board}/g, 'Ec65656')
+              .replace(/{pnid}/g, 'pn167')
               .replace(/{kilometers}/g, '2000');
           
           emailPreviewText.textContent = updatedPreview;
