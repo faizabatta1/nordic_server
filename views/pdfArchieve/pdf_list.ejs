@@ -92,8 +92,8 @@
                     <tr>
                         <td><%= pdf.createdAt %></td>
                         <td><%= pdf.name %></td>
-                        <td><%= pdf.userId?.name ?? 'Removed'  %></td>
-                        <td><%= pdf.userId?.accountId ?? "Unknown"  %></td>
+                        <td><%= pdf.username %></td>
+                        <td><%= pdf.accountId %></td>
                         <td><a href="/pdfs/<%= pdf._id %>">Se PDF</a></td>
                     </tr>
 
