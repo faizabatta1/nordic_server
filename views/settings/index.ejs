@@ -39,13 +39,13 @@
                         <input type="text" id="emailSubject" name="emailSubject" class="form-control" value="xx@gmail.com" required>
                     </div>
                     <div class="mb-3">
-                        <label for="emailText" class="form-label">Text</label>
+                        <label for="emailText" class="form-label" id="emailSubject">Text</label>
                         <textarea id="emailText" name="emailText" class="form-control" rows="6" required><%= email_template %></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
                 <div class="preview mt-3">
-                    <h4 class="card-title">Subject: Car {private}</h4>
+                    <h4 class="card-title email-preview-subject">Subject: Car {private}</h4>
                     <p class="card-text email-preview-text">this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000</p>
                 </div>
             </div>
@@ -73,9 +73,29 @@
     <script>
 
       const emailText = document.getElementById('emailText');
-      const previewText = document.querySelector('.email-preview-text');
+      const emailPreviewText = document.querySelector('.email-preview-text');
 
-      previewText.textContent = '<%=email_template%>'
+      const emailSubject = document.getElementById('emailSubject')
+      const emailSubjectPreview = document.querySelector('.email-preview-subject')
+
+
+      emailSubjectPreview.textContent = '<%=email_template%>'
+              .replace(/{private}/g, 'EL 01')
+              .replace(/{board}/g, 'Ec65656')
+              .replace(/{kilometers}/g, '2000');
+      
+      emailSubject.addEventListener('input', function() {
+          const template = emailSubject.value;
+          const updatedPreview = template
+              .replace(/{private}/g, 'EL 01')
+              .replace(/{board}/g, 'Ec65656')
+              .replace(/{kilometers}/g, '2000');
+          
+          emailSubjectPreview.textContent = updatedPreview;
+      });
+
+
+      emailPreviewText.textContent = '<%=email_template%>'
               .replace(/{private}/g, 'EL 01')
               .replace(/{board}/g, 'Ec65656')
               .replace(/{kilometers}/g, '2000');
@@ -87,7 +107,7 @@
               .replace(/{board}/g, 'Ec65656')
               .replace(/{kilometers}/g, '2000');
           
-          previewText.textContent = updatedPreview;
+          emailPreviewText.textContent = updatedPreview;
       });
   </script>
 </body>

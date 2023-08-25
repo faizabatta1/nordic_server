@@ -4,13 +4,18 @@ const fs = require('fs')
 const path = require('path')
 
 router.get('/settings',(req,res) =>{
-  let email_template = fs.readFileSync(path.join(__dirname,'../utils/email.txt'),{ 
+  let data = fs.readFileSync(path.join(__dirname,'../utils/email.txt'),{ 
     encoding: 'utf8',
     flag: 'r'
    })
 
+   let json = JSON.parse(data)
+
+
   return res.status(200).render('settings/index',{
-    email_template: email_template
+    email_template: json.text,
+    email_subject: json.subject
+
   })
 })
 
