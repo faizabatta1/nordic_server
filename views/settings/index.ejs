@@ -145,7 +145,20 @@
         let username = document.getElementById('username')
         let password = document.getElementById('password')
 
-        await fetch('')
+        let response = await fetch('/settings/credentials',{
+          method:'PUT',
+          headers:{
+            'Content-Type': 'application/json; charset=utf-8'
+          },
+          body:JSON.stringify({
+            username: username.value,
+            password: password.value
+          })
+        })
+
+        if(response.status == 200){
+          location.reload()
+        }
       }
   </script>
 </body>
