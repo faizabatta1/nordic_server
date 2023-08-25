@@ -79,7 +79,7 @@
       const emailSubjectPreview = document.querySelector('.email-preview-subject')
 
 
-      emailSubjectPreview.textContent = '<%=email_template%>'
+      emailSubjectPreview.textContent = '<%=email_subject%>'
               .replace(/{private}/g, 'EL 01')
               .replace(/{board}/g, 'Ec65656')
               .replace(/{kilometers}/g, '2000');
