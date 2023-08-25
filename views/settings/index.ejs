@@ -83,14 +83,13 @@
                 <input type="text" id="emailSubject" name="emailSubject" value="xx@gmail.com" required>
                 <label for="emailText">Text:</label>
                 <textarea id="emailText" name="emailText" required>
-                  Test
+                  this is a simple template my car number is {board} and it exceeded {kilometers}
                 </textarea>
                 <button type="submit">Save</button>
             </form>
             <div class="preview">
-                <h3>Email Template Preview:</h3>
-                <h4>Subject: Test</h4>
-                <p>template</p>
+                <h4>Subject: Car {private}</h4>
+                <p>this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000</p>
             </div>
         </div>
 
@@ -98,12 +97,13 @@
             <h2>SMS Template</h2>
             <form action="/updateSmsTemplate" method="post">
                 <label for="smsText">Text:</label>
-                <textarea id="smsText" name="smsText" required>'Test</textarea>
+                <textarea id="smsText" name="smsText" required>
+                  this is a simple template my car number is {board} and it exceeded {kilometers}
+                </textarea>
                 <button type="submit">Save</button>
             </form>
             <div class="preview">
-                <h3>SMS Template Preview:</h3>
-                <p>smsTemplate.text</p>
+              this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000
             </div>
         </div>
     </div>
