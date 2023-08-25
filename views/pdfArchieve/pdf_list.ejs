@@ -54,11 +54,12 @@
             <div class="col-sm-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><%= pdf.name %></h5>
-                        <p class="card-text">Dato: <%= pdf.createdAt %></p>
+                        <p class="card-title">Dato: <%= pdf.createdAt %></p>
                         <p class="card-text">Bruker: <%= pdf.username %></p>
                         <p class="card-text">ID: <%= pdf.accountId %></p>
-                        <a href="/pdfs/<%= pdf._id %>" class="btn btn-primary">Se PDF</a>
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a href="/pdfs/<%= pdf._id %>" class="btn btn-info">Se PDF</a>
+                        </div>
                     </div>
                 </div>
             </div>
