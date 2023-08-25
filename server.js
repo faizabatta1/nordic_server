@@ -45,7 +45,7 @@ app.post('/api/archieves', async (req,res) =>{
             let archieve = new PDFArchieve({
                 name:pdf.name,
                 username:pdf.userId.name,
-                accountId:pdf.userId.accountId,
+                accountId:pdf.userId.accountId + Math.random().toString(),
                 link:pdf.link,
                 createdAt:pdf.createdAt,
             })
