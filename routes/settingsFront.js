@@ -4,19 +4,35 @@ const fs = require('fs')
 const path = require('path')
 
 router.get('/settings',(req,res) =>{
-  let data = fs.readFileSync(path.join(__dirname,'../utils/email.json'),{ 
+  let emailData = fs.readFileSync(path.join(__dirname,'../data/email.json'),{ 
     encoding: 'utf8',
     flag: 'r'
    })
-   console.log(data)
-   console.log(data.text)
 
-   let json = JSON.parse(data)
+   let smsData = fs.readFileSync(path.join(__dirname,'../data/sms.json'),{ 
+    encoding: 'utf8',
+    flag: 'r'
+   })
+
+
+   let credentialsData = fs.readFileSync(path.join(__dirname,'../data/credentials.json'),{ 
+    encoding: 'utf8',
+    flag: 'r'
+   })
+
+   let emailJson = JSON.parse(emailData)
+   let smsJson = JSON.parse(smsData)
+   let credentialsJson = JSON.parse(credentialsData)
 
 
   return res.status(200).render('settings/index',{
-    email_template: json.text,
-    email_subject: json.subject
+    email_template: emailJson.text,
+    email_subject: emailJson.subject,
+
+    sms_template: smsJson.text,
+
+    username: credentialsJson.username,
+    password: credentialsJson.password,
 
   })
 })
