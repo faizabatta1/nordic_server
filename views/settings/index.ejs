@@ -35,7 +35,7 @@
 
                 <form action="/updateEmailTemplate" method="post">
                     <div class="mb-3">
-                        <label for="emailSubject" class="form-label">Subject</label>
+                        <label for="emailSubject" class="form-label"><%= email_subject %></label>
                         <input type="text" id="emailSubject" name="emailSubject" class="form-control" value="xx@gmail.com" required>
                     </div>
                     <div class="mb-3">
@@ -45,8 +45,8 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
                 <div class="preview mt-3">
-                    <h4 class="card-title email-preview-subject">Subject: Car {private}</h4>
-                    <p class="card-text email-preview-text">this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000</p>
+                    <h4 class="card-title email-preview-subject"></h4>
+                    <p class="card-text email-preview-text"></p>
                 </div>
             </div>
         </div>
