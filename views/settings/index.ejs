@@ -160,6 +160,44 @@
           location.reload()
         }
       }
+
+      async function updateEmailTemplate(){
+        let subject = document.querySelector('.email-preview-subject')
+        let text = document.querySelector('.email-preview-text')
+
+        let response = await fetch('/api/settings/emailTemplate',{
+          method:'PUT',
+          headers:{
+            'Content-Type': 'application/json; charset=utf-8'
+          },
+          body:JSON.stringify({
+            subject: subject.value,
+            text: text.value
+          })
+        })
+
+        if(response.status == 200){
+          location.reload()
+        }
+      }
+
+      async function updateSmsTemplate(){
+        let text = document.querySelector('.sms-template-preview')
+
+        let response = await fetch('/api/settings/credentials',{
+          method:'PUT',
+          headers:{
+            'Content-Type': 'application/json; charset=utf-8'
+          },
+          body:JSON.stringify({
+            text: text.value
+          })
+        })
+
+        if(response.status == 200){
+          location.reload()
+        }
+      }
   </script>
 </body>
 </html>
