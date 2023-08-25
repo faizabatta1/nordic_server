@@ -91,6 +91,17 @@
       const emailSubjectPreview = document.querySelector('.email-preview-subject')
 
       const smsTestPreview = document.querySelector('.sms-template-preview')
+      const smsText = document.getElementById('smsText')
+
+      smsText.addEventListener('input', function() {
+          const template = smsText.value;
+          const updatedPreview = template
+              .replace(/{private}/g, 'EL 01')
+              .replace(/{board}/g, 'Ec65656')
+              .replace(/{kilometers}/g, '2000');
+          
+          smsTestPreview.textContent = updatedPreview;
+      });
 
 
       smsTestPreview.textContent = '<%=sms_template%>'
