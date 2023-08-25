@@ -3,7 +3,7 @@
 <head>
     <title>Settings</title>
     <style>
-        /* Your CSS styling here */
+        /* Custom CSS */
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
@@ -69,51 +69,49 @@
 </head>
 <body>
     <div class="container">
-        <h1>Settings</h1>
+        <h1 class="title">Settings</h1>
         
         <div class="section">
-            <h2>Admin Credentials</h2>
+            <h2 class="section-title">Admin Credentials</h2>
             <form action="/updateAdminCredentials" method="post">
-                <label for="adminUsername">Username:</label>
-                <input type="text" id="adminUsername" name="adminUsername" value="USERNAME" required>
-                <label for="adminPassword">Password:</label>
-                <input type="password" id="adminPassword" name="adminPassword" value="PASSWORD" required>
-                <button type="submit">Save</button>
+                <label for="adminUsername" class="label">Username</label>
+                <input type="text" id="adminUsername" name="adminUsername" class="input" value="USERNAME" required>
+                <label for="adminPassword" class="label">Password</label>
+                <input type="password" id="adminPassword" name="adminPassword" class="input" value="PASSWORD" required>
+                <button type="submit" class="button">Save</button>
             </form>
         </div>
 
         <div class="section">
-            <h2>Email Template</h2>
-            <p>Use <b><i>{private}</i></b> for car private number</p>
-            <p>Use <b><i>{board}</i></b> for car board number</p>
-            <p>Use <b><i>{kilometers}</i></b> for kilometers</p>
+            <h2 class="section-title">Email Template</h2>
+            <p class="helper-text">Use placeholders for dynamic content: {private}, {board}, {kilometers}</p>
 
             <form action="/updateEmailTemplate" method="post">
-                <label for="emailSubject">Subject:</label>
-                <input type="text" id="emailSubject" name="emailSubject" value="xx@gmail.com" required>
-                <label for="emailText">Text:</label>
-                <textarea id="emailText" name="emailText" required>
+                <label for="emailSubject" class="label">Subject</label>
+                <input type="text" id="emailSubject" name="emailSubject" class="input" value="xx@gmail.com" required>
+                <label for="emailText" class="label">Text</label>
+                <textarea id="emailText" name="emailText" class="input input-textarea" required>
                   this is a simple template my car number is {board} and it exceeded {kilometers}
                 </textarea>
-                <button type="submit">Save</button>
+                <button type="submit" class="button button-primary">Save</button>
             </form>
             <div class="preview">
-                <h4>Subject: Car {private}</h4>
-                <p>this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000</p>
+                <h4 class="preview-title">Subject: Car {private}</h4>
+                <p class="preview-text">this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000</p>
             </div>
         </div>
 
         <div class="section">
-            <h2>SMS Template</h2>
+            <h2 class="section-title">SMS Template</h2>
             <form action="/updateSmsTemplate" method="post">
-                <label for="smsText">Text:</label>
-                <textarea id="smsText" name="smsText" required>
+                <label for="smsText" class="label">Text</label>
+                <textarea id="smsText" name="smsText" class="input input-textarea" required>
                   this is a simple template my car number is {board} and it exceeded {kilometers}
                 </textarea>
-                <button type="submit">Save</button>
+                <button type="submit" class="button button-primary">Save</button>
             </form>
             <div class="preview">
-              this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000
+                <p class="preview-text">this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000</p>
             </div>
         </div>
     </div>
