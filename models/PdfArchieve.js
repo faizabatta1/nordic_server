@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const PDFArechieveSchema = new mongoose.Schema({
+const PDFArchieveSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true
@@ -24,6 +24,6 @@ const PDFArechieveSchema = new mongoose.Schema({
     },
 })
 
-const PDFArchieveModel = mongoose.model('PDF', PDFArechieveSchema)
+const PDFArchieveModel = mongoose.model('PDFArchieve', PDFArchieveSchema)
 
 module.exports = PDFArchieveModel
