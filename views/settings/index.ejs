@@ -35,8 +35,8 @@
 
                 <form action="/updateEmailTemplate" method="post">
                     <div class="mb-3">
-                        <label for="emailSubject" class="form-label"><%= email_subject %></label>
-                        <input type="text" id="emailSubject" name="emailSubject" class="form-control" value="xx@gmail.com" required>
+                        <label for="emailSubject" class="form-label">Subject</label>
+                        <input type="text" id="emailSubject" name="emailSubject" class="form-control" value="<%= email_subject %>" required>
                     </div>
                     <div class="mb-3">
                         <label for="emailText" class="form-label" id="emailSubject">Text</label>
