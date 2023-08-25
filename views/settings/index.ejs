@@ -14,17 +14,19 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h2 class="card-title">Admin Credentials</h2>
-                <div class="mb-3">
-                    <label for="adminUsername" class="form-label">Username</label>
-                    <input type="text" id="adminUsername" name="adminUsername" class="form-control" value="USERNAME" required>
-                </div>
-                <div class="mb-3">
-                    <label for="adminPassword" class="form-label">Password</label>
-                    <input type="password" id="adminPassword" name="adminPassword" class="form-control" value="PASSWORD" required>
-                </div>
-                <div class="d-flex justify-content-end align-items-center">
-                  <button id="saveAdminCredentials" class="btn btn-info">Save</button>
-                </div>
+                <form action="/updateAdminCredentials" method="post">
+                    <div class="mb-3">
+                        <label for="adminUsername" class="form-label">Username</label>
+                        <input type="text" id="adminUsername" name="adminUsername" class="form-control" value="USERNAME" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminPassword" class="form-label">Password</label>
+                        <input type="password" id="adminPassword" name="adminPassword" class="form-control" value="PASSWORD" required>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center">
+                      <button type="submit" class="btn btn-info">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -33,17 +35,19 @@
                 <h2 class="card-title">Email Template</h2>
                 <p class="card-text">Use placeholders for dynamic content: {private}, {board}, {kilometers}</p>
 
-                <div class="mb-3">
-                    <label for="emailSubject" class="form-label">Subject</label>
-                    <input type="text" id="emailSubject" name="emailSubject" class="form-control" value="<%= email_subject %>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="emailText" class="form-label" id="emailSubject">Text</label>
-                    <textarea id="emailText" name="emailText" class="form-control" rows="6" required><%= email_template %></textarea>
-                </div>
-                <div class="d-flex justify-content-end align-items-center">
-                  <button id="saveEmailTemplate" class="btn btn-info">Save</button>
-                </div>
+                <form action="/updateEmailTemplate" method="post">
+                    <div class="mb-3">
+                        <label for="emailSubject" class="form-label">Subject</label>
+                        <input type="text" id="emailSubject" name="emailSubject" class="form-control" value="<%= email_subject %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailText" class="form-label" id="emailSubject">Text</label>
+                        <textarea id="emailText" name="emailText" class="form-control" rows="6" required><%= email_template %></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center">
+                      <button type="submit" class="btn btn-info">Save</button>
+                    </div>
+                </form>
                 <div class="preview mt-3">
                     <h4 class="card-title email-preview-subject"></h4>
                     <p class="card-text email-preview-text"></p>
@@ -54,13 +58,15 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">SMS Template</h2>
-                <div class="mb-3">
-                    <label for="smsText" class="form-label">Text</label>
-                    <textarea id="smsText" name="smsText" class="form-control" rows="6" required>this is a simple template my car number is {board} and it exceeded {kilometers}</textarea>
-                </div>
-                <div class="d-flex justify-content-end align-items-center">
-                  <button id="saveSmsTemplate" class="btn btn-info">Save</button>
-                </div>
+                <form action="/updateSmsTemplate" method="post">
+                    <div class="mb-3">
+                        <label for="smsText" class="form-label">Text</label>
+                        <textarea id="smsText" name="smsText" class="form-control" rows="6" required>this is a simple template my car number is {board} and it exceeded {kilometers}</textarea>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center">
+                      <button type="submit" class="btn btn-info">Save</button>
+                    </div>  
+                  </form>
                 <div class="preview mt-3">
                     <p class="card-text">this is a simple template my car number is Ec65656 and private number EL 01 and it exceeded service kilometer 2000</p>
                 </div>
@@ -75,93 +81,44 @@
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function updateEmailPreview() {
-            const emailTemplate = document.getElementById('emailText').value;
-            const emailPreviewText = document.querySelector('.email-preview-text');
-            const updatedPreview = emailTemplate
-                .replace(/{private}/g, 'EL 01')
-                .replace(/{board}/g, 'Ec65656')
-                .replace(/{kilometers}/g, '2000');
-            emailPreviewText.textContent = updatedPreview;
-        }
 
-        function updateEmailSubjectPreview() {
-            const emailSubjectTemplate = document.getElementById('emailSubject').value;
-            const emailSubjectPreview = document.querySelector('.email-preview-subject');
-            const updatedSubjectPreview = emailSubjectTemplate
-                .replace(/{private}/g, 'EL 01')
-                .replace(/{board}/g, 'Ec65656')
-                .replace(/{kilometers}/g, '2000');
-            emailSubjectPreview.textContent = updatedSubjectPreview;
-        }
+      const emailText = document.getElementById('emailText');
+      const emailPreviewText = document.querySelector('.email-preview-text');
 
-        document.getElementById('emailText').addEventListener('input', updateEmailPreview);
-        document.getElementById('emailSubject').addEventListener('input', updateEmailSubjectPreview);
+      const emailSubject = document.getElementById('emailSubject')
+      const emailSubjectPreview = document.querySelector('.email-preview-subject')
 
-        document.getElementById('saveAdminCredentials').addEventListener('click', function () {
-            // Handle admin credentials saving using fetch
-            // Example:
-            fetch('/updateAdminCredentials', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    adminUsername: document.getElementById('adminUsername').value,
-                    adminPassword: document.getElementById('adminPassword').value
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle response data
-            })
-            .catch(error => {
-                // Handle error
-            });
-        });
 
-        document.getElementById('saveEmailTemplate').addEventListener('click', function () {
-            // Handle email template saving using fetch
-            // Example:
-            fetch('/updateEmailTemplate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    emailSubject: document.getElementById('emailSubject').value,
-                    emailText: document.getElementById('emailText').value
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle response data
-            })
-            .catch(error => {
-                // Handle error
-            });
-        });
+      emailSubjectPreview.textContent = '<%=email_subject%>'
+              .replace(/{private}/g, 'EL 01')
+              .replace(/{board}/g, 'Ec65656')
+              .replace(/{kilometers}/g, '2000');
+      
+      emailSubject.addEventListener('input', function() {
+          const template = emailSubject.value;
+          const updatedPreview = template
+              .replace(/{private}/g, 'EL 01')
+              .replace(/{board}/g, 'Ec65656')
+              .replace(/{kilometers}/g, '2000');
+          
+          emailSubjectPreview.textContent = updatedPreview;
+      });
 
-        document.getElementById('saveSmsTemplate').addEventListener('click', function () {
-            // Handle SMS template saving using fetch
-            // Example:
-            fetch('/updateSmsTemplate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    smsText: document.getElementById('smsText').value
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle response data
-            })
-            .catch(error => {
-                // Handle error
-            });
-        });
-    </script>
+
+      emailPreviewText.textContent = '<%=email_template%>'
+              .replace(/{private}/g, 'EL 01')
+              .replace(/{board}/g, 'Ec65656')
+              .replace(/{kilometers}/g, '2000');
+      
+      emailText.addEventListener('input', function() {
+          const template = emailText.value;
+          const updatedPreview = template
+              .replace(/{private}/g, 'EL 01')
+              .replace(/{board}/g, 'Ec65656')
+              .replace(/{kilometers}/g, '2000');
+          
+          emailPreviewText.textContent = updatedPreview;
+      });
+  </script>
 </body>
 </html>
