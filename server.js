@@ -51,9 +51,19 @@ app.get('/api/logout',(req,res) =>{
     return res.redirect('/')
 })
 
+const path = require('path')
+
 app.post('/api/login', async (req,res) =>{
     const { username, password } = req.body
-    if(username == "admin" && password == "Admin"){
+    const file = fs.readFileSync('data/credentials.json',{
+        encoding:'utf-8'
+    })
+
+    const json = JSON.parse(file)
+
+
+
+    if(username == json.username && password == json.password){
         res.cookie('isLogged','true',{
             maxAge: 36000000000000, // Cookie expiration time in milliseconds (1 hour in this case)
             httpOnly: true,
