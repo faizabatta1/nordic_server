@@ -209,7 +209,7 @@
     failureAllAlert.innerHTML = 'Failed to delete PDF.';
 
 
-    function archieveAll(){
+    async function archieveAll(){
         try{
             let response = await fetch('/api/archieves',{
                 method:'POST'
