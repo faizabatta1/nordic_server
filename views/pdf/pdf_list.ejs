@@ -177,8 +177,18 @@
         }
     });
 
-    const date = new Date().toISOString()
+    const date = new Date().toISOString().split('T')[0]
     console.log(date);
+
+    for (let i = 1; i < tableRows.length; i++) {
+            const dateCell = tableRows[i].getElementsByTagName('td')[0]; // Adjust the index as per your table structure
+            console.log(dateCell.innerText)
+            if (dateCell && dateCell.innerText == date) {
+                tableRows[i].style.display = '';
+            } else {
+                tableRows[i].style.display = 'none';
+            }
+        }
 
 
     const deletePdfModal = document.getElementById('deletePdfModal');
