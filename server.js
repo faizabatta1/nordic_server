@@ -24,8 +24,13 @@ app.get('/login', (req,res) =>{
     return res.status(200).render('auth/login')
 })
 
+const PDFArchieve = require('./models/PdfArchieve')
+
 app.get('/archieve',async (req,res) =>{
-    return res.status(200).render('pdfArchieve/pdf_list')
+    let archieves = await PDFArchieve.find({})
+    return res.status(200).render('pdfArchieve/pdf_list',{
+        pdfs: archieves
+    })
 })
 
 app.get('/api/logout',(req,res) =>{
