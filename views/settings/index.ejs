@@ -182,7 +182,7 @@
       async function updateSmsTemplate(){
         let text = document.querySelector('.sms-template-preview')
 
-        let response = await fetch('/api/settings/credentials',{
+        let response = await fetch('/api/settings/smsTemplate',{
           method:'PUT',
           headers:{
             'Content-Type': 'application/json; charset=utf-8'
