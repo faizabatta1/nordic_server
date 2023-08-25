@@ -1,4 +1,4 @@
 {
-  "subject":"File Subject",
-  "text":"this is a simple template my car number is {board} and it exceeded {kilometers}"
+  "subject":"Email Subject",
+  "text":"this is a simple SMS template use _________{board}_________{private}_________{kilometers}_________{pnid}_________"
 }
