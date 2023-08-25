@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 
 router.get('/settings',(req,res) =>{
-  let data = fs.readFileSync(path.join(__dirname,'../utils/email.txt'),{ 
+  let data = fs.readFileSync(path.join(__dirname,'../utils/email.json'),{ 
     encoding: 'utf8',
     flag: 'r'
    })
