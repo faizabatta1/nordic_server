@@ -33,6 +33,32 @@ app.get('/archieve',async (req,res) =>{
     })
 })
 
+const PDF = require('./models/PDF')
+app.post('/api/archieves', async (req,res) =>{
+    try{
+        let pdfs = await PDF.find({}).populate({
+            path:'userId',
+            ref:'User'
+        })
+
+        for(let pdf of pdfs){
+            let archieve = new PDFArchieve({
+                name:pdf.name,
+                username:pdf.userId.name,
+                accountId:pdf.userId.accountId,
+                link:pdf.link,
+                createdAt:pdf.createdAt,
+            })
+
+            await archieve.save()
+        }
+
+        return res.sendStatus(200)
+    }catch(error){
+        return res.status(500).send(error.message)
+    }
+})
+
 app.get('/api/logout',(req,res) =>{
 
     res.cookie('isLogged',{
