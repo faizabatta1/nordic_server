@@ -133,7 +133,7 @@ const createNewDriver = async (req,res) =>{
                 console.log(e.whenToGetDescription)
                 return {
                     title: e.title,
-                    status: e.value != (e.whenToGetDescription ? 'Ja' : 'Nei') ? 'Nei' : 'Ja',
+                    status: e.value != 'Ja' && e.value != 'Nei' ? (e.whenToGetDescription ? 'Ja' : 'Nei') : e.value,
                     notes: e.value != 'Ja' && e.value != 'Nei' ? e.value : 'XXX',
                     positive: e.value != 'Ja' && e.value != 'Nei' ? 'red' : 'green'
                 };
