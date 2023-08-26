@@ -70,6 +70,19 @@ app.post('/api/archieves', async (req,res) =>{
     }
 })
 
+// READ - Get a specific PDF by ID
+router.get('/archieves/:id', async (req, res) => {
+    try {
+        const pdf = await PDFArchieve.findById(req.params.id);
+        if (!pdf) {
+            return res.status(404).json({ error: 'PDF not found' });
+        }
+        return res.status(200).render('pdf/pdf_show.ejs', { pdf });
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.get('/api/logout',(req,res) =>{
 
     res.cookie('isLogged',{
