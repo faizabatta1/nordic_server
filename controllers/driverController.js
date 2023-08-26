@@ -16,22 +16,53 @@ const createNewDriver = async (req,res) =>{
     try{
         const { data, token } = req.headers
         const information = JSON.parse(decodeURIComponent(data))
-        console.log(information)
+
+        let decodedToken = jwt.verify(token,'your-secret-key')
+        let user = await User.findOne({ _id: decodedToken.userId })
+
         if(information.carId != undefined){
             let existingCar = await Car.findOne({ _id: information.carId })
             if(+information.kilometers + +existingCar.currentKilometers >= +existingCar.kilometers){
+                let emailData = fs.readFileSync(path.join(__dirname,'../data/email.json'),{ 
+                    encoding: 'utf8',
+                    flag: 'r'
+                })
+                
+                let emailJson = JSON.parse(emailData)
+                let emailSubject = emailJson.subject
+                .replace(/{private}/g, information.privateNumber)
+                .replace(/{board}/g, information.boardNumber)
+                .replace(/{pnid}/g, user.accountId)
+                .replace(/{kilometers}/g, existingCar.kilometers);
+
+                let emailText = emailJson.text
+                .replace(/{private}/g, information.privateNumber)
+                .replace(/{board}/g, information.boardNumber)
+                .replace(/{pnid}/g, user.accountId)
+                .replace(/{kilometers}/g, existingCar.kilometers);
+
+
                 sendAlertMail({
                     to:'vaktleder@parknordic.no',
-                    subject:`Bil nr ${information.privateNumber} Trenger services`,
-                    text: `Bilen med skilt nr:${information.boardNumber} Og tjenesternr ${information.privateNumber} Har nå gått over service. Service blir i ${existingCar.kilometers} Kilometer`,
-                    html: `<h2>Bilen med skilt nr:${information.boardNumber} Og tjenesternr ${information.privateNumber} Har nå gått over service. Service blir i ${existingCar.kilometers} Kilometer</h2>`
-                    // text:`Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`,
-                    // html:`Car ${information.boardNumber + "  " + information.privateNumber} Exceeded ${existingCar.kilometers} By ${+information.kilometers + +existingCar.currentKilometers - +existingCar.kilometers}`
-                    
+                    subject: emailSubject,
+                    text: emailText,
+                    html: `<h2>${emailText}</h2>`                    
                 })
 
+                let smsData = fs.readFileSync(path.join(__dirname,'../data/sms.json'),{ 
+                    encoding: 'utf8',
+                    flag: 'r'
+                })
+                
+                let smsJson = JSON.parse(smsData)
+                let smsText = smsJson.text
+                .replace(/{private}/g, information.privateNumber)
+                .replace(/{board}/g, information.boardNumber)
+                .replace(/{pnid}/g, user.accountId)
+                .replace(/{kilometers}/g, existingCar.kilometers);
+
                 await sendAlertSMS({
-                    text:`Bilen med skilt nr:${information.boardNumber} Og tjenesternr ${information.privateNumber} Har nå gått over service. Service blir i ${existingCar.kilometers} Kilometer`,
+                    text: smsText,
                     to:"4747931499"
                 });
 
@@ -67,8 +98,6 @@ const createNewDriver = async (req,res) =>{
 
         // Load the HTML template
         const htmlTemplate = fs.readFileSync('templates/driver.html', 'utf8');
-        let decodedToken = jwt.verify(token,'your-secret-key')
-        let user = await User.findOne({ _id: decodedToken.userId })
     
 
 
