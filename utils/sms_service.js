@@ -23,6 +23,10 @@ axios.post(apiUrl, {
   from: 'Nordic',
   to: '4740088605',
   text: text
+},{
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
 })
   .then(response => {
     console.log('Response:', response.data);
