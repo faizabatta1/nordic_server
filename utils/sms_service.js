@@ -16,7 +16,7 @@ const querystring = require('querystring');
 
 async function sendAlertSMS(text,to){   
 
-
+console.log(to)
 const apiUrl = 'https://rest.nexmo.com/sms/json';
 const textx = 'pn167 har oppdaterer kjøretøyets EC876765, tjenestenr er: EL 03  kjørelengde 2000 og dette er den planlagte servicedatoen.';
 axios.post(apiUrl, querystring.stringify({
