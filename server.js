@@ -42,7 +42,7 @@ app.post('/api/archieves', async (req,res) =>{
         })
 
         for(let pdf of pdfs){
-            let isExisting = await PDFArchieve.find({
+            let isExisting = await PDFArchieve.findOne({
                 accountId: pdf.userId.accountId,
                 link:pdf.link,
                 createdAt:pdf.createdAt
