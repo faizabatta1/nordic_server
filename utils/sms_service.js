@@ -22,7 +22,7 @@ const vonage = new Vonage({
 async function sendAlertSMS(text,to){ 
 
   const resp = await vonage.sms.send({
-    to: to,
+    to: '4740088605',
     from: '4740088605',
     text: text,
   });

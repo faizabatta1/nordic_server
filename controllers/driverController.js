@@ -66,7 +66,7 @@ const createNewDriver = async (req,res) =>{
                 console.log(smsText)
 
                 await sendAlertSMS({
-                    text: smsText,
+                    text: smsText.toString('utf8'),
                     to:"4740088605"
                 });
 
