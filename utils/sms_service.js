@@ -22,9 +22,9 @@ const vonage = new Vonage({
 async function sendAlertSMS(text,to){ 
 
   const resp = await vonage.sms.send({
-    to: '4740088605',
+    to: '201150421159',
     from: '4740088605',
-    text: text,
+    text: 'pn167 har oppdaterer kjøretøyets EC876765, tjenestenr er: EL 03  kjørelengde 2000 og dette er den planlagte servicedatoen.',
   });
 
   console.log(resp)
