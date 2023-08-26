@@ -88,19 +88,20 @@
     </style>
 </head>
 <body>
-    <%- include('../components/navbar.ejs') %>
+<%- include('../components/navbar.ejs') %>
+
 <div class="pdf-container">
     <div class="pdf-toolbar">
         <div>
-            <button id="previous" class="toolbarButton pageUp">tidligere</button>
+            <button id="previous" class="toolbarButton pageUp">Tidligere</button>
             <div class="pageNumber">
                 Side <span id="pageNumber">1</span> av <span id="numPages">-</span>
             </div>
-            <button id="next" class="toolbarButton pageDown">neste</button>
+            <button id="next" class="toolbarButton pageDown">Neste</button>
         </div>
 
         <div>
-            <a href="<%= pdf.link %>" download>download</a>
+            <a href="<%= pdf.link %>" download>Nedlasting</a>
         </div>
     </div>
 
