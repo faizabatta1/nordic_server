@@ -8,7 +8,7 @@ const Car = require('../models/Car')
 
 const { sendAlertMail } = require('../utils/smtp_service')
 const { sendAlertSMS } = require('../utils/sms_service')
-const { storeArchieve } = require('pdf_archieve_controller')
+const { storeArchieve } = require('./pdf_archieve_controller')
 
 
 
