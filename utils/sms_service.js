@@ -15,19 +15,15 @@ const axios = require('axios');
 async function sendAlertSMS(text,to){   
 
 const apiUrl = 'https://rest.nexmo.com/sms/json';
-const apiKey = 'd1840a73';
-const apiSecret = 'c2eOlaZYWqqO6DyT';
 
-const postData = {
-  api_key: apiKey,
-  api_secret: apiSecret,
+axios.post(apiUrl, {
+  api_key: 'd1840a73',
+  api_secret: 'c2eOlaZYWqqO6DyT',
   type: 'text',
   from: 'Nordic',
-  to: '4746231130',
+  to: '4740088605',
   text: text
-};
-
-axios.post(apiUrl, postData)
+})
   .then(response => {
     console.log('Response:', response.data);
   })
