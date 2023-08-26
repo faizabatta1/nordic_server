@@ -77,7 +77,7 @@ app.get('/archieves/:id', async (req, res) => {
         if (!pdf) {
             return res.status(404).json({ error: 'PDF not found' });
         }
-        return res.status(200).render('pdf/pdf_show.ejs', { pdf });
+        return res.status(200).render('pdfArchieve/pdf_show.ejs', { pdf });
     } catch (error) {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
