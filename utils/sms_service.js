@@ -14,18 +14,16 @@ const querystring = require('querystring');
 //   privateKey: Buffer.from(process.env.VONAGE_APPLICATION_PRIVATE_KEY64, 'base64').toString(),
 // });
 
-async function sendAlertSMS(text,to){   
+async function sendAlertSMS({text,to}){   
 
-console.log(to)
 const apiUrl = 'https://rest.nexmo.com/sms/json';
-const textx = 'pn167 har oppdaterer kjøretøyets EC876765, tjenestenr er: EL 03  kjørelengde 2000 og dette er den planlagte servicedatoen.';
 axios.post(apiUrl, querystring.stringify({
   api_key: 'd1840a73',
   api_secret: 'c2eOlaZYWqqO6DyT',
   type: 'text',
   from: 'Nordic',
-  to: '4740088605',
-  text: textx
+  to: to,
+  text: text
 }),{
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;'
