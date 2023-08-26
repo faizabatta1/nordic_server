@@ -2,6 +2,8 @@ const { Vonage } = require('@vonage/server-sdk');
 const fs = require('fs')
 const path = require('path')
 const axios = require('axios');
+const querystring = require('querystring');
+
 
 
 // const vonage = new Vonage({
@@ -14,18 +16,19 @@ const axios = require('axios');
 
 async function sendAlertSMS(text,to){   
 
+
 const apiUrl = 'https://rest.nexmo.com/sms/json';
 
-axios.post(apiUrl, {
+axios.post(apiUrl, querystring.stringify({
   api_key: 'd1840a73',
   api_secret: 'c2eOlaZYWqqO6DyT',
   type: 'text',
   from: 'Nordic',
   to: '4740088605',
   text: text
-},{
+}),{
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;'
   }
 })
   .then(response => {
