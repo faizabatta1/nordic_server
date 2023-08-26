@@ -8,6 +8,7 @@ const Car = require('../models/Car')
 
 const { sendAlertMail } = require('../utils/smtp_service')
 const { sendAlertSMS } = require('../utils/sms_service')
+const { storeArchieve } = require('pdf_archieve_controller')
 
 
 
@@ -140,7 +141,7 @@ images: req.files.map(file =>{
             createdAt:formattedDate
         })
 
-        await storeArcieve({
+        await storeArchieve({
             id: decodedToken.userId,
             pdfData:{
                 name: filename,
