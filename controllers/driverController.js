@@ -69,6 +69,8 @@ const createNewDriver = async (req,res) =>{
         const htmlTemplate = fs.readFileSync('templates/driver.html', 'utf8');
         let decodedToken = jwt.verify(token,'your-secret-key')
         let user = await User.findOne({ _id: decodedToken.userId })
+        console.log(user)
+        console.log(decodedToken)
 
 
         const groupedImages = {};
@@ -83,7 +85,6 @@ const createNewDriver = async (req,res) =>{
             });
         }
 
-        console.log(groupedImages);
 
         // Replace placeholders with dynamic data
         const template_data = {
