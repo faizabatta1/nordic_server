@@ -26,8 +26,6 @@ async function sendAlertSMS(text,to){
     from: '4740088605',
     text: 'pn167 har oppdaterer kjøretøyets EC876765, tjenestenr er: EL 03  kjørelengde 2000 og dette er den planlagte servicedatoen.',
   });
-
-  console.log(resp)
 }
 
 
