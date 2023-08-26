@@ -71,7 +71,7 @@ app.post('/api/archieves', async (req,res) =>{
 })
 
 // READ - Get a specific PDF by ID
-router.get('/archieves/:id', async (req, res) => {
+app.get('/archieves/:id', async (req, res) => {
     try {
         const pdf = await PDFArchieve.findById(req.params.id);
         if (!pdf) {
