@@ -127,6 +127,10 @@ const createNewDriver = async (req,res) =>{
             date: information.date,
             user: user.name + ' - ' + user.accountId,
             rows: [...groupedData['First'],...groupedData['Second']].map(e => {
+                console.log(e)
+                console.log(e.title)
+                console.log(e.value)
+                console.log(e.whenToGetDescription)
                 return {
                     title: e.title,
                     status: e.value != (e.whenToGetDescription ? 'Ja' : 'Nei') ? 'Nei' : 'Ja',
