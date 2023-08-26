@@ -78,44 +78,53 @@
     const datePicker = document.getElementById('datePicker');
     const cards = document.getElementsByClassName('card');
 
-    datePicker.addEventListener('change', function () {
-        const selectedDate = datePicker.value;
+    // Inside the datePicker event listener
+datePicker.addEventListener('change', function () {
+    const selectedDate = datePicker.value;
 
-        for (let i = 0; i < cards.length; i++) {
-            const dateInfo = cards[i].querySelector('.card-title').textContent;
-            if (dateInfo.includes(selectedDate)) {
-                cards[i].style.display = '';
-            } else {
-                cards[i].style.display = 'none';
-            }
+    for (let i = 0; i < cards.length; i++) {
+        const dateInfo = cards[i].querySelector('.card-title').textContent;
+        if (dateInfo.includes(selectedDate)) {
+            cards[i].style.visibility = 'visible';
+            cards[i].style.position = 'static';
+        } else {
+            cards[i].style.visibility = 'hidden';
+            cards[i].style.position = 'absolute';
         }
-    });
+    }
+});
 
     const date = new Date().toISOString().split('T')[0]
 
     for (let i = 0; i < cards.length; i++) {
             const dateInfo = cards[i].querySelector('.card-title').textContent;
             if (dateInfo.includes(date)) {
-                cards[i].style.display = '';
+                cards[i].style.visibility = 'visible';
+            cards[i].style.position = 'static';
             } else {
-                cards[i].style.display = 'none';
+                cards[i].style.visibility = 'hidden';
+            cards[i].style.position = 'absolute';
             }
         }
 
     const searchInput = document.getElementById('searchInput');
 
-    searchInput.addEventListener('keyup', function () {
-        const filter = searchInput.value.toLowerCase();
+    
+// Inside the searchInput event listener
+searchInput.addEventListener('keyup', function () {
+    const filter = searchInput.value.toLowerCase();
 
-        for (let i = 0; i < cards.length; i++) {
-            const cardContent = cards[i].textContent.toLowerCase();
-            if (cardContent.includes(filter)) {
-                cards[i].style.display = '';
-            } else {
-                cards[i].style.display = 'none';
-            }
+    for (let i = 0; i < cards.length; i++) {
+        const cardContent = cards[i].textContent.toLowerCase();
+        if (cardContent.includes(filter)) {
+            cards[i].style.visibility = 'visible';
+            cards[i].style.position = 'static';
+        } else {
+            cards[i].style.visibility = 'hidden';
+            cards[i].style.position = 'absolute';
         }
-    });
+    }
+});
 </script>
 
 </body>
