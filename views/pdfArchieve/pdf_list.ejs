@@ -100,10 +100,10 @@ datePicker.addEventListener('change', function () {
             const dateInfo = cards[i].querySelector('.card-title').textContent;
             if (dateInfo.includes(date)) {
                 cards[i].style.visibility = 'visible';
-            cards[i].style.position = 'static';
+            cards[i].style.display = 'block';
             } else {
                 cards[i].style.visibility = 'hidden';
-            cards[i].style.position = 'absolute';
+                cards[i].style.display = 'none';
             }
         }
 
