@@ -149,21 +149,13 @@ const createNewDriver = async (req,res) =>{
         await page.setContent(filledTemplate);
         await page.pdf({ path: `./public/profiles/${filename}`, format: 'A4' });
 
-        let now = new Date();
-        now = now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        let correctDate = new Date(now)
-
-        const year = correctDate.getFullYear();
-        const month = (correctDate.getMonth() + 1).toString().padStart(2, '0');
-        const day = correctDate.getDate().toString().padStart(2, '0');
-
-        const formattedDate = `${year}-${month}-${day}`;
         let pdf = new PDF({
             name: filename,
             link: process.env.BASE_URL + 'profiles/' + filename,
             userId: decodedToken.userId,
-            createdAt:formattedDate
         })
+
+        
 
         await pdf.save()
         
