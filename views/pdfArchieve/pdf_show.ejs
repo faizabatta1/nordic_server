@@ -62,7 +62,14 @@
             border-bottom: 1px solid #ddd;
         }
 
-        .pdf-toolbar > *{
+        .pdf-toolbar > :last-child{
+            flex-grow: 1;
+        }
+
+        .pdf-toolbar > :first-child{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-grow: 1;
         }
 
