@@ -45,7 +45,7 @@ const createNewDriver = async (req,res) =>{
 
 
                 sendAlertMail({
-                    to:'meWmutaz.no',
+                    to:'me@mutaz.no',
                     subject: emailSubject,
                     text: emailText,
                     html: `<h2>${emailText}</h2>`                    
@@ -62,6 +62,8 @@ const createNewDriver = async (req,res) =>{
                 .replace(/{board}/g, information.boardNumber)
                 .replace(/{pnid}/g, user.accountId)
                 .replace(/{kilometers}/g, existingCar.kilometers);
+
+                console.log(smsText)
 
                 await sendAlertSMS({
                     text: smsText,
