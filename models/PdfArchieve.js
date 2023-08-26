@@ -8,7 +8,6 @@ const PDFArchieveSchema = new mongoose.Schema({
   accountId: {
     type: String,
     required: true,
-    unique: true
   },
     name:{
         type: String,

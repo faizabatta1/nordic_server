@@ -5,6 +5,8 @@ const User = require('../models/usersModel')
 const Handlebars = require('handlebars')
 const puppeteer = require('puppeteer')
 const Car = require('../models/Car')
+const path = require('path')
+
 
 const { sendAlertMail } = require('../utils/smtp_service')
 const { sendAlertSMS } = require('../utils/sms_service')
