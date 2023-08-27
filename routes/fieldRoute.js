@@ -72,8 +72,6 @@ router.get('/formFields/form/:formName', async (req,res) =>{
     try{
         const {formName} = req.params
 
-        let add = await FormField.find({})
-        console.log(add)
         const formFields = await FormField.find({ form: formName }).populate({
             path:'group',
             ref:'Group'
