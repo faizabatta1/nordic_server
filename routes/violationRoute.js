@@ -56,6 +56,34 @@ router.get('/violations/:id',async (req,res) =>{
       } catch (err) {
         console.error('Error:', err);
       }
+    }else if(id == 3){
+      const now = new Date();
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(now.getDate() - 7);
+
+      try {
+        const result = await Violation.aggregate([
+          {
+            $match: {
+              createdAt: {
+                $gte: oneWeekAgo.toISOString(), // Filter for documents created after one week ago
+                $lt: now.toISOString() // Filter for documents created until now
+              }
+            }
+          },
+          {
+            $group: {
+              _id: null,
+              totalViolations: { $sum: '$violations' } // Sum the violations field
+            }
+          }
+        ]);
+
+        const totalViolations = result.length > 0 ? result[0].totalViolations : 0;
+        console.log('Total violations in the last one week:', totalViolations);
+      } catch (err) {
+        console.error('Error:', err);
+      }
     }else{
       return res.send("0")
     }
