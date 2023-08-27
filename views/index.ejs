@@ -185,9 +185,11 @@
         const holder = document.getElementById('vio-num');
         const selectVio = document.getElementById('violationsFilter');
         const value = selectVio.value;
+        console.log(value);
 
         try {
             const data = await fetchData(`/api/violations/${value}`);
+            console.log(data);
             holder.textContent = data;
         } catch (error) {
             console.error(error);
