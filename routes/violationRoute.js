@@ -14,9 +14,9 @@ router.get('/violations/:id',async (req,res) =>{
         totalViolations += violation.violations;
       });
 
-      return res.status(200).send(totalViolations)      
+      return res.send(totalViolations.toString())      
     }else{
-      return res.status(200).send(0)
+      return res.send("0")
     }
   }catch(error){
     console.log(error.message)
