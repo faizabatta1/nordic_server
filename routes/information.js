@@ -23,9 +23,11 @@ router.get('/info/shift',async (req,res) =>{
       flag: 'r'
      })
      let applicationJson = JSON.parse(applicationData)
+     console.log(applicationJson)
 
      return res.status(200).send(applicationJson.shift)
   }catch(error){
+    console.log(error.message)
     return res.status(500).send(error.message)
   }
 })
