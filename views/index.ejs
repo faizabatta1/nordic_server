@@ -163,12 +163,14 @@
 <script>
     let holder = document.getElementById('vio-num')
 
-    let response = await fetch(`/api/violations/0`)
-    if(response.status == 200){
-        holder.textContent = await response.json()
-    }else{
-        alert('something went wrong')
-    }
+    (async function(){
+        let response = await fetch(`/api/violations/0`)
+        if(response.status == 200){
+            holder.textContent = await response.json()
+        }else{
+            alert('something went wrong')
+        }
+    })()
 
     async function getViolationStatic(){
         let selectVio = document.getElementById('violationsFilter')
