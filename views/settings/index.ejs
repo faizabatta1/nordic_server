@@ -38,6 +38,10 @@
 .tabcontent {
   display: none;
 }
+
+textarea{
+  white-space: pre-wrap;
+}
     </style>
     <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -202,6 +206,105 @@
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+      async function updateShiftSelectText(){
+        try{
+          let shiftText = document.getElementById('shiftSelectText').value
+          let response = await fetch('/api/settings/shift',{
+            method:'POST',
+            body:JSON.stringify({
+              shift: shiftText
+            }),
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            }
+          })
+
+          if(response.status == 200){
+            $('#successModal').modal('show');
+            setTimeout(() => location.reload(), 2000);
+          }else{
+            alert('something went wrong')
+          }
+        }catch(error){
+          alert(error.message)
+        }
+      }
+
+      async function updateCarSelectText(){
+        try{
+          let carText = document.getElementById('carSelectText').value
+          let response = await fetch('/api/settings/car',{
+            method:'POST',
+            body:JSON.stringify({
+              car: carText
+            }),
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            }
+          })
+
+          if(response.status == 200){
+            $('#successModal').modal('show');
+            setTimeout(() => location.reload(), 2000);
+          }else{
+            alert('something went wrong')
+          }
+        }catch(error){
+          alert(error.message)
+        }
+      }
+
+      async function updateServiceKilometersText(){
+        try{
+          let serviceKilometerText = document.getElementById('serviceKilometersText').value
+          let response = await fetch('/api/settings/kilometer',{
+            method:'POST',
+            body:JSON.stringify({
+              kilometer: serviceKilometerText
+            }),
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            }
+          })
+
+          if(response.status == 200){
+            $('#successModal').modal('show');
+            setTimeout(() => location.reload(), 2000);
+          }else{
+            alert('something went wrong')
+          }
+        }catch(error){
+          alert(error.message)
+        }
+      }
+
+      async function updateViolationsText(){
+        try{
+          let violationText = document.getElementById('violationText').value
+          let response = await fetch('/api/settings/violation',{
+            method:'POST',
+            body:JSON.stringify({
+              violation: violationText
+            }),
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            }
+          })
+
+          if(response.status == 200){
+            $('#successModal').modal('show');
+            setTimeout(() => location.reload(), 2000);
+          }else{
+            alert('something went wrong')
+          }
+        }catch(error){
+          alert(error.message)
+        }
+      }
+    </script>
+    <script>
+
+
 
 document.getElementById('general').style.display = "block";
 document.getElementById('general').className += " active";
@@ -219,6 +322,7 @@ function openSection(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " active";
 }
+
 
       const emailText = document.getElementById('emailText');
       const emailPreviewText = document.querySelector('.email-preview-text');
