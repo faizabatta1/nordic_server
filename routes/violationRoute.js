@@ -19,7 +19,7 @@ router.get('/violations/:id',async (req,res) =>{
       let currentDate = new Date().toISOString().split('T')[0]
 
       let violations = await Violation.find({
-        createdAt: currrentDate
+        createdAt: currentDate
       })
       let totalViolations = 0;
     
