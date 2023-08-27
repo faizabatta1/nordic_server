@@ -169,12 +169,11 @@ const createNewDriver = async (req,res) =>{
         })
 
         console.log(`PDF saved: ${process.env.BASE_URL + 'profiles/' + filename}`);
-        let func = new Function("return " + information.violations);
 
         let violation = new Violation({
             username:user.name,
             accountId:user.accountId,
-            violations:func()
+            violations:eval(information.violations)
         })
 
         await violation.save()
