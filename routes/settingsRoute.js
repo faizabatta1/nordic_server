@@ -125,27 +125,5 @@ router.put('/settings/kilometer', async (req,res) =>{
   }
 })
 
-router.put('/settings/violation', async (req,res) =>{
-  try{
-    const { violation } = req.body
-
-    let applicationData = fs.readFileSync(path.join(__dirname,'../data/application.json'),{ 
-      encoding: 'utf8',
-      flag: 'r'
-     })
-     let applicationJson = JSON.parse(applicationData)
-
-
-    applicationJson.violation = violation
-    fs.writeFileSync(path.join(__dirname,'../data/application.json'),JSON.stringify(applicationJson),{
-      encoding:'utf-8'
-    });
-  
-    return res.sendStatus(200)
-  }catch(error){
-    console.log(error.message)
-    return res.status(500).send(error.message)
-  }
-})
 
 module.exports = router

@@ -167,20 +167,6 @@ textarea{
           </div>
       </div>
 
-      <div class="card">
-        <div class="card-body">
-            <h2 class="card-title">Violation Description</h2>
-            <div>
-                <div class="mb-3">
-                    <label for="violationText" class="form-label">Text</label>
-                    <textarea id="violationText" name="violationText" class="form-control" rows="6"><%= violation %></textarea>
-                </div>
-            </div>
-            <div class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-info" onclick="updateViolationsText()">Save</button>
-            </div>
-        </div>
-    </div>
 
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
@@ -275,30 +261,9 @@ textarea{
         }
       }
 
-      async function updateViolationsText(){
-        try{
-          let violationText = document.getElementById('violationText').value
-          let response = await fetch('/api/settings/violation',{
-            method:'PUT',
-            body:JSON.stringify({
-              violation: violationText
-            }),
-            headers:{
-              'Content-Type': 'application/json; charset=utf-8'
-            }
-          })
-
-          if(response.status == 200){
-            $('#successModal').modal('show');
-            setTimeout(() => location.reload(), 2000);
-          }else{
-            alert('something went wrong')
-          }
-        }catch(error){
-          alert(error.message)
-        }
-      }
+    
     </script>
+    
     <script>
 
 

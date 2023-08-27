@@ -47,18 +47,4 @@ router.get('/info/kilometer',async (req,res) =>{
   }
 })
 
-router.get('/info/violation',async (req,res) =>{
-  try{
-    let applicationData = fs.readFileSync(path.join(__dirname,'../data/application.json'),{ 
-      encoding: 'utf8',
-      flag: 'r'
-     })
-     let applicationJson = JSON.parse(applicationData)
-
-     return res.status(200).send(applicationJson.violation)
-  }catch(error){
-    return res.status(500).send(error.message)
-  }
-})
-
 module.exports = router

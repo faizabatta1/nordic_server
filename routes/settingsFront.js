@@ -41,7 +41,6 @@ router.get('/settings',(req,res) =>{
     password: credentialsJson.password,
 
     kilometer: applicationJson.kilometer,
-    violation: applicationJson.violation,
     car: applicationJson.car,
     shift: applicationJson.shift,
 
