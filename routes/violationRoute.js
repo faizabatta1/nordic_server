@@ -15,6 +15,19 @@ router.get('/violations/:id',async (req,res) =>{
       });
 
       return res.send(totalViolations.toString())      
+    }else if(id == 1){
+      let currentDate = new Date().toISOString().split('T')[0]
+
+      let violations = await Violation.find({
+        createdAt: currrentDate
+      })
+      let totalViolations = 0;
+    
+      violations.forEach(violation => {
+        totalViolations += violation.violations;
+      });
+
+      return res.send(totalViolations.toString())      
     }else{
       return res.send("0")
     }
