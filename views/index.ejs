@@ -125,22 +125,22 @@
 <div class="container">
     <div class="welcome-message">Hei, Admin!</div>
 
+    <select name="violationsFilter" id="violationsFilter" onchange="updateViolationCount()">
+        <option value="0">All Time</option>
+        <option value="1">Today</option>
+        <option value="2">3 days</option>
+        <option value="3">one week</option>
+        <option value="4">one month</option>
+        <option value="5">one year</option>
+    </select>
+
     <div class="statistics">
         <div class="stat-card" style="margin-right: 12px">
-            <select name="violationsFilter" id="violationsFilter" onchange="updateViolationCount()">
-                <option value="0">All Time</option>
-                <option value="1">Today</option>
-                <option value="2">3 days</option>
-                <option value="3">one week</option>
-                <option value="4">one month</option>
-                <option value="5">one year</option>
-            </select>
-            <div class="info">
-                <h3>Violations</h3>
-                <p id="vio-num"></p>
+            <div class="info" >
+                <h3>Total K.S: <span id="vio-num"></span></h3>
             </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card" style="margin-right: 12px">
             <h2>Snart</h2>
         </div>
 
