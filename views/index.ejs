@@ -55,6 +55,12 @@
             font-size: 16px;
         }
 
+        .stat-card .info{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
 
         .notifications {
             background-color: #f5f5f5;
@@ -127,7 +133,10 @@
                 <option value="4">one month</option>
                 <option value="5">one year</option>
             </select>
-            <h3 id="vio-num"></h3>
+            <div class="info">
+                <h3>Violations</h3>
+                <p id="vio-num"></p>
+            </div>
         </div>
         <div class="stat-card">
             <h2>Snart</h2>
