@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             <label for="group">Gruppe</label>
-            <select class="form-control" id="group" name="group">
+            <select class="form-control" id="group" name="group" required>
                 <% groups.forEach(group => { %>
                     <option value="<%= group._id %>"><%= group.name %></option>
                 <% }); %>
@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <label for="form">Skjema</label>
-            <select class="form-control" id="form" name="form">
+            <select class="form-control" id="form" name="form" required>
                 <option value="First">Første</option>
                 <option value="Second">Andre</option>
             </select>
@@ -43,7 +43,7 @@
 
         <div class="form-group" id="requiredDescriptionField">
             <label for="requiredDescription">Beskrivelse</label>
-            <input type="text" class="form-control" id="requiredDescription" name="requiredDescription">
+            <input type="text" class="form-control" id="requiredDescription" name="requiredDescription" required>
         </div>
 
         <!-- Display these fields only for "Ja-Nei" question type -->
