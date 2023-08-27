@@ -17,7 +17,7 @@ router.put('/settings/credentials', async (req,res) =>{
   
     return res.sendStatus(200)
   }catch(error){
-    return res.send(500).send(error.message)
+    return res.status(500).send(error.message)
   }
 })
 
@@ -35,7 +35,7 @@ router.put('/settings/emailTemplate', async (req,res) =>{
   
     return res.sendStatus(200)
   }catch(error){
-    return res.send(500).send(error.message)
+    return res.status(500).send(error.message)
   }
 })
 
@@ -52,7 +52,7 @@ router.put('/settings/smsTemplate', async (req,res) =>{
   
     return res.sendStatus(200)
   }catch(error){
-    return res.send(500).send(error.message)
+    return res.status(500).send(error.message)
   }
 })
 
@@ -75,7 +75,7 @@ router.put('/settings/shift', async (req,res) =>{
     return res.sendStatus(200)
   }catch(error){
     console.log(error.mesage)
-    return res.send(500).send(error.message)
+    return res.status(500).send(error.message)
   }
 })
 
@@ -98,7 +98,7 @@ router.put('/settings/car', async (req,res) =>{
     return res.sendStatus(200)
   }catch(error){
     console.log(error.mesage)
-    return res.send(500).send(error.message)
+    return res.status(500).send(error.message)
   }
 })
 
@@ -121,7 +121,7 @@ router.put('/settings/kilometer', async (req,res) =>{
     return res.sendStatus(200)
   }catch(error){
     console.log(error.mesage)
-    return res.send(500).send(error.message)
+    return res.status(500).send(error.message)
   }
 })
 
@@ -144,7 +144,7 @@ router.put('/settings/violation', async (req,res) =>{
     return res.sendStatus(200)
   }catch(error){
     console.log(error.mesage)
-    return res.send(500).send(error.message)
+    return res.status(500).send(error.message)
   }
 })
 
