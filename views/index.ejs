@@ -148,10 +148,18 @@
 </div>
 <script src="https://kit.fontawesome.com/7d365a7c21.js" crossorigin="anonymous"></script>
 <script>
+    let holder = document.getElementById('vio-num')
+
+    let response = await fetch(`/api/violations/0`)
+    if(response.status == 200){
+        holder.textContent = await response.json()
+    }else{
+        alert('something went wrong')
+    }
+
     async function getViolationStatic(){
         let selectVio = document.getElementById('violationsFilter')
         let value = selectVio.value
-        let holder = document.getElementById('vio-num')
 
         let response = await fetch(`/api/violations/${value}`)
         if(response.status == 200){
