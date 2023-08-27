@@ -19,6 +19,7 @@ router.get('/violations/:id',async (req,res) =>{
       return res.status(200).send(0)
     }
   }catch(error){
+    console.log(error.message)
     return res.status(500).send(error.message)
   }
 })
