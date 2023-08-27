@@ -68,7 +68,7 @@ router.put('/settings/shift', async (req,res) =>{
 
 
     applicationJson.shift = shift
-    fs.writeFileSync(path.join(__dirname,'../data/application.json'), applicationJson,{
+    fs.writeFileSync(path.join(__dirname,'../data/application.json'),JSON.stringify(applicationJson),{
       encoding:'utf-8'
     });
   
@@ -91,7 +91,7 @@ router.put('/settings/car', async (req,res) =>{
 
 
     applicationJson.car = car
-    fs.writeFileSync(path.join(__dirname,'../data/application.json'), applicationJson,{
+    fs.writeFileSync(path.join(__dirname,'../data/application.json'),JSON.stringify(applicationJson),{
       encoding:'utf-8'
     });
   
@@ -114,7 +114,7 @@ router.put('/settings/kilometer', async (req,res) =>{
 
 
     applicationJson.kilometer = kilometer
-    fs.writeFileSync(path.join(__dirname,'../data/application.json'), applicationJson,{
+    fs.writeFileSync(path.join(__dirname,'../data/application.json'),JSON.stringify(applicationJson),{
       encoding:'utf-8'
     });
   
@@ -137,7 +137,7 @@ router.put('/settings/violation', async (req,res) =>{
 
 
     applicationJson.violation = violation
-    fs.writeFileSync(path.join(__dirname,'../data/application.json'), applicationJson,{
+    fs.writeFileSync(path.join(__dirname,'../data/application.json'),JSON.stringify(applicationJson),{
       encoding:'utf-8'
     });
   
