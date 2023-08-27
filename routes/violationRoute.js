@@ -28,6 +28,36 @@ router.get('/violations/:id',async (req,res) =>{
       });
 
       return res.send(totalViolations.toString())      
+    }else if(id == 2){
+      const now = new Date();
+      const threeDaysAgo = new Date();
+      threeDaysAgo.setDate(now.getDate() - 3);
+
+      Violation.aggregate([
+        {
+          $match: {
+            createdAt: {
+              $gte: threeDaysAgo.toISOString(), // Filter for documents created after three days ago
+              $lt: now.toISOString() // Filter for documents created until now
+            }
+          }
+        },
+        {
+          $group: {
+            _id: null,
+            totalViolations: { $sum: '$violations' } // Sum the violations field
+          }
+        }
+      ])
+      .exec((err, result) => {
+        if (err) {
+          console.error('Error:', err);
+          return;
+        }
+
+        const totalViolations = result.length > 0 ? result[0].totalViolations : 0;
+        console.log('Total violations in the last 3 days:', totalViolations);
+      });
     }else{
       return res.send("0")
     }
