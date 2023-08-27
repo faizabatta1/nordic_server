@@ -151,7 +151,7 @@
     async function getViolationStatic(){
         let selectVio = document.getElementById('violationsFilter')
         let value = selectVio.value
-        let holder = document.getElementById('dio-num')
+        let holder = document.getElementById('vio-num')
 
         let response = await fetch(`/api/violations/${value}`)
         if(response.status == 200){
