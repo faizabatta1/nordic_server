@@ -210,7 +210,7 @@ textarea{
         try{
           let shiftText = document.getElementById('shiftSelectText').value
           let response = await fetch('/api/settings/shift',{
-            method:'POST',
+            method:'PUT',
             body:JSON.stringify({
               shift: shiftText
             }),
@@ -234,7 +234,7 @@ textarea{
         try{
           let carText = document.getElementById('carSelectText').value
           let response = await fetch('/api/settings/car',{
-            method:'POST',
+            method:'PUT',
             body:JSON.stringify({
               car: carText
             }),
@@ -258,7 +258,7 @@ textarea{
         try{
           let serviceKilometerText = document.getElementById('serviceKilometersText').value
           let response = await fetch('/api/settings/kilometer',{
-            method:'POST',
+            method:'PUT',
             body:JSON.stringify({
               kilometer: serviceKilometerText
             }),
@@ -282,7 +282,7 @@ textarea{
         try{
           let violationText = document.getElementById('violationText').value
           let response = await fetch('/api/settings/violation',{
-            method:'POST',
+            method:'PUT',
             body:JSON.stringify({
               violation: violationText
             }),
