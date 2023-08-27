@@ -41,14 +41,15 @@
             </select>
         </div>
 
+        <div class="form-group" id="requiredDescriptionField">
+            <label for="requiredDescription">Beskrivelse</label>
+            <input type="text" class="form-control" id="requiredDescription" name="requiredDescription" disabled>
+        </div>
+
         <!-- Display these fields only for "Ja-Nei" question type -->
         <div class="form-group form-check" style="display: none;" id="requiredDescriptionGroup">
             <input type="checkbox" class="form-check-input" id="hasRequiredDescription" onchange="toggleRequiredDescription()" name="hasRequiredDescription">
             <label class="form-check-label" for="hasRequiredDescription">Har nødvendig beskrivelse?</label>
-        </div>
-        <div class="form-group" style="display: none;" id="requiredDescriptionField">
-            <label for="requiredDescription">Nødvendig beskrivelse</label>
-            <input type="text" class="form-control" id="requiredDescription" name="requiredDescription" disabled>
         </div>
         <div class="form-group" style="display: none;" id="positiveGroup">
             <label for="positive">Velg når du vil få beskrivelse</label>
