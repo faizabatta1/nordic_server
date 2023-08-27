@@ -95,16 +95,13 @@
             function toggleAdditionalFields() {
                 const answerDataType = document.getElementById("answerDataType");
                 const requiredDescriptionGroup = document.getElementById("requiredDescriptionGroup");
-                const requiredDescriptionField = document.getElementById("requiredDescriptionField");
                 const positiveGroup = document.getElementById("positiveGroup");
 
                 if (answerDataType.value === "yes_no") {
                     requiredDescriptionGroup.style.display = "block";
-                    requiredDescriptionField.style.display = "block";
                     positiveGroup.style.display = "block";
                 } else {
                     requiredDescriptionGroup.style.display = "none";
-                    requiredDescriptionField.style.display = "none";
                     positiveGroup.style.display = "none";
                 }
             }
