@@ -130,8 +130,51 @@
     </div>
 
     <div class="container tabcontent" id="application">
-      Application Section Test
-    </div>
+      <div class="card mb-4">
+          <div class="card-body">
+              <h2 class="card-title">Shift Select Information</h2>
+              <div>
+                  <div class="mb-3">
+                      <label for="shiftSelectText" class="form-label">Text</label>
+                      <textarea id="shiftSelectText" name="shiftSelectText" class="form-control" rows="6" required><%= shift_select_text %></textarea>
+                  </div>
+              </div>
+              <div class="d-flex justify-content-end align-items-center">
+                  <button type="submit" class="btn btn-info" onclick="updateShiftSelectText()">Save</button>
+              </div>
+          </div>
+      </div>
+  
+      <div class="card mb-4">
+          <div class="card-body">
+              <h2 class="card-title">Car Selection Information</h2>
+              <div>
+                  <div class="mb-3">
+                      <label for="carSelectText" class="form-label">Text</label>
+                      <textarea id="carSelectText" name="carSelectText" class="form-control" rows="6" required><%= car_select_text %></textarea>
+                  </div>
+              </div>
+              <div class="d-flex justify-content-end align-items-center">
+                  <button type="submit" class="btn btn-info" onclick="updateCarSelectText()">Save</button>
+              </div>
+          </div>
+      </div>
+  
+      <div class="card">
+          <div class="card-body">
+              <h2 class="card-title">Service Kilometers Description</h2>
+              <div>
+                  <div class="mb-3">
+                      <label for="serviceKilometersText" class="form-label">Text</label>
+                      <input id="serviceKilometersText" name="serviceKilometersText" class="form-control" value="200"/>
+                  </div>
+              </div>
+              <div class="d-flex justify-content-end align-items-center">
+                  <button type="submit" class="btn btn-info" onclick="updateServiceKilometersText()">Save</button>
+              </div>
+          </div>
+      </div>
+  </div>
 
     <br>
     <br>
