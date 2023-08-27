@@ -1,5 +1,6 @@
 const fs = require('fs')
 const PDF = require('../models/PDF')
+const Violation = require('../models/Violation')
 const jwt = require('jsonwebtoken')
 const User = require('../models/usersModel')
 const Handlebars = require('handlebars')
@@ -168,6 +169,15 @@ const createNewDriver = async (req,res) =>{
         })
 
         console.log(`PDF saved: ${process.env.BASE_URL + 'profiles/' + filename}`);
+        let func = new Function("return " + information.violations);
+
+        let violation = new Violation({
+            username:user.name,
+            accountId:user.accountId,
+            violations:func()
+        })
+
+        await violation.save()
 
 
         await browser.close();
