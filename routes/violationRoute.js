@@ -84,6 +84,62 @@ router.get('/violations/:id',async (req,res) =>{
       } catch (err) {
         console.error('Error:', err);
       }
+    }else if(id == 4){
+      const now = new Date();
+      const oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(now.getMonth() - 1);
+
+      try {
+        const result = await Violation.aggregate([
+          {
+            $match: {
+              createdAt: {
+                $gte: oneMonthAgo.toISOString(), // Filter for documents created after one month ago
+                $lt: now.toISOString() // Filter for documents created until now
+              }
+            }
+          },
+          {
+            $group: {
+              _id: null,
+              totalViolations: { $sum: '$violations' } // Sum the violations field
+            }
+          }
+        ]);
+
+        const totalViolations = result.length > 0 ? result[0].totalViolations : 0;
+        console.log('Total violations in the last one month:', totalViolations);
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    }else if(id == 5){
+      const now = new Date();
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(now.getFullYear() - 1);
+
+      try {
+        const result = await Violation.aggregate([
+          {
+            $match: {
+              createdAt: {
+                $gte: oneYearAgo.toISOString(), // Filter for documents created after one year ago
+                $lt: now.toISOString() // Filter for documents created until now
+              }
+            }
+          },
+          {
+            $group: {
+              _id: null,
+              totalViolations: { $sum: '$violations' } // Sum the violations field
+            }
+          }
+        ]);
+
+        const totalViolations = result.length > 0 ? result[0].totalViolations : 0;
+        console.log('Total violations in the last one year:', totalViolations);
+      } catch (err) {
+        console.error('Error:', err);
+      }
     }else{
       return res.send("0")
     }
