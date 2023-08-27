@@ -62,10 +62,8 @@
         <script>
             // Function to enable/disable the required description based on checkbox state
             function toggleRequiredDescription() {
-                const requiredDescriptionInput = document.getElementById("requiredDescription");
                 const positive = document.getElementById("positive");
                 const checkbox = document.getElementById("hasRequiredDescription");
-                requiredDescriptionInput.disabled = !checkbox.checked;
                 positive.disabled = !checkbox.checked;
             }
 
