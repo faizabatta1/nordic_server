@@ -155,7 +155,7 @@
 
         let response = await fetch(`/api/violations/${value}`)
         if(response.status == 200){
-            console.log(response.json());
+            console.log(await response.json());
             holder.textContent = response
         }else{
             alert('something went wrong')
