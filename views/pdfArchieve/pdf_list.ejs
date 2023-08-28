@@ -61,7 +61,7 @@
         <% pdfs.forEach(pdf => { %>
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Dato: <%= pdf.createdAt %></p>
+                    <p class="card-title"><%= pdf.createdAt %></p>
                     <p class="card-text">Bruker: <%= pdf.username %></p>
                     <p class="card-text">ID: <%= pdf.accountId %></p>
                     <div class="d-flex justify-content-end align-items-center">
@@ -99,8 +99,6 @@
 
     for (let i = 0; i < cards.length; i++) {
             const dateInfo = cards[i].querySelector('.card-title').textContent;
-            console.log(dateInfo);
-            console.log(date);
             if (dateInfo.includes(date)) {
                 console.log('yes')
                 cards[i].style.display = 'block !important';
