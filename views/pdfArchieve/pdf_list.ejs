@@ -101,11 +101,11 @@
             const dateInfo = cards[i].querySelector('.card-title').textContent;
             console.log(dateInfo);
             console.log(date);
-            if (dateInfo.includes(date)) {
+            if (dateInfo == date) {
                 console.log('yes')
-                cards[i].style.display = 'block !important';
+                cards[i].style.display = '';
             } else {
-                cards[i].style.display = 'none !important';
+                cards[i].style.display = 'none';
             }
         }
 
