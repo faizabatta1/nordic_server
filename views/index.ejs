@@ -116,7 +116,28 @@
         }
 
 
+        .stat-card.ks{
+            display: flex;
+        }
 
+        .stat-card.ks > *{
+            flex-grow: 1;
+        }
+
+        .stat-card.ks > :first-child{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-card.ks > :last-child{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
 
     </style>
 </head>
@@ -137,12 +158,14 @@
     </select>
 
     <div class="statistics">
-        <div class="stat-card" style="margin-right: 12px">
-            <h3>Total K.S:</h3>
+        <div class="stat-card ks" style="margin-right: 12px">
             <div class="info">
                 <span id="vio-num" style="margin-right: 10px;"></span>
-                <i class="fas fa-car"></i> <!-- Example icon for traffic violations -->
                 <span>Violations</span>
+            </div>
+
+            <div class="icon">
+                <i class="fas fa-car"></i> 
             </div>
         </div>
         <div class="stat-card" style="margin-right: 12px">
