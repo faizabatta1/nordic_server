@@ -103,6 +103,19 @@
             font-size: 24px;
         }
 
+        #violationsFilter {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .ks i{
+            font-size: 40px !important;
+        }
+
         .ks > *{
             flex-grow: 1;
         }
@@ -129,16 +142,6 @@
 <div class="mt-4"></div>
 <div class="container">
     <div class="welcome-message">Hei, Admin!</div>
-
-    <select name="violationsFilter" id="violationsFilter">
-        <option value="0">Hele tiden</option>
-        <option value="6">I går</option>
-        <option value="1">I dag</option>
-        <option value="2">3 dager siden</option>
-        <option value="3">en uke siden</option>
-        <option value="4">en måned siden</option>
-        <option value="5">ett år siden</option>
-    </select>
 
     <div class="statistics">
         <div class="stat-card ks" style="margin-right: 12px">
