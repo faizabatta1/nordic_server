@@ -376,12 +376,12 @@ svg.append('g')
 
         // Add zoom and pan behavior
         const zoom = d3.zoom()
-        .scaleExtent([1, 8])
-        .extent([[0, 0], [width, height]]) // Set the zoom extent to the width of the chart
-        .translateExtent([[0, 0], [width, height]]) // Set the translate extent
-        .on('zoom', zoomed);
+  .scaleExtent([1, 8])
+  .extent([[0, 0], [width, height]]) // Set the zoom extent to the width of the chart
+  .translateExtent([[0, 0], [width, height]]) // Set the translate extent
+  .on('zoom', zoomed);
 
-        svg.call(zoom);
+svg.call(zoom);
 
 
         const pointLabels = svg.selectAll('.point-label')
@@ -396,6 +396,16 @@ svg.append('g')
   .attr('font-weight', 'bold')
   .text(d => d.value);
 
+        function zoomed(event) {
+  const newX = event.transform.rescaleX(x);
+  svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
+  svg.select('.x-axis').call(d3.axisBottom(newX));
+  svg.selectAll('.point') // Update points' positions on zoom
+    .attr('cx', d => newX(parseDate(d.date)))
+    .attr('cy', d => y(d.value));
+    pointLabels.attr('x', d => newX(parseDate(d.date))).attr('y', d => y(d.value) - 10);
+
+}
 
 
 
