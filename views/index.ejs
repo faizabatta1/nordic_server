@@ -394,8 +394,8 @@ var focusText = svg
     var i = bisect(data, x0, 1);
     selectedData = data[i]
     focus
-      .attr("cx", selectedData.date)
-      .attr("cy", selectedData.value)
+      .attr("cx", 10)
+      .attr("cy", 10)
     focusText
       .html("date:" + selectedData.date + "  -  " + "violations:" + selectedData.value)
       .attr("x", selectedData.date)
