@@ -390,8 +390,10 @@ var focusText = svg
 
   function mousemove(e) {
     const xCoord = d3.pointer(e)[0];
+    const clampedX = Math.max(0, Math.min(width, xCoord)); // Clamp to the range [0, width]
+
     // Get the corresponding date using the clamped x-coordinate
-    const x0 = x.invert(xCoord);
+    const x0 = x.invert(clampedX);
     console.log(x0)
     bisect = d3.bisector(d => d.date)
     console.log(bisect);
