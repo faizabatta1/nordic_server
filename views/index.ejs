@@ -328,28 +328,82 @@ const line = d3.line()
   .y(d => y(d.value));
 
 // Create the SVG element
+
+// Create the SVG element with dynamic width
 const svg = d3.select('#chart').append('svg')
-  .attr('width', width + margin.left + margin.right)
-  .attr('height', height + margin.top + margin.bottom)
-  .append('g')
-  .attr('transform', `translate(${margin.left},${margin.top})`);
+            .attr('width', '100%')
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', `translate(${margin.left},${margin.top})`);
 
-// Add the line to the chart
-svg.append('path')
-  .datum(data)
-  .attr('fill', 'none')
-  .attr('stroke', 'steelblue')
-  .attr('stroke-width', 2)
-  .attr('d', line);
+        // Add the line to the chart with dynamic width
+        svg.append('path')
+            .datum(data)
+            .attr('fill', 'none')
+            .attr('stroke', 'steelblue')
+            .attr('stroke-width', 2)
+            .attr('d', line);
 
-// Add the X axis
-svg.append('g')
-  .attr('transform', `translate(0,${height})`)
-  .call(d3.axisBottom(x));
+        // Add the X axis with dynamic width
+        svg.append('g')
+            .attr('transform', `translate(0,${height})`)
+            .call(d3.axisBottom(x));
 
-// Add the Y axis
-svg.append('g')
-  .call(d3.axisLeft(y));
+        // Add the Y axis
+        svg.append('g')
+            .call(d3.axisLeft(y));
+
+        // Add zoom and pan behavior
+        const zoom = d3.zoom()
+            .scaleExtent([1, 8])
+            .on('zoom', zoomed);
+
+        svg.call(zoom);
+
+        function zoomed(event) {
+            const newX = event.transform.rescaleX(x);
+            svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
+            svg.select('.x-axis').call(d3.axisBottom(newX));
+        }
+
+        // Add interactive points
+        svg.selectAll('.point')
+            .data(data)
+            .enter().append('circle')
+            .attr('class', 'point')
+            .attr('cx', d => x(parseDate(d.date)))
+            .attr('cy', d => y(d.value))
+            .attr('r', 5)
+            .style('fill', 'steelblue')
+            .on('mouseover', showTooltip)
+            .on('mouseout', hideTooltip);
+
+        const tooltip = svg.append('g')
+            .attr('class', 'tooltip')
+            .style('display', 'none');
+
+        tooltip.append('rect')
+            .attr('width', 60)
+            .attr('height', 30)
+            .attr('fill', 'white')
+            .style('opacity', 0.8);
+
+        tooltip.append('text')
+            .attr('x', 30)
+            .attr('dy', '1.2em')
+            .style('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('font-weight', 'bold');
+        
+        function showTooltip(event, d) {
+            tooltip.style('display', 'block');
+            tooltip.attr('transform', `translate(${x(parseDate(d.date))},${y(d.value)})`);
+            tooltip.select('text').text(d.value);
+        }
+
+        function hideTooltip() {
+            tooltip.style('display', 'none');
+        }
 </script>
 
 
