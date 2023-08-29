@@ -374,42 +374,43 @@ svg.append('g')
         svg.append('g')
             .call(d3.axisLeft(y));
 
-            const zoom = d3.zoom()
-  .scaleExtent([1, 8])
-  .on('zoom', zoomed);
+// Create a clipping path
+svg.append('defs').append('clipPath')
+  .attr('id', 'clip')
+  .append('rect')
+  .attr('width', width)
+  .attr('height', height);
 
-// Initial visible domain
-let visibleDomain = x.domain();
+// Create a group for the chart elements
+const chartGroup = svg.append('g')
+  .attr('clip-path', 'url(#clip)');
+
+// ...
 
 function zoomed(event) {
   // Update x scale based on zoom
   const newX = event.transform.rescaleX(x);
-  
-  // Calculate visible domain based on the new x scale
-  visibleDomain = newX.domain();
-
-  // Filter data based on the visible domain
-  const visibleData = data.filter(d => visibleDomain[0] <= parseDate(d.date) && parseDate(d.date) <= visibleDomain[1]);
 
   // Update x-axis
   svg.select('.x-axis').call(d3.axisBottom(newX));
 
   // Update the line and points data
-  svg.select('.line').datum(visibleData).attr('d', line);
+  svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
   svg.selectAll('.point')
-    .data(visibleData)
-    .attr('cx', d => newX(parseDate(d.date)))
-    .attr('cy', d => y(d.value));
+    .attr('cx', d => newX(parseDate(d.date)));
 
   // Update point label positions
   pointLabels
-    .data(visibleData)
     .attr('x', d => newX(parseDate(d.date)))
     .attr('y', d => y(d.value) - 10);
+
+  // Update the clipping path based on the new x scale
+  chartGroup.select('rect')
+    .attr('width', width + margin.right - newX(visibleDomain[0]))
+    .attr('x', newX(visibleDomain[0]) - margin.left);
 }
 
 svg.call(zoom);
-
 
         const pointLabels = svg.selectAll('.point-label')
   .data(data)
