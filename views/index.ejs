@@ -374,36 +374,22 @@ svg.append('g')
         svg.append('g')
             .call(d3.axisLeft(y));
 
-        // Add zoom and pan behavior
-        const zoom = d3.zoom()
-        .scaleExtent([1, 8])
-        .extent([[0, 0], [width, height]]) // Set the zoom extent to the width of the chart
-        .translateExtent([[0, 0], [width, height]]) // Set the translate extent
-        .on('zoom', zoomed);
+            const zoom = d3.zoom()
+  .scaleExtent([1, 8])
+  .on('zoom', zoomed);
 
-        svg.call(zoom);
+// Initial visible domain
+let visibleDomain = x.domain();
 
-
-        const pointLabels = svg.selectAll('.point-label')
-  .data(data)
-  .enter()
-  .append('text')
-  .attr('class', 'point-label')
-  .attr('x', d => x(parseDate(d.date)))
-  .attr('y', d => y(d.value) - 10) // Adjust the y position above the point
-  .attr('text-anchor', 'middle')
-  .attr('font-size', '12px')
-  .attr('font-weight', 'bold')
-  .text(d => d.value);
-
- 
-  function zoomed(event) {
-  // Calculate the visible domain based on zoom
+function zoomed(event) {
+  // Update x scale based on zoom
   const newX = event.transform.rescaleX(x);
-  const newDomain = newX.domain();
   
+  // Calculate visible domain based on the new x scale
+  visibleDomain = newX.domain();
+
   // Filter data based on the visible domain
-  const visibleData = data.filter(d => newDomain[0] <= parseDate(d.date) && parseDate(d.date) <= newDomain[1]);
+  const visibleData = data.filter(d => visibleDomain[0] <= parseDate(d.date) && parseDate(d.date) <= visibleDomain[1]);
 
   // Update x-axis
   svg.select('.x-axis').call(d3.axisBottom(newX));
@@ -421,6 +407,21 @@ svg.append('g')
     .attr('x', d => newX(parseDate(d.date)))
     .attr('y', d => y(d.value) - 10);
 }
+
+svg.call(zoom);
+
+
+        const pointLabels = svg.selectAll('.point-label')
+  .data(data)
+  .enter()
+  .append('text')
+  .attr('class', 'point-label')
+  .attr('x', d => x(parseDate(d.date)))
+  .attr('y', d => y(d.value) - 10) // Adjust the y position above the point
+  .attr('text-anchor', 'middle')
+  .attr('font-size', '12px')
+  .attr('font-weight', 'bold')
+  .text(d => d.value);
 
 
 
