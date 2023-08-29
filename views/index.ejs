@@ -488,7 +488,7 @@ focusText
         }
 
         svg.selectAll('.point')
-  .data(data)
+  .data([data[0],data[data.length - 1]])
   .enter()
   .append('circle')
   .attr('class', 'point')
