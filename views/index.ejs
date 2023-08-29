@@ -289,7 +289,7 @@
 // Sample data (replace this with your actual data)
 const generateRandomData = () => {
             const startDate = new Date('2023-08-01');
-            const endDate = new Date('2023-12-01');
+            const endDate = new Date('2023-09-01');
             const data = [];
 
             for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
@@ -313,8 +313,7 @@ const width = 900 ;
 const height = 500;
 
 // Parse the date format
-const parseDate = d3.utcParse('%Y-%m-%d')
-
+const parseDate = d3.utcParse('%Y-%m-%d');
 
 // Set up the scales
 const x = d3.scaleUtc()
