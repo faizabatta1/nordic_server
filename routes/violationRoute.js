@@ -172,6 +172,14 @@ try {
   console.error('Error:', err);
   return res.status(500).send(err.message);
 }
+
+    }else{
+      return res.send("0")
+    }
+  }catch(error){
+    console.log(error.message)
+    return res.status(500).send(error.message)
+  }
 })
 
 module.exports = router
