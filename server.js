@@ -177,7 +177,7 @@ const combinedViolations = violations.reduce((result, v) => {
 
     console.log(combinedViolations)
 
-    const violationsJSON = JSON.stringify(violations);
+    const violationsJSON = JSON.stringify(combinedViolations);
 
     return res.status(200).render('index',{
         violations: violationsJSON
