@@ -410,7 +410,7 @@ const index = i === lastIndex ? lastIndex - 1 : i;
 selectedData = data[index];
     
     focus
-  .attr("cx", x(selectedData.date))
+  .attr("cx", x(parseDate(selectedData.date)))
   .attr("cy", y(selectedData.value));
 
 focusText
