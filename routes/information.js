@@ -52,7 +52,7 @@ const User = require('../models/usersModel')
 
 router.get('/info/pdfs', async (req,res) =>{
   try{
-    const count = await PDF.countDocuments();
+    const count = await PDF.count();
     return res.status(200).send(count)
   }catch(error){
     console.log(error.message)
@@ -62,7 +62,7 @@ router.get('/info/pdfs', async (req,res) =>{
 
 router.get('/info/users', async (req,res) =>{
   try{
-    const count = await User.countDocuments();
+    const count = await User.count();
     return res.status(200).send(count)
   }catch(error){
     console.log(error.message)
@@ -72,7 +72,7 @@ router.get('/info/users', async (req,res) =>{
 
 router.get('/info/accidents', async (req,res) =>{
   try{
-    // const count = await PDF.countDocuments();
+    const count = await PDF.count();
     return res.status(200).send('coming soon')
   }catch(error){
     console.log(error.message)
