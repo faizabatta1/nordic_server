@@ -168,6 +168,8 @@ app.get('/',async (req,res) =>{
         }
     })
 
+    console.log(violations)
+
     const violationsJSON = JSON.stringify(violations);
 
     return res.status(200).render('index',{
