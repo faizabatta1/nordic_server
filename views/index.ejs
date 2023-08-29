@@ -208,6 +208,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    flex-direction: column;
     padding: 20px;
     background-color: rgb(20, 19, 19);
 }
@@ -354,6 +355,8 @@ const svg = d3.select('#chart').append('svg')
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
+            svg.selectAll(".domain")
+   .styles({ fill:"none", stroke:"#fff",  "stroke-width":"2" });
 
             // This allows to find the closest X index of the mouse:
   var bisect = d3.bisector(function(d) { return d.x; }).left;
