@@ -327,15 +327,6 @@ const y = d3.scaleLinear()
   .nice()
   .range([height, 0]);
 
-  const xAxis = d3.axisBottom(x)
-  .ticks(d3.timeDay.every(2))
-  .tickFormat(parseDate);
-
-// Add the X axis with dynamic width
-svg.append('g')
-  .attr('class', 'x-axis') // Add a class for the X axis
-  .attr('transform', `translate(0,${height})`)
-  .call(xAxis);
 
 // Create the line
 const line = d3.line()
@@ -352,6 +343,16 @@ const svg = d3.select('#chart').append('svg')
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
+
+            const xAxis = d3.axisBottom(x)
+  .ticks(d3.timeDay.every(2))
+  .tickFormat(parseDate);
+
+// Add the X axis with dynamic width
+svg.append('g')
+  .attr('class', 'x-axis') // Add a class for the X axis
+  .attr('transform', `translate(0,${height})`)
+  .call(xAxis);
 
         // Add the line to the chart with dynamic width
         svg.append('path')
