@@ -315,15 +315,7 @@ const height = 500;
 // Parse the date format
 const parseDate = d3.utcParse('%Y-%m-%d');
 
-const xAxis = d3.axisBottom(x)
-  .ticks(d3.timeDay.every(2))
-  .tickFormat(parseDate);
 
-// Add the X axis with dynamic width
-svg.append('g')
-  .attr('class', 'x-axis') // Add a class for the X axis
-  .attr('transform', `translate(0,${height})`)
-  .call(xAxis);
 
 // Set up the scales
 const x = d3.scaleUtc()
@@ -334,6 +326,16 @@ const y = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)])
   .nice()
   .range([height, 0]);
+
+  const xAxis = d3.axisBottom(x)
+  .ticks(d3.timeDay.every(2))
+  .tickFormat(parseDate);
+
+// Add the X axis with dynamic width
+svg.append('g')
+  .attr('class', 'x-axis') // Add a class for the X axis
+  .attr('transform', `translate(0,${height})`)
+  .call(xAxis);
 
 // Create the line
 const line = d3.line()
