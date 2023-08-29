@@ -370,17 +370,6 @@ const svg = d3.select('#chart').append('svg')
                 .attr('cx', d => newX(parseDate(d.date)));
         }
 
-        // Add interactive points
-        svg.selectAll('.point')
-            .data(data)
-            .enter().append('circle')
-            .attr('class', 'point')
-            .attr('cx', d => x(parseDate(d.date)))
-            .attr('cy', d => y(d.value))
-            .attr('r', 5)
-            .style('fill', 'steelblue')
-            .on('mouseover', showTooltip)
-            .on('mouseout', hideTooltip);
 
         const tooltip = svg.append('g')
             .attr('class', 'tooltip')
