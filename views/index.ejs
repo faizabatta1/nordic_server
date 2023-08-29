@@ -416,6 +416,19 @@ const svg = d3.select('#chart').append('svg')
   .attr('fill', 'steelblue')
   .on('mouseover', (event, d) => showTooltip(event, d))
   .on('mouseout', hideTooltip);
+
+  // Add text labels for each point's value
+svg.selectAll('.point-label')
+  .data(data)
+  .enter()
+  .append('text')
+  .attr('class', 'point-label')
+  .attr('x', d => x(parseDate(d.date)))
+  .attr('y', d => y(d.value) - 10) // Adjust the y position above the point
+  .attr('text-anchor', 'middle')
+  .attr('font-size', '12px')
+  .attr('font-weight', 'bold')
+  .text(d => d.value);
 </script>
 
 
