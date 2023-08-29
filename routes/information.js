@@ -52,8 +52,8 @@ const User = require('../models/usersModel')
 
 router.get('/info/pdfs', async (req,res) =>{
   try{
-    const count = await PDF.count();
-    return res.status(200).send(count)
+    const count = await PDF.find({});
+    return res.status(200).send(count.length)
   }catch(error){
     console.log(error.message)
     return res.status(500).send(error.message)
