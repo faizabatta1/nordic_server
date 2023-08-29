@@ -54,7 +54,7 @@ router.get('/info/pdfs', async (req,res) =>{
   try{
     const count = await PDF.count();
     console.log(count)
-    return res.status(200).send(count.toString())
+    return res.status(200).json(count)
   }catch(error){
     console.log(error.message)
     return res.status(500).send(error.message)
@@ -64,7 +64,7 @@ router.get('/info/pdfs', async (req,res) =>{
 router.get('/info/users', async (req,res) =>{
   try{
     const count = await User.count();
-    return res.status(200).send(count)
+    return res.status(200).json(count)
   }catch(error){
     console.log(error.message)
     return res.status(500).send(error.message)
@@ -74,7 +74,7 @@ router.get('/info/users', async (req,res) =>{
 router.get('/info/accidents', async (req,res) =>{
   try{
     const count = await PDF.count();
-    return res.status(200).send('coming soon')
+    return res.status(200).json('coming soon')
   }catch(error){
     console.log(error.message)
     return res.status(500).send(error.message)
