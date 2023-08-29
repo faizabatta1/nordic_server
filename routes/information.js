@@ -48,7 +48,7 @@ router.get('/info/kilometer',async (req,res) =>{
 })
 
 const PDF = require('../models/PDF')
-const User = require('../models/userModel')
+const User = require('../models/usersModel')
 
 router.get('/info/pdfs', async (req,res) =>{
   try{
