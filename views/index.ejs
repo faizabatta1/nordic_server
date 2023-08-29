@@ -411,26 +411,50 @@ const svg = d3.select('#chart').append('svg')
         }
     }
 
-    async function updateViolationCount() {
-        const holder = document.getElementById('vio-num');
+    async function updateCount() {
+        const vioHolder = document.getElementById('vio-num');
+        const pdfHolder = document.getElementById('pdf-num');
+        const userHolder = document.getElementById('user-num');
+        const accidentHolder = document.getElementById('accident-num');
+
         const selectVio = document.getElementById('violationsFilter');
         const value = selectVio.value;
-        console.log(value);
 
         try {
-            const data = await fetchData(`/api/violations/${value}`);
-            console.log(data);
-            holder.textContent = data;
+            let responseData = await fetchData(`/api/violations/${value}`);
+            vioHolder.textContent = data;
         } catch (error) {
             console.error(error);
+        }
+
+
+        try{
+            let responseData = await fetchData(`/api/pdfs/${value}`);
+            pdfHolder.textContent = data;
+        }catch(error){
+            console.log(error)
+        }
+
+        try{
+            let responseData = await fetchData(`/api/users/${value}`);
+            pdfHolder.textContent = data;
+        }catch(error){
+            console.log(error)
+        }
+
+        try{
+            let responseData = await fetchData(`/api/accidents/${value}`);
+            pdfHolder.textContent = data;
+        }catch(error){
+            console.log(error)
         }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        updateViolationCount();
+        updateCount();
 
         const selectVio = document.getElementById('violationsFilter');
-        selectVio.addEventListener('change', updateViolationCount);
+        selectVio.addEventListener('change', updateCount);
     });
 </script>
 </body>

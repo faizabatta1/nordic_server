@@ -47,4 +47,34 @@ router.get('/info/kilometer',async (req,res) =>{
   }
 })
 
+const PDF = require('../models/PDF')
+const User = require('../models/userModel')
+
+router.get('/info/pdfs', async (req,res) =>{
+  try{
+    const count = await PDF.countDocuments();
+    return res.status(200).send(count)
+  }catch(error){
+    res.status(500).send(error.message)
+  }
+})
+
+router.get('/info/users', async (req,res) =>{
+  try{
+    const count = await User.countDocuments();
+    return res.status(200).send(count)
+  }catch(error){
+    res.status(500).send(error.message)
+  }
+})
+
+router.get('/info/accidents', async (req,res) =>{
+  try{
+    // const count = await PDF.countDocuments();
+    return res.status(200).send('coming soon')
+  }catch(error){
+    res.status(500).send(error.message)
+  }
+})
+
 module.exports = router
