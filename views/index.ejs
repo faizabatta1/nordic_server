@@ -335,9 +335,8 @@ const line = d3.line()
 // Create the SVG element with dynamic width
 const svg = d3.select('#chart').append('svg')
             .attr('width', '100%')
-            .attr('height', height + margin.top + margin.bottom)
-            .append('g')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
+            .attr('height')
+            .append('g');
 
 
         // Add the line to the chart with dynamic width
