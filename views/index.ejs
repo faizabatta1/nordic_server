@@ -287,23 +287,25 @@
 
 <script>
 // Sample data (replace this with your actual data)
-// const generateRandomData = () => {
-//             const startDate = new Date('2023-08-01');
-//             const endDate = new Date('2023-09-01');
-//             const data = [];
+const generateRandomData = () => {
+            const startDate = new Date('2023-08-01');
+            const endDate = new Date('2023-09-01');
+            const data = [];
 
-//             for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-//                 data.push({
-//                     date: d.toISOString().split('T')[0],
-//                     value: Math.floor(Math.random() * 50) + 10
-//                 });
-//             }
+            for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+                data.push({
+                    date: d.toISOString().split('T')[0],
+                    value: Math.floor(Math.random() * 50) + 10
+                });
+            }
 
-//             return data;
-//         };
+            return data;
+        };
 
-        const data = <%- violations %>;
-        console.log(data);
+const data = generateRandomData();
+
+        // const data = <%- violations %>;
+        // console.log(data);
 
 // Set up the dimensions of the chart
 const margin = { top: 20, right: 30, bottom: 30, left: 40 };
