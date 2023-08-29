@@ -396,16 +396,32 @@ svg.append('g')
   .attr('font-weight', 'bold')
   .text(d => d.value);
 
-        function zoomed(event) {
+ 
+  function zoomed(event) {
+  // Calculate the visible domain based on zoom
   const newX = event.transform.rescaleX(x);
-  svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
+  const newDomain = newX.domain();
+  
+  // Filter data based on the visible domain
+  const visibleData = data.filter(d => newDomain[0] <= parseDate(d.date) && parseDate(d.date) <= newDomain[1]);
+
+  // Update x-axis
   svg.select('.x-axis').call(d3.axisBottom(newX));
-  svg.selectAll('.point') // Update points' positions on zoom
+
+  // Update the line and points data
+  svg.select('.line').datum(visibleData).attr('d', line);
+  svg.selectAll('.point')
+    .data(visibleData)
     .attr('cx', d => newX(parseDate(d.date)))
     .attr('cy', d => y(d.value));
-    pointLabels.attr('x', d => newX(parseDate(d.date))).attr('y', d => y(d.value) - 10);
 
+  // Update point label positions
+  pointLabels
+    .data(visibleData)
+    .attr('x', d => newX(parseDate(d.date)))
+    .attr('y', d => y(d.value) - 10);
 }
+
 
 
 
