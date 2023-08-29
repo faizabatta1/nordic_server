@@ -313,8 +313,7 @@ const width = 900 ;
 const height = 500;
 
 // Parse the date format
-const parseDate = d3.utcParse('%Y-%m-%d');
-
+const parseDate = d3.utcParse('%Y-%m-%d')
 
 
 // Set up the scales
@@ -326,8 +325,6 @@ const y = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)])
   .nice()
   .range([height, 0]);
-
-  
 
 // Create the line
 const line = d3.line()
