@@ -416,7 +416,7 @@ console.log(i);
 
 focusText
   .html("date: " + selectedData.date + "  -  " + "violations: " + selectedData.value)
-  .attr("x", x(parseDate(selectedData.date)))
+  .attr("x", x(parseDate(selectedData.date)) + 15)
   .attr("y", y(selectedData.value) - 15);
     }
   function mouseout() {
