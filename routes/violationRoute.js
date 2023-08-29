@@ -145,41 +145,33 @@ router.get('/violations/:id',async (req,res) =>{
         console.error('Error:', err);
       }
     }else if(id == 6){
-      const now = new Date();
       const yesterday = new Date();
-      yesterday.setDate(now.getDate() - 1);
-    
-      try {
-        const result = await Violation.aggregate([
-          {
-            $match: {
-              createdAt: {
-                $gte: yesterday.toISOString(),
-                $lt: now.toISOString()
-              }
-            }
-          },
-          {
-            $group: {
-              _id: null,
-              totalViolations: { $sum: '$violations' } // Sum the violations field
-            }
-          }
-        ]);
-    
-        const totalViolations = result.length > 0 ? result[0].totalViolations : 0;
-        console.log('Total violations for yesterday:', totalViolations);
-        return res.send(totalViolations.toString())
-      } catch (err) {
-        console.error('Error:', err);
+yesterday.setDate(yesterday.getDate() - 1);
+
+const formattedYesterday = yesterday.toISOString().split('T')[0];
+
+try {
+  const result = await Violation.aggregate([
+    {
+      $match: {
+        createdAt: formattedYesterday
       }
-    }else{
-      return res.send("0")
+    },
+    {
+      $group: {
+        _id: null,
+        totalViolations: { $sum: '$violations' } // Sum the violations field
+      }
     }
-  }catch(error){
-    console.log(error.message)
-    return res.status(500).send(error.message)
-  }
+  ]);
+
+  const totalViolations = result.length > 0 ? result[0].totalViolations : 0;
+  console.log('Total violations for yesterday:', totalViolations);
+  return res.send(totalViolations.toString());
+} catch (err) {
+  console.error('Error:', err);
+  return res.status(500).send(err.message);
+}
 })
 
 module.exports = router
