@@ -285,132 +285,121 @@
 </div>
 <script src="https://kit.fontawesome.com/7d365a7c21.js" crossorigin="anonymous"></script>
 
-
-
 <script>
+// Sample data (replace this with your actual data)
+const generateRandomData = () => {
+            const startDate = new Date('2023-08-01');
+            const endDate = new Date('2023-09-01');
+            const data = [];
 
-    // set the dimensions and margins of the graph
-    const margin = {top: 10, right: 30, bottom: 30, left: 60},
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
-    
-    // append the svg object to the body of the page
-    const svg = d3.select("#chart")
-      .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform",
-              `translate(${margin.left}, ${margin.top})`);
-    
-    //Read the data
-    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
-    
-      // When reading the csv, I must format variables:
-      function(d){
-        return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
-      }).then(
-    
-      // Now I can use this dataset:
-      function(data) {
-    
-        // Add X axis --> it is a date format
-        const x = d3.scaleTime()
-          .domain(d3.extent(data, function(d) { return d.date; }))
-          .range([ 0, width ]);
-        xAxis = svg.append("g")
-          .attr("transform", `translate(0, ${height})`)
-          .call(d3.axisBottom(x));
-    
-        // Add Y axis
-        const y = d3.scaleLinear()
-          .domain([0, d3.max(data, function(d) { return +d.value; })])
-          .range([ height, 0 ]);
-        yAxis = svg.append("g")
-          .call(d3.axisLeft(y));
-    
-        // Add a clipPath: everything out of this area won't be drawn.
-        const clip = svg.append("defs").append("svg:clipPath")
-            .attr("id", "clip")
-            .append("svg:rect")
-            .attr("width", width )
-            .attr("height", height )
-            .attr("x", 0)
-            .attr("y", 0);
-    
-        // Add brushing
-        const brush = d3.brushX()                   // Add the brush feature using the d3.brush function
-            .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-            .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
-    
-        // Create the line variable: where both the line and the brush take place
-        const line = svg.append('g')
-          .attr("clip-path", "url(#clip)")
-    
-        // Add the line
-        line.append("path")
-          .datum(data)
-          .attr("class", "line")  // I add the class line to be able to modify this line later on.
-          .attr("fill", "none")
-          .attr("stroke", "steelblue")
-          .attr("stroke-width", 1.5)
-          .attr("d", d3.line()
-            .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.value) })
-            )
-    
-        // Add the brushing
-        line
-          .append("g")
-            .attr("class", "brush")
-            .call(brush);
-    
-        // A function that set idleTimeOut to null
-        let idleTimeout
-        function idled() { idleTimeout = null; }
-    
-        // A function that update the chart for given boundaries
-        function updateChart(event,d) {
-    
-          // What are the selected boundaries?
-          extent = event.selection
-    
-          // If no selection, back to initial coordinate. Otherwise, update X axis domain
-          if(!extent){
-            if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-            x.domain([ 4,8])
-          }else{
-            x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
-            line.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
-          }
-    
-          // Update axis and line position
-          xAxis.transition().duration(1000).call(d3.axisBottom(x))
-          line
-              .select('.line')
-              .transition()
-              .duration(1000)
-              .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
-                .y(function(d) { return y(d.value) })
-              )
+            for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+                data.push({
+                    date: d.toISOString().split('T')[0],
+                    value: Math.floor(Math.random() * 50) + 10
+                });
+            }
+
+            return data;
+        };
+
+        const data = generateRandomData();
+
+// Set up the dimensions of the chart
+const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+const width = 900 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
+
+// Parse the date format
+const parseDate = d3.utcParse('%Y-%m-%d');
+
+// Set up the scales
+const x = d3.scaleUtc()
+  .domain(d3.extent(data, d => parseDate(d.date)))
+  .range([0, width]);
+
+const y = d3.scaleLinear()
+  .domain([0, d3.max(data, d => d.value)])
+  .nice()
+  .range([height, 0]);
+
+// Create the line
+const line = d3.line()
+  .x(d => x(parseDate(d.date)))
+  .y(d => y(d.value));
+
+// Create the SVG element
+
+// Create the SVG element with dynamic width
+const svg = d3.select('#chart').append('svg')
+            .attr('width', '100%')
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', `translate(${margin.left},${margin.top})`);
+
+        // Add the line to the chart with dynamic width
+        svg.append('path')
+            .datum(data)
+            .attr('fill', 'none')
+            .attr('stroke', 'steelblue')
+            .attr('stroke-width', 2)
+            .attr('d', line)
+            .attr('class', 'line'); // Add a class for the line
+
+        // Add the X axis with dynamic width
+        svg.append('g')
+            .attr('class', 'x-axis') // Add a class for the X axis
+            .attr('transform', `translate(0,${height})`)
+            .call(d3.axisBottom(x));
+
+        // Add the Y axis
+        svg.append('g')
+            .call(d3.axisLeft(y));
+
+        // Add zoom and pan behavior
+        const zoom = d3.zoom()
+            .scaleExtent([1, 8])
+            .on('zoom', zoomed);
+
+        svg.call(zoom);
+
+        function zoomed(event) {
+            const newX = event.transform.rescaleX(x);
+            svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
+            svg.select('.x-axis').call(d3.axisBottom(newX));
+            svg.selectAll('.point') // Update points' positions on zoom
+                .attr('cx', d => newX(parseDate(d.date)));
         }
-    
-        // If user double click, reinitialize the chart
-        svg.on("dblclick",function(){
-          x.domain(d3.extent(data, function(d) { return d.date; }))
-          xAxis.transition().call(d3.axisBottom(x))
-          line
-            .select('.line')
-            .transition()
-            .attr("d", d3.line()
-              .x(function(d) { return x(d.date) })
-              .y(function(d) { return y(d.value) })
-          )
-        });
-    
-    })
-    </script>
+
+
+        const tooltip = svg.append('g')
+            .attr('class', 'tooltip')
+            .style('display', 'none');
+
+        tooltip.append('rect')
+            .attr('width', 60)
+            .attr('height', 30)
+            .attr('fill', 'white')
+            .style('opacity', 0.8);
+
+        tooltip.append('text')
+            .attr('x', 30)
+            .attr('dy', '1.2em')
+            .style('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('font-weight', 'bold');
+        
+        function showTooltip(event, d) {
+            tooltip.style('display', 'block');
+            tooltip.attr('transform', `translate(${x(parseDate(d.date))},${y(d.value)})`);
+            tooltip.select('text').text(d.value);
+        }
+
+        function hideTooltip() {
+            tooltip.style('display', 'none');
+        }
+</script>
+
+
 
 <script>
     async function fetchData(url) {
