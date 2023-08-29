@@ -394,12 +394,12 @@ var focusText = svg
     var i = bisect(data, x0, 1);
     selectedData = data[i]
     focus
-      .attr("cx", 10)
-      .attr("cy", 10)
+      .attr("cx", x(selectedData.date))
+      .attr("cy", y(selectedData.value))
     focusText
       .html("date:" + selectedData.date + "  -  " + "violations:" + selectedData.value)
-      .attr("x", selectedData.date)
-      .attr("y", selectedData.value)
+      .attr("x", x(selectedData.date)+15)
+      .attr("y", y(selectedData.value))
     }
   function mouseout() {
     focus.style("opacity", 0)
