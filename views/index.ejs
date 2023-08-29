@@ -318,7 +318,7 @@ const parseDate = d3.utcParse('%Y-%m-%d');
 // Set up the scales
 const x = d3.scaleUtc()
   .domain(d3.extent(data, d => parseDate(d.date)))
-  .range([0, width]);
+  .range([0, width + 200]);
 
 const y = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)])
