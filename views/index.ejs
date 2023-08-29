@@ -391,11 +391,10 @@ var focusText = svg
   function mousemove() {
     // recover coordinate we need
     var x0 = x.invert(d3.pointer(this)[0]);
+    console.log(x0);
     bisect = d3.bisector(d => d.date)
     var i = bisect.left(data, x0);
 
-    console.log(i);
-    console.log(bisect);
     selectedData = data[i]
     focus
       .attr("cx", x(selectedData.date))
