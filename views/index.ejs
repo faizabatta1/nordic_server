@@ -436,7 +436,7 @@ focusText
         
 
         const pointLabels = svg.selectAll('.point-label')
-  .data(data)
+  .data([data[0],data[data.length - 1]])
   .enter()
   .append('text')
   .attr('class', 'point-label')
