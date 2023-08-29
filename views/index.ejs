@@ -316,10 +316,11 @@ const height = 500;
 const parseDate = d3.utcParse('%Y-%m-%d');
 
 
+const initialDomain = d3.extent(data.slice(0, 15), d => parseDate(d.date));
 
 // Set up the scales
 const x = d3.scaleUtc()
-  .domain(d3.extent(data, d => parseDate(d.date)))
+  .domain(initialDomain)
   .range([0, width]);
 
 const y = d3.scaleLinear()
@@ -375,10 +376,13 @@ svg.append('g')
 
         // Add zoom and pan behavior
         const zoom = d3.zoom()
-            .scaleExtent([1, 8])
-            .on('zoom', zoomed);
+        .scaleExtent([1, 8])
+        .extent([[0, 0], [width, height]]) // Set the zoom extent to the width of the chart
+        .translateExtent([[0, 0], [width, height]]) // Set the translate extent
+        .on('zoom', zoomed);
 
         svg.call(zoom);
+
 
         const pointLabels = svg.selectAll('.point-label')
   .data(data)
