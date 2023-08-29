@@ -326,7 +326,8 @@ const y = d3.scaleLinear()
 // Create the line
 const line = d3.line()
   .x(d => x(parseDate(d.date)))
-  .y(d => y(d.value));
+  .y(d => y(d.value))
+  .curve(d3.curveMonotoneX);
 
 // Create the SVG element
 
