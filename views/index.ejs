@@ -340,6 +340,18 @@ const svg = d3.select('#chart').append('svg')
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
+            svg.selectAll('.point')
+  .data(data)
+  .enter()
+  .append('circle')
+  .attr('class', 'point')
+  .attr('cx', d => x(parseDate(d.date)))
+  .attr('cy', d => y(d.value))
+  .attr('r', 5) // Radius of the circle
+  .attr('fill', 'steelblue')
+  .on('mouseover', (event, d) => showTooltip(event, d))
+  .on('mouseout', hideTooltip);
+
         // Add the line to the chart with dynamic width
         svg.append('path')
             .datum(data)
@@ -367,12 +379,14 @@ const svg = d3.select('#chart').append('svg')
         svg.call(zoom);
 
         function zoomed(event) {
-            const newX = event.transform.rescaleX(x);
-            svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
-            svg.select('.x-axis').call(d3.axisBottom(newX));
-            svg.selectAll('.point') // Update points' positions on zoom
-                .attr('cx', d => newX(parseDate(d.date)));
-        }
+  const newX = event.transform.rescaleX(x);
+  svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
+  svg.select('.x-axis').call(d3.axisBottom(newX));
+  svg.selectAll('.point') // Update points' positions on zoom
+    .attr('cx', d => newX(parseDate(d.date)))
+    .attr('cy', d => y(d.value));
+}
+
 
 
         const tooltip = svg.append('g')
