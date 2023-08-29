@@ -168,7 +168,7 @@ app.get('/',async (req,res) =>{
         }
     })
     return res.status(200).render('index',{
-        violations0
+        violations: violations
     })
 })
 
