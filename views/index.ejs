@@ -347,13 +347,16 @@ const svg = d3.select('#chart').append('svg')
             
 
         // Add the line to the chart with dynamic width
-        svg.append('path')
-            .datum(data)
-            .attr('fill', 'none')
-            .attr('stroke', 'steelblue')
-            .attr('stroke-width', 2)
-            .attr('d', line)
-            .attr('class', 'line'); // Add a class for the line
+        svg
+    .append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.x) })
+      .y(function(d) { return y(d.y) })
+      ) // Add a class for the line
 
         // Add the X axis with dynamic width
         svg.append('g')
