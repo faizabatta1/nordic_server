@@ -394,7 +394,9 @@ var focusText = svg
     const x0 = x.invert(xCoord);
     console.log(x0)
     bisect = d3.bisector(d => d.date)
+    console.log(bisect);
     var i = bisect.left(data, x0);
+    console.log(i);
 
     selectedData = data[i]
     focus
