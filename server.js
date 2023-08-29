@@ -167,8 +167,11 @@ app.get('/',async (req,res) =>{
             value: v.violations
         }
     })
+
+    const violationsJSON = JSON.stringify(violations);
+
     return res.status(200).render('index',{
-        violations: violations
+        violations: violationsJSON
     })
 })
 
