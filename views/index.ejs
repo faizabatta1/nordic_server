@@ -404,11 +404,10 @@ const bisect = d3.bisector(d => d.date).left;
 // Find the index of the data point corresponding to the given date
 const i = bisect(data, x0ISOString);
 
-console.log(x0);
-console.log(x0ISOString);
-console.log(i);
+const lastIndex = data.length - 1;
+const index = i === lastIndex ? lastIndex - 1 : i;
 
-    selectedData = data[i]
+selectedData = data[index];
     
     focus
   .attr("cx", x(selectedData.date))
