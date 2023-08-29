@@ -359,11 +359,9 @@ const svg = d3.select('#chart').append('svg')
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-            x.selectAll("text")
+            svg.selectAll("text")
     .style("stroke", "white");
 
-    y.selectAll("text")
-    .style("stroke", "white");
             // This allows to find the closest X index of the mouse:
   var bisect = d3.bisector(function(d) { return d.x; }).left;
 
