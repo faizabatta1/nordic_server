@@ -391,7 +391,7 @@ var focusText = svg
   function mousemove() {
     const xCoord = d3.pointer(this)[0];
     console.log(xCoord);
-    console.log(d3.pointer(this)[0]);
+    console.log(d3.pointer(this));
     const clampedX = Math.max(0, Math.min(width, xCoord)); // Clamp to the range [0, width]
 
     // Get the corresponding date using the clamped x-coordinate
