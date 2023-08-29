@@ -337,21 +337,9 @@ const line = d3.line()
 const svg = d3.select('#chart').append('svg')
             .attr('width', '100%')
             .attr('height', height + margin.top + margin.bottom)
-            .call(zoom)
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-            svg.selectAll('.point')
-  .data(data)
-  .enter()
-  .append('circle')
-  .attr('class', 'point')
-  .attr('cx', d => x(parseDate(d.date)))
-  .attr('cy', d => y(d.value))
-  .attr('r', 5) // Radius of the circle
-  .attr('fill', 'steelblue')
-  .on('mouseover', (event, d) => showTooltip(event, d))
-  .on('mouseout', hideTooltip);
 
         // Add the line to the chart with dynamic width
         svg.append('path')
@@ -416,6 +404,18 @@ const svg = d3.select('#chart').append('svg')
         function hideTooltip() {
             tooltip.style('display', 'none');
         }
+
+        svg.selectAll('.point')
+  .data(data)
+  .enter()
+  .append('circle')
+  .attr('class', 'point')
+  .attr('cx', d => x(parseDate(d.date)))
+  .attr('cy', d => y(d.value))
+  .attr('r', 5) // Radius of the circle
+  .attr('fill', 'steelblue')
+  .on('mouseover', (event, d) => showTooltip(event, d))
+  .on('mouseout', hideTooltip);
 </script>
 
 
