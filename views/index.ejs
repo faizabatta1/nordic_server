@@ -327,6 +327,7 @@ const y = d3.scaleLinear()
   .nice()
   .range([height, 0]);
 
+  
 
 // Create the line
 const line = d3.line()
@@ -343,7 +344,6 @@ const svg = d3.select('#chart').append('svg')
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-            
 
         // Add the line to the chart with dynamic width
         svg.append('path')
