@@ -205,6 +205,9 @@
 }
 
     </style>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
 </head>
 <body>
 <%- include('./components/navbar') %>
@@ -268,17 +271,8 @@
         </div>
     </div>
 
-    <div class="notifications">
-        <h1>Kommer Snart!</h1>
-<!--        <div class="notification-item">-->
-<!--            <img src="user-avatar.png" alt="User Avatar">-->
-<!--            <span>New user registered - John Doe</span>-->
-<!--        </div>-->
-<!--        <div class="notification-item">-->
-<!--            <img src="order-icon.png" alt="Order Icon">-->
-<!--            <span>New order received - Order #12345</span>-->
-<!--        </div>-->
-        <!-- Add more notification items here -->
+    <div id="charts">
+
     </div>
 
     <div class="quick-links">
@@ -290,6 +284,64 @@
     </div>
 </div>
 <script src="https://kit.fontawesome.com/7d365a7c21.js" crossorigin="anonymous"></script>
+
+<script>
+// Sample data (replace this with your actual data)
+const data = [
+  { date: '2023-08-27', value: 10 },
+  { date: '2023-08-28', value: 15 },
+  { date: '2023-08-29', value: 8 },
+  // ... more data ...
+];
+
+// Set up the dimensions of the chart
+const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+const width = 600 - margin.left - margin.right;
+const height = 400 - margin.top - margin.bottom;
+
+// Parse the date format
+const parseDate = d3.utcParse('%Y-%m-%d');
+
+// Set up the scales
+const x = d3.scaleUtc()
+  .domain(d3.extent(data, d => parseDate(d.date)))
+  .range([0, width]);
+
+const y = d3.scaleLinear()
+  .domain([0, d3.max(data, d => d.value)])
+  .nice()
+  .range([height, 0]);
+
+// Create the line
+const line = d3.line()
+  .x(d => x(parseDate(d.date)))
+  .y(d => y(d.value));
+
+// Create the SVG element
+const svg = d3.select('#chart').append('svg')
+  .attr('width', width + margin.left + margin.right)
+  .attr('height', height + margin.top + margin.bottom)
+  .append('g')
+  .attr('transform', `translate(${margin.left},${margin.top})`);
+
+// Add the line to the chart
+svg.append('path')
+  .datum(data)
+  .attr('fill', 'none')
+  .attr('stroke', 'steelblue')
+  .attr('stroke-width', 2)
+  .attr('d', line);
+
+// Add the X axis
+svg.append('g')
+  .attr('transform', `translate(0,${height})`)
+  .call(d3.axisBottom(x));
+
+// Add the Y axis
+svg.append('g')
+  .call(d3.axisLeft(y));
+</script>
+
 
 <script>
     async function fetchData(url) {
