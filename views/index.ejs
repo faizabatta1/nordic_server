@@ -413,10 +413,6 @@ const svg = d3.select('#chart').append('svg')
 
     async function updateCount() {
         const vioHolder = document.getElementById('vio-num');
-        const pdfHolder = document.getElementById('pdf-num');
-        const userHolder = document.getElementById('user-num');
-        const accidentHolder = document.getElementById('accident-num');
-
         const selectVio = document.getElementById('violationsFilter');
         const value = selectVio.value;
 
@@ -425,28 +421,6 @@ const svg = d3.select('#chart').append('svg')
             vioHolder.textContent = data;
         } catch (error) {
             console.error(error);
-        }
-
-
-        try{
-            let responseData = await fetchData(`/api/pdfs/${value}`);
-            pdfHolder.textContent = data;
-        }catch(error){
-            console.log(error)
-        }
-
-        try{
-            let responseData = await fetchData(`/api/users/${value}`);
-            pdfHolder.textContent = data;
-        }catch(error){
-            console.log(error)
-        }
-
-        try{
-            let responseData = await fetchData(`/api/accidents/${value}`);
-            pdfHolder.textContent = data;
-        }catch(error){
-            console.log(error)
         }
     }
 
