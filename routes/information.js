@@ -55,6 +55,7 @@ router.get('/info/pdfs', async (req,res) =>{
     const count = await PDF.countDocuments();
     return res.status(200).send(count)
   }catch(error){
+    console.log(error.message)
     res.status(500).send(error.message)
   }
 })
