@@ -433,12 +433,7 @@ focusText
         svg.append('g')
             .call(d3.axisLeft(y));
 
-        // Add zoom and pan behavior
-        const zoom = d3.zoom()
-            .scaleExtent([1, 8])
-            .on('zoom', zoomed);
-
-        svg.call(zoom);
+        
 
         const pointLabels = svg.selectAll('.point-label')
   .data(data)
