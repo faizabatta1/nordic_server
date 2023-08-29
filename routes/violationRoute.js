@@ -154,8 +154,8 @@ router.get('/violations/:id',async (req,res) =>{
           {
             $match: {
               createdAt: {
-                $gte: new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate(), 0, 0, 0),
-                $lt: new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate(), 23, 59, 59)
+                $gte: yesterday.toISOString(),
+                $lt: now.toISOString()
               }
             }
           },
