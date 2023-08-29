@@ -74,7 +74,7 @@ router.get('/info/users', async (req,res) =>{
 router.get('/info/accidents', async (req,res) =>{
   try{
     const count = await PDF.count();
-    return res.status(200).json('coming soon')
+    return res.status(200).json(0)
   }catch(error){
     console.log(error.message)
     return res.status(500).send(error.message)
