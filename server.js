@@ -158,7 +158,7 @@ const settingsFront = require('./routes/settingsFront')
 app.use(settingsFront,driverFront,groupFront,fieldFront,pdfFront,usersFront,carFront,locationFront)
 
 
-const Violation = require('./routes/violationRoute')
+const Violation = require('./models/Violation')
 app.get('/',async (req,res) =>{
     let violations = await Violation.find({})
     violations = violations.map(v => {
@@ -168,7 +168,7 @@ app.get('/',async (req,res) =>{
         }
     })
     return res.status(200).render('index',{
-        violations
+        violations0
     })
 })
 
