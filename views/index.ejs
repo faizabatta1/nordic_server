@@ -204,6 +204,14 @@
   color: white;
 }
 
+.chart-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.chart-header{}
+
     </style>
 
 <script src="https://d3js.org/d3.v6.js"></script>
@@ -271,8 +279,12 @@
         </div>
     </div>
 
-    <div id="chart">
-
+    <div class="chart-container">
+        <div class="chart-header">
+            <img src="/images/calendar.png" alt="Calendar">
+            <h3>Nordic K.S Chart</h3>
+        </div>
+        <div id="chart"></div>
     </div>
 
     <div class="quick-links">
