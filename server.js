@@ -158,8 +158,18 @@ const settingsFront = require('./routes/settingsFront')
 app.use(settingsFront,driverFront,groupFront,fieldFront,pdfFront,usersFront,carFront,locationFront)
 
 
-app.get('/',(req,res) =>{
-    return res.status(200).render('index')
+const Violation = require('./routes/violationRoute')
+app.get('/',async (req,res) =>{
+    let violations = await Violation.find({})
+    violations = violations.map(v => {
+        return {
+            date: v.createdAt,
+            value: v.violations
+        }
+    })
+    return res.status(200).render('index',{
+        violations
+    })
 })
 
 const port = process.env.port || 9090
