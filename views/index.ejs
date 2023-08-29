@@ -367,6 +367,18 @@ const svg = d3.select('#chart').append('svg')
 
         svg.call(zoom);
 
+        const pointLabels = svg.selectAll('.point-label')
+  .data(data)
+  .enter()
+  .append('text')
+  .attr('class', 'point-label')
+  .attr('x', d => x(parseDate(d.date)))
+  .attr('y', d => y(d.value) - 10) // Adjust the y position above the point
+  .attr('text-anchor', 'middle')
+  .attr('font-size', '12px')
+  .attr('font-weight', 'bold')
+  .text(d => d.value);
+
         function zoomed(event) {
   const newX = event.transform.rescaleX(x);
   svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
@@ -374,6 +386,8 @@ const svg = d3.select('#chart').append('svg')
   svg.selectAll('.point') // Update points' positions on zoom
     .attr('cx', d => newX(parseDate(d.date)))
     .attr('cy', d => y(d.value));
+    pointLabels.attr('x', d => newX(parseDate(d.date))).attr('y', d => y(d.value) - 10);
+
 }
 
 
@@ -418,17 +432,7 @@ const svg = d3.select('#chart').append('svg')
   .on('mouseout', hideTooltip);
 
   // Add text labels for each point's value
-svg.selectAll('.point-label')
-  .data(data)
-  .enter()
-  .append('text')
-  .attr('class', 'point-label')
-  .attr('x', d => x(parseDate(d.date)))
-  .attr('y', d => y(d.value) - 10) // Adjust the y position above the point
-  .attr('text-anchor', 'middle')
-  .attr('font-size', '12px')
-  .attr('font-weight', 'bold')
-  .text(d => d.value);
+
 </script>
 
 
