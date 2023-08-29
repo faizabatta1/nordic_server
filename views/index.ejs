@@ -389,7 +389,7 @@ var focusText = svg
   }
 
   function mousemove(e) {
-    const xCoord = d3.pointer(e);
+    const xCoord = d3.pointer(e)[0];
     // Get the corresponding date using the clamped x-coordinate
     const x0 = x.invert(xCoord);
     console.log(x0)
