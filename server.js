@@ -160,15 +160,22 @@ app.use(settingsFront,driverFront,groupFront,fieldFront,pdfFront,usersFront,carF
 
 const Violation = require('./models/Violation')
 app.get('/',async (req,res) =>{
-    let violations = await Violation.find({})
-    violations = violations.map(v => {
-        return {
+    let violations = await Violation.find({});
+
+const combinedViolations = violations.reduce((result, v) => {
+    const existingEntry = result.find(entry => entry.date === v.createdAt);
+    if (existingEntry) {
+        existingEntry.value += v.violations;
+    } else {
+        result.push({
             date: v.createdAt,
             value: v.violations
-        }
-    })
+        });
+    }
+    return result;
+}, []);
 
-    console.log(violations)
+    console.log(combinedViolations)
 
     const violationsJSON = JSON.stringify(violations);
 
