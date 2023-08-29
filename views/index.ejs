@@ -342,10 +342,12 @@ const svg = d3.select('#chart').append('svg')
             .attr('fill', 'none')
             .attr('stroke', 'steelblue')
             .attr('stroke-width', 2)
-            .attr('d', line);
+            .attr('d', line)
+            .attr('class', 'line'); // Add a class for the line
 
         // Add the X axis with dynamic width
         svg.append('g')
+            .attr('class', 'x-axis') // Add a class for the X axis
             .attr('transform', `translate(0,${height})`)
             .call(d3.axisBottom(x));
 
@@ -364,6 +366,8 @@ const svg = d3.select('#chart').append('svg')
             const newX = event.transform.rescaleX(x);
             svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
             svg.select('.x-axis').call(d3.axisBottom(newX));
+            svg.selectAll('.point') // Update points' positions on zoom
+                .attr('cx', d => newX(parseDate(d.date)));
         }
 
         // Add interactive points
