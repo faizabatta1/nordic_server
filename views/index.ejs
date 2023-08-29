@@ -219,6 +219,10 @@ svg{
 
 .chart-header{}
 
+.tick{
+    color:white
+}
+
     </style>
 
 <script src="https://d3js.org/d3.v6.js"></script>
@@ -359,8 +363,6 @@ const svg = d3.select('#chart').append('svg')
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-            svg.selectAll("text")
-    .style("stroke", "white");
 
             // This allows to find the closest X index of the mouse:
   var bisect = d3.bisector(function(d) { return d.x; }).left;
