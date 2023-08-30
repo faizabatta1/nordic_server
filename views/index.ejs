@@ -224,9 +224,6 @@ svg{
     color: white;
 }
 
-.chart-header image{
-    filter: hue-rotate(10deg); /* Adjust the degree value to achieve the desired color */
-}
 
 .tick{
     color:white
@@ -350,7 +347,7 @@ const parseDate = d3.utcParse('%Y-%m-%d');
 // Set up the scales
 const x = d3.scaleUtc()
   .domain(d3.extent(data, d => parseDate(d.date)))
-  .range([0, width - margin.right - 10]);
+  .range([0, width - margin.right]);
 
 const y = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)])
