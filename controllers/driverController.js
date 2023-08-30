@@ -6,6 +6,7 @@ const User = require('../models/usersModel')
 const Handlebars = require('handlebars')
 const puppeteer = require('puppeteer')
 const Car = require('../models/Car')
+const Accident = require('../models/Accident')
 const path = require('path')
 
 
@@ -181,6 +182,19 @@ const createNewDriver = async (req,res) =>{
         })
 
         await violation.save()
+
+        if(information.accidents > 0 && information.carId != undefined){
+            let existingCar = await Car.findOne({ _id: information.carId })
+
+            let accident = new Accident({
+                username:user.name,
+                pnid:user.accountId,
+                boardNumber: existingCar.boardNumber,
+                privateNumber: existingCar.privateNumber
+            })
+
+            await accident.save()
+        }
 
 
         await browser.close();

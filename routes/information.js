@@ -49,6 +49,7 @@ router.get('/info/kilometer',async (req,res) =>{
 
 const PDF = require('../models/PDF')
 const User = require('../models/usersModel')
+const Accident = require('../models/Accident')
 
 router.get('/info/pdfs', async (req,res) =>{
   try{
@@ -73,8 +74,8 @@ router.get('/info/users', async (req,res) =>{
 
 router.get('/info/accidents', async (req,res) =>{
   try{
-    const count = await PDF.count();
-    return res.status(200).json(0)
+    const count = await Accident.count();
+    return res.status(200).json(count)
   }catch(error){
     console.log(error.message)
     return res.status(500).send(error.message)
