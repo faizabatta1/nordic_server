@@ -23,6 +23,6 @@ const AccidentSchema = new mongoose.Schema({
     }
 })
 
-const AccidentModel = mongoose.model('Car', AccidentSchema)
+const AccidentModel = mongoose.model('Accident', AccidentSchema)
 
 module.exports = AccidentModel
