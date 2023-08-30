@@ -12,19 +12,5 @@ router.get('/accidents',async (req,res) =>{
   }
 })
 
-// router.post('/accidents',async (req,res) =>{
-//   try{
-//     const { 
-//       username,
-//       pnid,
-//       boardNumber,
-//       privateNumber
-//      }
-
-     
-//   }catch(error){
-
-//   }
-// })
 
 module.exports = router
