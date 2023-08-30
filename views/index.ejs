@@ -207,17 +207,25 @@
 .chart-container{
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
     align-items: stretch;
     flex-direction: column;
     padding: 20px;
-    background-color: rgb(49, 43, 43);
+    background-color: #ddd;
 }
 
 svg{
     width: 100%;
 }
 
-.chart-header{}
+.chart-header{
+    display: flex;
+    color: white;
+}
+
+.chart-header image{
+    filter: hue-rotate(10deg); /* Adjust the degree value to achieve the desired color */
+}
 
 .tick{
     color:white
