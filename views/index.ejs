@@ -423,8 +423,11 @@ var focusText = svg
     const xCoord = d3.pointer(e)[0];
 const clampedX = Math.max(0, Math.min(width, xCoord)); // Clamp to the range [0, width]
 
+const xScale = d3.zoomTransform(svg.node()).rescaleX(x);
+
+
 // Get the corresponding date using the clamped x-coordinate
-const x0 = x.invert(clampedX);
+const x0 = xScale.invert(clampedX);
 
 // Convert x0 to ISO string format
 const x0ISOString = x0.toISOString().split('T')[0];
@@ -441,12 +444,12 @@ const index = i === lastIndex ? lastIndex - 1 : i;
 selectedData = data[index];
     
     focus
-  .attr("cx", x(parseDate(selectedData.date)))
+  .attr("cx", xScale(parseDate(selectedData.date)))
   .attr("cy", y(selectedData.value));
 
 focusText
   .html("date: " + selectedData.date + "  -  " + "violations: " + selectedData.value)
-  .attr("x", x(parseDate(selectedData.date)) + 15)
+  .attr("x", xScale(parseDate(selectedData.date)) + 15)
   .attr("y", y(selectedData.value) - 15);
     }
   function mouseout() {
@@ -489,44 +492,15 @@ const zoom = d3.zoom()
 // Apply zoom behavior to the SVG
 svg.call(zoom);
 
-
+  // Define the zoomed function
 function zoomed(event) {
-  const newX = event.transform.rescaleX(x);
-
-  // Update the line path
-  svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
-
-  // Update the X axis
-  svg.select('.x-axis').call(d3.axisBottom(newX));
-
-  // Update the positions of data points
-  svg.selectAll('.point')
-    .attr('cx', d => newX(parseDate(d.date)))
-    .attr('cy', d => y(d.value));
-
-  // Update the positions of point labels
-  pointLabels
-    .attr('x', d => newX(parseDate(d.date)))
-    .attr('y', d => y(d.value) - 10);
-
-  // Adjust the position of the focus and focusText elements during zoom
-  const xCoord = d3.pointer(event)[0];
-  const clampedX = Math.max(0, Math.min(width, xCoord));
-  const x0 = newX.invert(clampedX);
-  const x0ISOString = x0.toISOString().split('T')[0];
-  const i = bisect(data, x0ISOString);
-  const lastIndex = data.length - 1;
-  const index = i === lastIndex ? lastIndex - 1 : i;
-  selectedData = data[index];
-
-  focus
-    .attr('cx', x(parseDate(selectedData.date)))
-    .attr('cy', y(selectedData.value));
-
-  focusText
-    .html(`Date: ${selectedData.date}<br>Violations: ${selectedData.value}`)
-    .attr('x', x(parseDate(selectedData.date)) + 15)
-    .attr('y', y(selectedData.value) - 15);
+    const newX = event.transform.rescaleX(x);
+    svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
+    svg.select('.x-axis').call(d3.axisBottom(newX));
+    svg.selectAll('.point')
+        .attr('cx', d => newX(parseDate(d.date)))
+        .attr('cy', d => y(d.value));
+    pointLabels.attr('x', d => newX(parseDate(d.date))).attr('y', d => y(d.value) - 10);
 }
 
 
