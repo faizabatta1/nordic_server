@@ -544,7 +544,49 @@ function zoomed(event) {
   .on('mouseover', (event, d) => showTooltip(event, d))
   .on('mouseout', hideTooltip);
 
-  // Add text labels for each point's value
+  // Define dimensions for the brush
+const brushWidth = width;
+const brushHeight = 150; // You can adjust the height as needed
+
+// Create the SVG element for the brush
+const brushSvg = d3.select('#chart').append('svg')
+    .attr('width', '100%')
+    .attr('height', brushHeight)
+    .append('g')
+    .attr('transform', `translate(${margin.left},${0})`);
+
+const brush = d3.brushX()
+.extent([[0, 0], [brushWidth, brushHeight]])
+.on('end', brushed); // Define the callback function for when the brush ends
+
+brushSvg.append('g')
+    .attr('class', 'brush')
+    .call(brush)
+    .call(brush.move, x.range()); // Initially, set the brush to cover the entire chart
+
+    function brushed(event) {
+    if (!event.selection) return; // Ignore empty selections (e.g., clicking outside the brush)
+
+    // Get the selected time range from the brush
+    const [x0, x1] = event.selection.map(x.invert);
+
+    // Update the x domain based on the selected time range
+    x.domain([x0, x1]);
+
+    // Update the line and axis based on the new x domain
+    svg.select('.line').attr('d', line);
+    svg.select('.x-axis').call(d3.axisBottom(x));
+
+    // Update the data points
+    svg.selectAll('.point')
+        .attr('cx', d => x(parseDate(d.date)))
+        .attr('cy', d => y(d.value));
+
+    // Update point labels
+    pointLabels
+        .attr('x', d => x(parseDate(d.date)))
+        .attr('y', d => y(d.value) - 10);
+}
 
 </script>
 
