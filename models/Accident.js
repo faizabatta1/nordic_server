@@ -20,6 +20,10 @@ const AccidentSchema = new mongoose.Schema({
     pnid:{
       type:String,
       required: true
+    },
+    time:{
+      type: String,
+      default: new Date().toISOString().split('T')[1]
     }
 })
 

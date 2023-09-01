@@ -153,32 +153,38 @@ const createNewDriver = async (req,res) =>{
         await page.setContent(filledTemplate);
         await page.pdf({ path: `./public/profiles/${filename}`, format: 'A4' });
 
+        const now = new Date();
+        const localDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
+        const localDateString = localDate.toISOString().split('T')[0];
+        const localTimeString = localDate.toISOString().split('T')[1];
+
         let pdf = new PDF({
             name: filename,
             link: process.env.BASE_URL + 'profiles/' + filename,
             userId: decodedToken.userId,
+            createdAt: localDateString,
+            time: localTimeString
         })
 
-        
-
         await pdf.save()
+        console.log(`PDF saved: ${process.env.BASE_URL + 'profiles/' + filename}`);
         
         await storeArchieve({
             id: decodedToken.userId,
             pdfData:{
                 name: filename,
                 link: process.env.BASE_URL + 'profiles/' + filename,
+                createdAt:localDateString,
+                time:localTimeString
             }
         })
 
-        console.log(`PDF saved: ${process.env.BASE_URL + 'profiles/' + filename}`);
-
-        console.log(information.trafficViolations)
-        console.log(eval(information.trafficViolations))
         let violation = new Violation({
             username:user.name,
             accountId:user.accountId,
-            violations:eval(information.trafficViolations)
+            violations:eval(information.trafficViolations),
+            createdAt:localDateString,
+            time:localTimeString
         })
 
         await violation.save()
@@ -190,7 +196,9 @@ const createNewDriver = async (req,res) =>{
                 username:user.name,
                 pnid:user.accountId,
                 boardNumber: existingCar.boardNumber,
-                privateNumber: existingCar.privateNumber
+                privateNumber: existingCar.privateNumber,
+                createdAt: localDateString,
+                time: localTimeString
             })
 
             await accident.save()
