@@ -444,14 +444,10 @@ const index = i === lastIndex ? lastIndex - 1 : i;
 selectedData = data[index];
     
     focus
-    .transition()
-    .duration(200)
   .attr("cx", xScale(parseDate(selectedData.date)))
   .attr("cy", y(selectedData.value));
 
 focusText
-.transition()
-    .duration(200)
   .html("date: " + selectedData.date + "  -  " + "violations: " + selectedData.value)
   .attr("x", xScale(parseDate(selectedData.date)) + 15)
   .attr("y", y(selectedData.value) - 15);
