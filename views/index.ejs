@@ -463,20 +463,7 @@ focusText
         // Add the Y axis
         svg.append('g')
             .call(d3.axisLeft(y));
-// Add transitions for line updates
-svg.select('.line')
-    .datum(data)
-    .transition()
-    .duration(500)
-    .attr('d', line.x(d => newX(parseDate(d.date))));
 
-// Add transitions for data point updates
-svg.selectAll('.point')
-    .data(data)
-    .transition()
-    .duration(500)
-    .attr('cx', d => newX(parseDate(d.date)))
-    .attr('cy', d => y(d.value));
         
 
         const pointLabels = svg.selectAll('.point-label')
@@ -492,15 +479,25 @@ svg.selectAll('.point')
   .attr('font-weight', 'bold')
   .text(d => d.value);
 
-        function zoomed(event) {
-  const newX = event.transform.rescaleX(x);
-  svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
-  svg.select('.x-axis').call(d3.axisBottom(newX));
-  svg.selectAll('.point') // Update points' positions on zoom
-    .attr('cx', d => newX(parseDate(d.date)))
-    .attr('cy', d => y(d.value));
-    pointLabels.attr('x', d => newX(parseDate(d.date))).attr('y', d => y(d.value) - 10);
 
+// Create a zoom behavior
+const zoom = d3.zoom()
+    .scaleExtent([1, 8]) // Define the zoom extent
+    .translateExtent([[0, 0], [width, height]])
+    .on('zoom', zoomed);
+
+// Apply zoom behavior to the SVG
+svg.call(zoom);
+
+  // Define the zoomed function
+function zoomed(event) {
+    const newX = event.transform.rescaleX(x);
+    svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
+    svg.select('.x-axis').call(d3.axisBottom(newX));
+    svg.selectAll('.point')
+        .attr('cx', d => newX(parseDate(d.date)))
+        .attr('cy', d => y(d.value));
+    pointLabels.attr('x', d => newX(parseDate(d.date))).attr('y', d => y(d.value) - 10);
 }
 
 
