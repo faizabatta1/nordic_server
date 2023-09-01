@@ -495,32 +495,12 @@ svg.call(zoom);
   // Define the zoomed function
 function zoomed(event) {
     const newX = event.transform.rescaleX(x);
-
-  // Smoothly transition the line path
-  svg.select('.line')
-    .transition()
-    .duration(200) // Adjust the duration as needed for desired smoothness
-    .attr('d', line.x(d => newX(parseDate(d.date))));
-
-  // Update the X axis with a smooth transition
-  svg.select('.x-axis')
-    .transition()
-    .duration(200) // Adjust the duration as needed for desired smoothness
-    .call(d3.axisBottom(newX));
-
-  // Smoothly transition the positions of data points
-  svg.selectAll('.point')
-    .transition()
-    .duration(200) // Adjust the duration as needed for desired smoothness
-    .attr('cx', d => newX(parseDate(d.date)))
-    .attr('cy', d => y(d.value));
-
-  // Smoothly transition the positions of point labels
-  pointLabels
-    .transition()
-    .duration(200) // Adjust the duration as needed for desired smoothness
-    .attr('x', d => newX(parseDate(d.date)))
-    .attr('y', d => y(d.value) - 10);
+    svg.select('.line').attr('d', line.x(d => newX(parseDate(d.date))));
+    svg.select('.x-axis').call(d3.axisBottom(newX));
+    svg.selectAll('.point')
+        .attr('cx', d => newX(parseDate(d.date)))
+        .attr('cy', d => y(d.value));
+    pointLabels.attr('x', d => newX(parseDate(d.date))).attr('y', d => y(d.value) - 10);
 }
 
 
