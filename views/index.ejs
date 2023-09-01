@@ -463,7 +463,20 @@ focusText
         // Add the Y axis
         svg.append('g')
             .call(d3.axisLeft(y));
+// Add transitions for line updates
+svg.select('.line')
+    .datum(data)
+    .transition()
+    .duration(500)
+    .attr('d', line.x(d => newX(parseDate(d.date))));
 
+// Add transitions for data point updates
+svg.selectAll('.point')
+    .data(data)
+    .transition()
+    .duration(500)
+    .attr('cx', d => newX(parseDate(d.date)))
+    .attr('cy', d => y(d.value));
         
 
         const pointLabels = svg.selectAll('.point-label')
