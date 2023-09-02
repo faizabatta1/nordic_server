@@ -60,7 +60,7 @@ function prepareBackup(){
   const now = new Date();
   const localDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
   const localDateString = localDate.toISOString().split('T')[0];
-
+  
   // Restart your VPS by executing a command
   conn.exec(`
   mkdir -p ~/backup \
