@@ -40,7 +40,7 @@ function restartVPS(){
 
 function updateNordic(){
    // Restart your VPS by executing a command
-   conn.exec('cd ~/workspace/Bilsjekkserverp && git pull', (err, stream) => {
+   conn.exec('cd ~/workspace/nordic_server && git pull', (err, stream) => {
     if (err) {
         console.log(err);
         throw err
