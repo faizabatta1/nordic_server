@@ -222,18 +222,24 @@ textarea{
     
     <script>
       async function restartVPS() {
-        let response = await fetch('/api/vps/restart')
-        console.log(await response.json())
+        await fetch('/api/vps/restart').then(() =>{
+          $('#successModal').modal('show');
+            setTimeout(() => location.reload(), 2000);
+        }).catch(err => console.log(err))
       }
 
       async function updateNordic() {
-        let response = await fetch('/api/vps/update')
-        console.log(await response.json())
+        await fetch('/api/vps/update').then(() =>{
+          $('#successModal').modal('show');
+            setTimeout(() => location.reload(), 2000);
+        }).catch(err => console.log(err))
       }
 
       async function prepareBackup(){
-        let response = await fetch('/api/vps/backup/prepare')
-        console.log(await response.json());
+        await fetch('/api/vps/backup/prepare').then(() =>{
+          $('#successModal').modal('show');
+            setTimeout(() => location.reload(), 2000);
+        }).catch(err => console.log(err))
       }
 
     </script>
