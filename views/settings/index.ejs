@@ -172,13 +172,17 @@ textarea{
   <div class="container tabcontent" id="vps">
     <div class="card mb-4">
       <div class="card-body d-flex align-items-center justify-content-end">
-        <div class="btn btn-info">
+        <button class="btn btn-info me-4" onclick="updateNordic()">
           update nordic
-        </div>  
+        </button>  
         
-        <div class="btn btn-info">
+        <button class="btn btn-info me-4" onclick="restartVPS()">
           restart vps
-        </div>
+        </button>
+
+        <button class="btn btn-info me-4" >
+          soon
+        </button>
       </div>
   </div>
   </div>
@@ -203,6 +207,13 @@ textarea{
     
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+      async function restartVPS() {
+        let response = await fetch('/api/vps/restart')
+        console.log(await response.json())
+      }
+    </script>
     <script>
       async function updateShiftSelectText(){
         try{
