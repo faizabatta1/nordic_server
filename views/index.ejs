@@ -220,15 +220,16 @@ svg{
 .chart-header{
     display: flex;
     align-items: center;
-    color: white;
+    color: black;
 }
 
 
 .tick{
-    color:white
+    color:black
 }
 .wrapper{
-    width:100% !important
+    width:100% !important;
+    padding: 12px;
 }
 
     </style>
@@ -240,6 +241,7 @@ svg{
 <%- include('./components/navbar') %>
 <div class="mt-4"></div>
 <div class="wrapper">
+    <div class="container">
     <div class="welcome-message">Hei, Admin!</div>
 
     <select name="violationsFilter" id="violationsFilter">
@@ -298,6 +300,8 @@ svg{
         </div>
     </div>
 
+</div>
+
     <div class="chart-container">
         <div class="chart-header">
             <img src="/images/calendar.png" alt="Calendar">
@@ -306,6 +310,7 @@ svg{
         <div id="chart"></div>
     </div>
 
+    <div class="container">
     <div class="quick-links">
         <a href="/users" class="quick-link-item">Administrer brukere</a>
         <a href="/groups" class="quick-link-item">Administrer grupper</a>
@@ -313,6 +318,7 @@ svg{
         <a href="/pdfs" class="quick-link-item">Se Ferdigskjema</a>
         <!-- Add more quick links as needed -->
     </div>
+</div>
 </div>
 <script src="https://kit.fontawesome.com/7d365a7c21.js" crossorigin="anonymous"></script>
 
