@@ -6,9 +6,12 @@ const {
 } = require('../utils/vps_service')
 
 router.get('/vps/restart',(req,res) =>{
-  let data = restartVPS()
-
-  return res.status(200).send(data)
+  try{
+    let data = restartVPS()
+    return res.status(200).send(data)
+  }catch(error){
+    console.log(error.message)
+  }
 })
 
 
