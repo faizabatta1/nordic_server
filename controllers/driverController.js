@@ -84,9 +84,12 @@ const createNewDriver = async (req,res) =>{
                 },{ $new: true })
             }
                 else{
-                    await Car.updateOne({ _id: information.carId },{
+                    console.log(information)
+                    let x = await Car.updateOne({ _id: information.carId },{
                         currentKilometers: existingCar.currentKilometers + information.kilometers
                     })
+
+                    console.
                 }
         }
 
