@@ -406,7 +406,7 @@ var focusText = svg
   .append('text')
   .attr('fill', 'black') // Set the fill attribute to white
     .style("opacity", 0)
-    .attr('fill', 'white') // Set the fill attribute to white
+    .attr('fill', 'black') // Set the fill attribute to white
     .attr("text-anchor", "left")
     .attr("alignment-baseline", "middle")
 
@@ -496,7 +496,7 @@ focusText
   .attr('y', d => y(d.value) - 10) // Adjust the y position above the point
   .attr('text-anchor', 'middle')
   .attr('font-size', '12px')
-  .attr('fill', 'white') // Set the fill attribute to white
+  .attr('fill', 'black') // Set the fill attribute to white
   .attr('font-weight', 'bold')
   .text(d => d.value);
 
