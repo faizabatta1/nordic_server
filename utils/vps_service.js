@@ -27,7 +27,7 @@ function restartVPS() {
   });
 
   // Restart your VPS by executing a command
-  conn.exec(`export PATH=$PATH:/root/.nvm/versions/node/v18.0.0/bin/ && ${pm2Path} start nordic`, (err, stream) => {
+  conn.exec(`export PATH=$PATH:/root/.nvm/versions/node/v18.0.0/bin/ && ${pm2Path} list`, (err, stream) => {
     if (err) {
       console.log(err);
       throw err;
