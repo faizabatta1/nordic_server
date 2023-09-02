@@ -24,5 +24,11 @@ router.get('/vps/update',(req,res) =>{
   }
 })
 
+router.get('/vps/backup/prepare',async (req,res) =>{
+
+})
+
+router.get('/vps/backup/download')
+
 
 module.exports = router
