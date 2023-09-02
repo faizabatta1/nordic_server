@@ -466,7 +466,7 @@ selectedData = data[index];
   .attr("cy", y(selectedData.value));
 
 focusText
-  .html("date: " + selectedData.date + "  -  " + "violations: " + selectedData.value)
+  .html(selectedData.value)
   .attr("x", xScale(parseDate(selectedData.date)) + 15)
   .attr("y", y(selectedData.value) - 15);
     }
