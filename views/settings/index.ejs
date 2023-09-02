@@ -170,22 +170,22 @@ textarea{
   </div>
 
   <div class="container tabcontent" id="vps">
-    <div class="card mb-4 p-4">
+    <div class="card mb-4 p-2">
       <div class="card-title">
         VPS Management Controll
       </div>
       <div class="card-body d-flex align-items-center justify-content-end">
-        <button class="btn btn-info me-4" onclick="updateNordic()">
+        <button class="btn btn-info me-2" onclick="updateNordic()">
           Update Nordic
         </button>  
         
-        <button class="btn btn-info me-4" onclick="restartVPS()">
+        <button class="btn btn-info me-2" onclick="restartVPS()">
           Restart VPS
         </button>
       </div>
   </div>
 
-  <div class="card mb-4 p-4">
+  <div class="card mb-4 p-2">
     <div class="card-title">
       Data Backup Management
     </div>
@@ -194,7 +194,8 @@ textarea{
       <input type="text" id="path" class="form-control" placeholder="Enter path here > D://backups">
     </div>
     <div class="card-body d-flex align-items-center justify-content-end">
-      <button onclick="backupData()" class="btn btn-info me-4">Backup Data</button>
+      <button onclick="prepareBackup()" class="btn btn-info me-2">Prepare Backup</button>
+      <button onclick="downloadBackup()" class="btn btn-info me-2">Download Backup</button>
     </div>
   </div>
   </div>
@@ -229,6 +230,14 @@ textarea{
       async function updateNordic() {
         let response = await fetch('/api/vps/update')
         console.log(await response.json())
+      }
+
+      async function prepareBackup(){
+
+      }
+
+      async function downloadBackup(){
+        
       }
     </script>
     <script>
