@@ -504,7 +504,7 @@ focusText
 // Create a zoom behavior
 const zoom = d3.zoom()
     .scaleExtent([1, 8]) // Define the zoom extent
-    .translateExtent([[0, 0], [containerWidth, height]])
+    .translateExtent([[0, 0], [containerWidth - margin.right - 40, height]])
     .on('zoom', zoomed);
 
 // Apply zoom behavior to the SVG
@@ -551,7 +551,7 @@ function zoomed(event) {
         }
 
         svg.selectAll('.point')
-  .data([data[data.length - 1]])
+  .data([data[0],data[data.length - 1]])
   .enter()
   .append('circle')
   .attr('class', 'point')
