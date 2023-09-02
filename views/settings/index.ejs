@@ -220,21 +220,21 @@ textarea{
       async function restartVPS() {
         await fetch('/api/vps/restart').then(() =>{
           $('#successModal').modal('show');
-            setTimeout(() => location.reload(), 2000);
+            setTimeout(() => location.reload(), 3000);
         }).catch(err => console.log(err))
       }
 
       async function updateNordic() {
         await fetch('/api/vps/update').then(() =>{
           $('#successModal').modal('show');
-            setTimeout(() => location.reload(), 2000);
+            setTimeout(() => location.reload(), 3000);
         }).catch(err => console.log(err))
       }
 
       async function prepareBackup(){
         await fetch('/api/vps/backup/prepare').then(() =>{
           $('#successModal').modal('show');
-            setTimeout(() => location.reload(), 2000);
+            setTimeout(() => location.reload(), 3000);
         }).catch(err => console.log(err))
       }
 
