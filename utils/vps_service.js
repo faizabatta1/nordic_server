@@ -75,3 +75,9 @@ function stopNordic(){
     });
   });
 }
+
+module.exports = {
+  stopNordic,
+  updateNordic,
+  restarVPS 
+}
