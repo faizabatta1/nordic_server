@@ -365,7 +365,7 @@ const containerWidth = chartContainer.clientWidth;
 // Set up the scales
 const x = d3.scaleUtc()
   .domain(d3.extent(data, d => parseDate(d.date)))
-  .range([0, 1100 - margin.right - 40]);
+  .range([0, containerWidth - margin.right - 40]);
 
 const y = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)])
@@ -488,7 +488,7 @@ focusText
         
 
         const pointLabels = svg.selectAll('.point-label')
-  .data([data[0],data[data.length - 1]])
+  .data([data[data.length - 1]])
   .enter()
   .append('text')
   .attr('class', 'point-label')
@@ -504,7 +504,7 @@ focusText
 // Create a zoom behavior
 const zoom = d3.zoom()
     .scaleExtent([1, 8]) // Define the zoom extent
-    .translateExtent([[0, 0], [width, height]])
+    .translateExtent([[0, 0], [containerWidth, height]])
     .on('zoom', zoomed);
 
 // Apply zoom behavior to the SVG
@@ -551,7 +551,7 @@ function zoomed(event) {
         }
 
         svg.selectAll('.point')
-  .data([data[0],data[data.length - 1]])
+  .data(data[data.length - 1]])
   .enter()
   .append('circle')
   .attr('class', 'point')
