@@ -29,7 +29,8 @@ const createNewDriver = async (req,res) =>{
             let existingCar = await Car.findOne({ _id: information.carId })
 
             if(+information.kilometers + +existingCar.currentKilometers >= +existingCar.kilometers){
-        
+       
+                console.log('in if')
                 let emailData = fs.readFileSync(path.join(__dirname,'../data/email.json'),{ 
                     encoding: 'utf8',
                     flag: 'r'
@@ -83,6 +84,7 @@ const createNewDriver = async (req,res) =>{
                 },{ $new: true })
             }
                 else{
+                    console.log('in else')
                     await Car.findOneAndUpdate({ _id: information.carId },{
                         currentKilometers: existingCar.currentKilometers + information.kilometers
                     },{ $new: true })
