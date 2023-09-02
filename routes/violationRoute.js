@@ -16,10 +16,13 @@ router.get('/violations/:id',async (req,res) =>{
 
       return res.send(totalViolations.toString())      
     }else if(id == 1){
-      let currentDate = new Date().toISOString().split('T')[0]
+	const now = new Date();
+    const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+    const localDateString = localDate.toISOString().split('T')[0];
+console.log(localDate.toISOString())
 
       let violations = await Violation.find({
-        createdAt: currentDate
+        createdAt: localDateString
       })
       let totalViolations = 0;
     
@@ -28,10 +31,10 @@ router.get('/violations/:id',async (req,res) =>{
       });
 
       return res.send(totalViolations.toString())      
-    }else if(id == 2){
-      const now = new Date();
+    }else if(id == 2){      const now = new Date();
       const threeDaysAgo = new Date();
       threeDaysAgo.setDate(now.getDate() - 3);
+
 
       try {
         const result = await Violation.aggregate([
