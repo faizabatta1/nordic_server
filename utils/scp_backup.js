@@ -10,7 +10,7 @@ async function downloadBackup () {
       username: 'root',
       password: 'ray01ocruwRiP=LgEvoQ'
     })
-    await client.downloadDir('backup/', path.join('D:','backups'))
+    await client.downloadDir('backup/', path.join('E:','backups'))
     client.close() // remember to close connection after you finish
   } catch (e) {
     console.log(e)
