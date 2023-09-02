@@ -504,7 +504,7 @@ focusText
 // Create a zoom behavior
 const zoom = d3.zoom()
     .scaleExtent([1, 8]) // Define the zoom extent
-    .translateExtent([[0, 0], [containerWidth - margin.right + 10, height]])
+    .translateExtent([[0, 0], [containerWidth - margin.right + 12, height]])
     .on('zoom', zoomed);
 
 // Apply zoom behavior to the SVG
