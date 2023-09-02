@@ -467,7 +467,7 @@ selectedData = data[index];
 
 focusText
   .html(selectedData.value)
-  .attr("x", xScale(parseDate(selectedData.date)) + 15)
+  .attr("x", xScale(parseDate(selectedData.date)))
   .attr("y", y(selectedData.value) - 15);
     }
   function mouseout() {
