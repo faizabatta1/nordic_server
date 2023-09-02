@@ -22,7 +22,7 @@ conn.connect({
 
 function restartVPS(){
    // Restart your VPS by executing a command
-  conn.exec(`export PATH=$PATH:/root/.nvm/versions/node/v18.0.0/bin/ && ${pm2Path} start nordic`, (err, stream) => {
+  conn.exec(`export PATH=$PATH:/root/.nvm/versions/node/v18.0.0/bin/ && ${pm2Path} restart nordic`, (err, stream) => {
     if (err) {
         console.log(err);
         throw err
@@ -56,25 +56,8 @@ function updateNordic(){
   });
 }
 
-function stopNordic(){
-   // Restart your VPS by executing a command
-   conn.exec('pm2 stop techs', (err, stream) => {
-    if (err) {
-        console.log(err);
-        throw err
-    };
-    
-    stream.on('close', (code, signal) => {
-        console.log(signal);
-      console.log(`Command execution completed with code ${code}`);
-    }).on('data', (data) => {
-      console.log(`Command output: \n${data}`);
-    });
-  });
-}
 
 module.exports = {
-  stopNordic,
   updateNordic,
   restartVPS 
 }

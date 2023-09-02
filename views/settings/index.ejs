@@ -171,19 +171,27 @@ textarea{
 
   <div class="container tabcontent" id="vps">
     <div class="card mb-4">
+      <div class="card-title">
+        VPS Management Controll
+      </div>
       <div class="card-body d-flex align-items-center justify-content-end">
         <button class="btn btn-info me-4" onclick="updateNordic()">
-          update nordic
+          Update Nordic
         </button>  
         
         <button class="btn btn-info me-4" onclick="restartVPS()">
-          restart vps
-        </button>
-
-        <button class="btn btn-info me-4" >
-          soon
+          Restart VPS
         </button>
       </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-title">
+      Data Backup Management
+    </div>
+    <div class="card-body d-flex align-items-center justify-content-end">
+      <button onclick="backupData()" class="btn btn-info me-4">Backup Data</button>
+    </div>
   </div>
   </div>
 
@@ -211,6 +219,11 @@ textarea{
     <script>
       async function restartVPS() {
         let response = await fetch('/api/vps/restart')
+        console.log(await response.json())
+      }
+
+      async function updateNordic() {
+        let response = await fetch('/api/vps/update')
         console.log(await response.json())
       }
     </script>
