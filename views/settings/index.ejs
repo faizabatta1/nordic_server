@@ -211,7 +211,7 @@ textarea{
     <script>
       async function restartVPS() {
         let response = await fetch('/api/vps/restart')
-        console.log(await response.text())
+        console.log(await response.json())
       }
     </script>
     <script>

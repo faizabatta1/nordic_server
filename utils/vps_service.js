@@ -31,7 +31,7 @@ function restartVPS(){
     stream.on('close', (code, signal) => {
       console.log(`Command execution completed with code ${code}`);
     }).on('data', (data) => {
-      console.log(`Command output: ${data}`);
+      console.log(`Command output: \n${data}`);
       return data
     });
   });
@@ -50,7 +50,7 @@ function updateNordic(){
         console.log(signal);
       console.log(`Command execution completed with code ${code}`);
     }).on('data', (data) => {
-      console.log(`Command output: ${data}`);
+      console.log(`Command output: \n${data}`);
       restartVPS()
     });
   });
@@ -68,7 +68,7 @@ function stopNordic(){
         console.log(signal);
       console.log(`Command execution completed with code ${code}`);
     }).on('data', (data) => {
-      console.log(`Command output: ${data}`);
+      console.log(`Command output: \n${data}`);
     });
   });
 }
