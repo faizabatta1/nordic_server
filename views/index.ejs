@@ -358,10 +358,14 @@ const height = 450;
 // Parse the date format
 const parseDate = d3.utcParse('%Y-%m-%d');
 
+// Get the width of the chart container
+const chartContainer = document.getElementById('chart');
+const containerWidth = chartContainer.clientWidth;
+
 // Set up the scales
 const x = d3.scaleUtc()
   .domain(d3.extent(data, d => parseDate(d.date)))
-  .range([0, width - margin.right - 30]);
+  .range([0, containerWidth - margin.right - 30]);
 
 const y = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)])
