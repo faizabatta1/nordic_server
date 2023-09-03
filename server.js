@@ -3,13 +3,13 @@ require('./utils/mongodbConnection')
 const qr = require('qr-image');
 const fs = require('fs')
 
-const http = require('http');
+const https = require('https');
 const socketIo = require('socket.io');
 
 const express = require('express')
 const app = express()
 
-const server = http.createServer(app);
+const server = https.createServer(app);
 const io = socketIo(server);
 
 // WebSocket connection handling
