@@ -3,8 +3,31 @@ require('./utils/mongodbConnection')
 const qr = require('qr-image');
 const fs = require('fs')
 
+const http = require('http');
+const socketIo = require('socket.io');
+
 const express = require('express')
 const app = express()
+
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// WebSocket connection handling
+io.on('connection', (socket) => {
+    console.log('A user connected');
+
+    // Handle messages from the client
+    socket.on('message', (data) => {
+        console.log('Received message:', data);
+        // You can broadcast the message to all connected clients
+        io.emit('message', data);
+    });
+
+    // Handle disconnection
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
+});
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
@@ -187,4 +210,4 @@ const combinedViolations = violations.reduce((result, v) => {
 })
 
 const port = process.env.port || 9090
-app.listen(port, () => console.log(`Server is running on port ${port}`))
+server.listen(port, () => console.log(`Server is running on port ${port}`))
