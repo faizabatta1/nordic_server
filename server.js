@@ -29,6 +29,11 @@ io.on('connection', (socket) => {
     });
 });
 
+app.post('/api/notifications', (req,res) =>{
+    io.emit('message', 'LOLLLLLLLLLLLL')
+    return res.sendStatus(200)
+})
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

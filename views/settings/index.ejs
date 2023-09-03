@@ -51,6 +51,7 @@ textarea{
       <button class="tablinks" onclick="openSection(event, 'general')">Generell</button>
       <button class="tablinks" onclick="openSection(event, 'application')">Applikasjon</button>
       <button class="tablinks" onclick="openSection(event, 'vps')">VPS</button>
+      <button class="tablinks" onclick="openSection(event, 'notifications')">Notifications</button>
     </div>
 
     <div class="mt-4"></div>
@@ -195,6 +196,14 @@ textarea{
   </div>
   </div>
 
+  <div class="container tabcontent notifications">
+    <div class="card p2">
+      <div class="card-body">
+        <button onclick="sendNotification()">test</button>
+      </div>
+    </div>
+  </div>
+
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -215,7 +224,17 @@ textarea{
     
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script>
+      async function sendNotification(){
+        try{
+          let response = await fetch('/api/notifications',{
+            method:'POST'
+          })
+        }catch(error){
+          console.log(error)
+        }
+      }
+    </script>
     <script>
       async function restartVPS() {
         await fetch('/api/vps/restart').then(() =>{
@@ -460,4 +479,4 @@ function openSection(evt, cityName) {
       }
   </script>
 </body>
-</html>
+</ht
