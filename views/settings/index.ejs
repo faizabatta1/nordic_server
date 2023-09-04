@@ -375,11 +375,11 @@ textarea{
       e.preventDefault()
 
       if(!selected.includes(e.target.textContent)){
-        console.log('yes inc');
-        console.log(e.target.textContent);
+        selected.push(e.target.textContent)
+        console.log(selected);
       }
 
-      e.target.classList.toggle('option-selected')
+      e.target.classList.toggle('selected-option')
     })
   }
 </script>
