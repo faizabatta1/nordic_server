@@ -185,6 +185,7 @@ const createNewDriver = async (req,res) =>{
             username:user.name,
             accountId:user.accountId,
             violations:eval(information.trafficViolations),
+            removed:+information.trafficViolations.split('-')[1],
             createdAt:localDateString,
             time:localTimeString
         })
