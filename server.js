@@ -16,21 +16,26 @@ const io = socketIo(server);
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    // Handle messages from the client
-    socket.on('message', (data) => {
-        console.log('Received message:', data);
-        // You can broadcast the message to all connected clients
-        io.emit('message', data);
-    });
-
-    // Handle disconnection
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
 });
 
-app.post('/api/notifications', (req,res) =>{
-    io.emit('message', 'LOLLLLLLLLLLLL')
+app.post('/api/notifications/users', (req,res) =>{
+    console.log(req.body)
+    io.emit('single', JSON.stringify(req.body))
+    return res.sendStatus(200)
+})
+
+app.post('/api/notifications/zones', (req,res) =>{
+    console.log(req.body)
+    io.emit('zones', JSON.stringify(req.body))
+    return res.sendStatus(200)
+})
+
+app.post('/api/notifications/devices', (req,res) =>{
+    console.log(req.body)
+    io.emit('devices', JSON.stringify(req.body))
     return res.sendStatus(200)
 })
 

@@ -257,7 +257,7 @@ textarea{
         </div>
         <div class="form-group">
           <label for="deviceSelect">Select Zone</label>
-          <select class="form-control" id="deviceSelect">
+          <select class="form-control" id="zoneSelect">
             <option value="zone1">Zone 1</option>
             <option value="zone2">Zone 2</option>
             <!-- Add more options for other devices as needed -->
@@ -348,7 +348,7 @@ textarea{
           // Replace this with your logic to save IMEI data
           // Example: $.post('/save-imei', { imei: imeiInput }, function(response) { });
           console.log(`IMEI Number: ${imeiInput}`);
-  
+        
           // Close the modal
           $('#createIMEIModal').modal('hide');
       }
@@ -370,29 +370,56 @@ textarea{
     <script>
       async function sendNotification(){
         try{
-          let response = await fetch('/api/notifications',{
-            method:'POST'
+          let response = await fetch('/api/notifications/users',{
+            method:'POST',
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            body:{
+              title: document.getElementById('all-title'),
+              body: document.getElementById('all-body'),
+            }
           })
         }catch(error){
           console.log(error)
         }
       }
 
-      function sendNotificationToDevice() {
-  // Get the selected device's IMEI
-  const selectedDevice = document.getElementById('deviceSelect').value;
+      async function sendNotificationsToZones(){
+        try{
+          let response = await fetch('/api/notifications/zones',{
+            method:'POST',
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            body:{
+              title: document.getElementById('zones-title').value,
+              body: document.getElementById('zones-body').value,
+              zones: document.getElementById('zoneSelect').value
+            }
+          })
+        }catch(error){
+          console.log(error)
+        }
+      }
 
-  // Replace this with your logic to send a notification to the selected device
-  // You might use AJAX or any other method to send the notification to your server
-  // and specify the device using the selected IMEI.
-  // Example:
-  // $.post('/send-notification', { imei: selectedDevice }, function(response) {
-  //   // Handle the response from the server
-  // });
-
-  // For testing purposes, you can simply log the selected IMEI:
-  console.log(`Sending notification to device with IMEI: ${selectedDevice}`);
-}
+      async function sendNotificationToDevice(){
+        try{
+          let response = await fetch('/api/notifications/devices',{
+            method:'POST',
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            body:{
+              title: document.getElementById('imei-title').value,
+              body: document.getElementById('imei-body').value,
+              devices: document.getElementById('deviceSelect').value
+            }
+          })
+        }catch(error){
+          console.log(error)
+        }
+      }
 
     </script>
     <script>
