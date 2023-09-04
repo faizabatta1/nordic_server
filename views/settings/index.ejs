@@ -51,6 +51,9 @@ textarea{
 .wrap-options > div{
   margin-right: 10px;
   background-color: grey;
+  color: white;
+  font-weight: bolder;
+  border-radius: 12px;
 }
 
 .selected-option{
@@ -274,15 +277,15 @@ textarea{
         <div class="form-group">
           <label for="zoneSelect">Select Zone</label>
           <div class="wrap-options">
-            <div class="pe-4 ps-4 text-center" id="zoneSelect">
+            <div class="pe-4 ps-4 text-center cg" id="zoneSelect">
               Alex
             </div>
 
-            <div class="pe-4 ps-4 text-center">
+            <div class="pe-4 ps-4 text-center cg">
               Matr
             </div>
 
-            <div class="pe-4 ps-4 text-center">
+            <div class="pe-4 ps-4 text-center cg">
               Asiu
             </div>
           </div>
@@ -364,6 +367,23 @@ textarea{
     
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let selected = []
+  let options = document.getElementsByClassName('cg')
+  options.forEach(element => {
+    element.addEventListener('click',(e) =>{
+      e.preventDefault()
+
+      if(!selected.includes(e.target.textContent)){
+        console.log('yes inc');
+        console.log(e.target.textContent);
+      }
+
+      e.target.classList.toggle('option-selected')
+    })
+  });
+</script>
+
 <script>
       function saveIMEIData() {
           // Retrieve data from input fields
