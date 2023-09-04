@@ -198,8 +198,8 @@ textarea{
 
   <div class="container tabcontent" id="notifications">
     <div class="d-flex justify-content-end p-2">
-      <button onclick="createIMEI()" class="btn btn-info me-3">New IMEI</button>
-      <button onclick="createZone()" class="btn btn-info">New Zone</button>
+      <button data-toggle="modal" data-target="#createIMEIModal" class="btn btn-info me-3">New IMEI</button>
+      <button data-toggle="modal" data-target="#createZoneModal" class="btn btn-info">New Zone</button>
     </div>
 
     <div class="card p-2 mb-2">
@@ -263,9 +263,86 @@ textarea{
 
     <br>
     <br>
+
+    <!-- Create IMEI Modal -->
+<div class="modal fade" id="createIMEIModal" tabindex="-1" aria-labelledby="createIMEIModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="createIMEIModalLabel">Create IMEI</h5>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="mb-3">
+                      <label for="imeiInput" class="form-label">IMEI Number:</label>
+                      <input type="text" class="form-control" id="imeiInput" placeholder="Enter IMEI number" required>
+                  </div>
+                  <!-- Add more input fields for other IMEI-related data as needed -->
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="saveIMEIData()">Save</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Create Zone Modal -->
+<div class="modal fade" id="createZoneModal" tabindex="-1" aria-labelledby="createZoneModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="createZoneModalLabel">Create Zone</h5>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="mb-3">
+                      <label for="zoneNameInput" class="form-label">Zone Name:</label>
+                      <input type="text" class="form-control" id="zoneNameInput" placeholder="Enter zone name" required>
+                  </div>
+                  <!-- Add more input fields for other zone-related data as needed -->
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="saveZoneData()">Save</button>
+          </div>
+      </div>
+  </div>
+</div>
     
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function saveIMEIData() {
+          // Retrieve data from input fields
+          const imeiInput = document.getElementById('imeiInput').value;
+  
+          // Replace this with your logic to save IMEI data
+          // Example: $.post('/save-imei', { imei: imeiInput }, function(response) { });
+          console.log(`IMEI Number: ${imeiInput}`);
+  
+          // Close the modal
+          $('#createIMEIModal').modal('hide');
+      }
+  
+      function saveZoneData() {
+          // Retrieve data from input fields
+          const zoneNameInput = document.getElementById('zoneNameInput').value;
+  
+          // Replace this with your logic to save Zone data
+          // Example: $.post('/save-zone', { zoneName: zoneNameInput }, function(response) { });
+          console.log(`Zone Name: ${zoneNameInput}`);
+  
+          // Close the modal
+          $('#createZoneModal').modal('hide');
+      }
+  </script>
+  
+    
     <script>
       async function sendNotification(){
         try{
