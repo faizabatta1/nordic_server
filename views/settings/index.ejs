@@ -340,7 +340,39 @@ textarea{
     
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+
+  <script>
+    // JavaScript to populate multiselect options for IMEIs and Zones
+
+// Sample data (replace with your actual data)
+const imeiOptions = ['IMEI 1', 'IMEI 2', 'IMEI 3'];
+const zoneOptions = ['Zone 1', 'Zone 2', 'Zone 3'];
+
+// Function to populate the multiselect options
+function populateMultiselectOptions() {
+  const imeiSelect = document.getElementById('imeiSelect');
+  const zoneSelect = document.getElementById('zoneSelect');
+
+  imeiOptions.forEach((imei) => {
+    const option = document.createElement('option');
+    option.value = imei;
+    option.textContent = imei;
+    imeiSelect.appendChild(option);
+  });
+
+  zoneOptions.forEach((zone) => {
+    const option = document.createElement('option');
+    option.value = zone;
+    option.textContent = zone;
+    zoneSelect.appendChild(option);
+  });
+}
+
+// Call the function to populate options when the page loads
+populateMultiselectOptions();
+
+  </script>
+<script>
       function saveIMEIData() {
           // Retrieve data from input fields
           const imeiInput = document.getElementById('imeiInput').value;
@@ -366,7 +398,7 @@ textarea{
       }
   </script>
   
-    
+
     <script>
       async function sendNotification(){
         try{
@@ -385,7 +417,7 @@ textarea{
         }
       }
 
-      
+
       async function sendNotificationsToZones(){
         try{
           let response = await fetch('/api/notifications/zones',{
