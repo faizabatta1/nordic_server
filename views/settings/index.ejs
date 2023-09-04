@@ -60,8 +60,6 @@ textarea{
   background-color: steelblue !important;
 }
     </style>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>    
     <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -370,7 +368,9 @@ textarea{
 <script>
   let selected = []
   let options = document.getElementsByClassName('cg')
-  options.forEach(element => {
+  for(let i = 0; i < options.length; i++){
+    let element = options.item(i)
+
     element.addEventListener('click',(e) =>{
       e.preventDefault()
 
@@ -381,7 +381,7 @@ textarea{
 
       e.target.classList.toggle('option-selected')
     })
-  });
+  }
 </script>
 
 <script>
