@@ -197,11 +197,16 @@ textarea{
   </div>
 
   <div class="container tabcontent" id="notifications">
-    <div class="card p2 mb-2">
+    <div class="d-flex justify-content-end p-2">
+      <button onclick="createIMEI()" class="btn btn-info me-3">New IMEI</button>
+      <button onclick="createZone()" class="btn btn-info">New Zone</button>
+    </div>
+
+    <div class="card p-2 mb-2">
       <div class="card-title">
         Send Notifications For All Users
       </div>
-      <div class="card-body">
+      <div class="card-body d-flex justify-content-end">
         <button onclick="sendNotification()" class="btn btn-info">send to all users</button>
       </div>
     </div>
@@ -217,7 +222,9 @@ textarea{
             <!-- Add more options for other devices as needed -->
           </select>
         </div>
-        <button onclick="sendNotificationToDevice()" class="btn btn-info">Send Notification</button>
+        <div class="d-flex justify-content-end">
+          <button onclick="sendNotificationToDevice()" class="btn btn-info">Send Notification</button>
+        </div>
       </div>
     </div>
     
@@ -232,7 +239,9 @@ textarea{
             <!-- Add more options for other devices as needed -->
           </select>
         </div>
-        <button onclick="sendNotificationsToZones()" class="btn btn-info">Send Notifications</button>
+        <div class="d-flex justify-content-end">
+          <button onclick="sendNotificationsToZones()" class="btn btn-info">Send Notifications</button>
+        </div>
       </div>
     </div>
   </div>
