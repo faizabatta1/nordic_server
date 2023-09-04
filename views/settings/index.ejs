@@ -376,8 +376,8 @@ textarea{
               'Content-Type': 'application/json; charset=utf-8'
             },
             body:{
-              title: document.getElementById('all-title'),
-              body: document.getElementById('all-body'),
+              title: document.getElementById('all-title').value,
+              body: document.getElementById('all-body').value,
             }
           })
         }catch(error){
