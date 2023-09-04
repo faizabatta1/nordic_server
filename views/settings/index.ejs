@@ -199,7 +199,7 @@ textarea{
   <div class="container tabcontent" id="notifications">
     <div class="card p2 mb-2">
       <div class="card-title">
-
+        Send Notifications For All Users
       </div>
       <div class="card-body">
         <button onclick="sendNotification()" class="btn btn-info">send to all users</button>
@@ -221,10 +221,18 @@ textarea{
       </div>
     </div>
     
-
-    <div class="card p2 mb-2">
+    <div class="card p-2 mb-2">
       <div class="card-body">
-        <button onclick="sendNotification()" class="btn btn-info">test</button>
+        <div class="card-title">Choose Zone to send notifications</div>
+        <div class="form-group">
+          <label for="deviceSelect">Select Zone</label>
+          <select class="form-control" id="deviceSelect">
+            <option value="zone1">Zone 1</option>
+            <option value="zone2">Zone 2</option>
+            <!-- Add more options for other devices as needed -->
+          </select>
+        </div>
+        <button onclick="sendNotificationsToZones()" class="btn btn-info">Send Notifications</button>
       </div>
     </div>
   </div>
