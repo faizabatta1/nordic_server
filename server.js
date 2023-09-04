@@ -21,6 +21,21 @@ io.on('connection', (socket) => {
     });
 });
 
+
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+const cookieParser = require('cookie-parser');
+app.use(cookieParser())
+
+const cors = require('cors')
+app.use(cors())
+
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs')
+
+
 app.post('/api/notifications/users', (req,res) =>{
     console.log(req.body)
     io.emit('single', JSON.stringify(req.body))
@@ -38,20 +53,6 @@ app.post('/api/notifications/devices', (req,res) =>{
     io.emit('devices', JSON.stringify(req.body))
     return res.sendStatus(200)
 })
-
-const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-const cookieParser = require('cookie-parser');
-app.use(cookieParser())
-
-const cors = require('cors')
-app.use(cors())
-
-app.use(express.static(__dirname + '/public'));
-app.set('view engine', 'ejs')
-
 
 app.get('/login', (req,res) =>{
     return res.status(200).render('auth/login')
