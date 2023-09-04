@@ -58,15 +58,18 @@
     const violationsData = [
         {
             date: "2023-08-15",
-            description: "Speeding in area."
+            total: 50,
+            removed: 8
         },
         {
             date: "2023-09-05",
-            description: "Running a red light."
+            total: 40,
+            removed: 10
         },
         {
             date: "2023-09-20",
-            description: "Illegal parking."
+            total: 10,
+            removed: 1
         }
         // Add more violation entries as needed
     ];
@@ -82,16 +85,21 @@
             const violationCardInner = document.createElement('div');
             violationCardInner.classList.add('violation-card');
 
-            const violationDate = document.createElement('p');
+            const violationDate = document.cr0eateElement('p');
             violationDate.classList.add('violation-date');
             violationDate.textContent = `Date: ${violation.date}`;
 
-            const violationDescription = document.createElement('p');
-            violationDescription.classList.add('violation-description');
-            violationDescription.textContent = `Description: ${violation.description}`;
+            const violationsTotal = document.createElement('p');
+            violationsTotal.classList.add('violation-description');
+            violationsTotal.textContent = `Total: ${violation.total}`;
+
+            const violationsRemoved = document.createElement('p');
+            violationsRemoved.classList.add('violation-description');
+            violationsRemoved.textContent = `Removed: ${violation.removed}`;
 
             violationCardInner.appendChild(violationDate);
-            violationCardInner.appendChild(violationDescription);
+            violationCardInner.appendChild(violationsTotal);
+            violationCardInner.appendChild(violationsRemoved);
             violationCard.appendChild(violationCardInner);
             violationsContainer.appendChild(violationCard);
         });
