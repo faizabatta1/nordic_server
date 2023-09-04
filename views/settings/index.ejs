@@ -385,6 +385,7 @@ textarea{
         }
       }
 
+      
       async function sendNotificationsToZones(){
         try{
           let response = await fetch('/api/notifications/zones',{
@@ -394,7 +395,7 @@ textarea{
             },
             body: JSON.stringify({
               title: document.getElementById('zone-title').value,
-              body: document.getElementById('zones-body').value,
+              body: document.getElementById('zone-body').value,
               zones: document.getElementById('zoneSelect').value
             })
           })
