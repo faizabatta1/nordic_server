@@ -183,12 +183,10 @@ const vpsRouter = require('./routes/vpsRouter')
 const zoneRouter = require('./routes/zoneRouter')
 const imeiRouter = require('./routes/imeiRouter')
 const postalRouter = require('./routes/postalRoute')
-const mapRouter = require('./routes/mapRouter')
 
 app.use(
     '/api',
     vpsRouter,
-    mapRouter,
     postalRouter,
     violationRouter,
     accidentRouter,
@@ -216,8 +214,11 @@ const settingsFront = require('./routes/settingsFront')
 const zonesFront = require('./routes/zonesFront')
 const imeiFront = require('./routes/imeiFront')
 const postalFront = require('./routes/postalFront')
+const mapFront = require('./routes/mapFront')
+
 
 app.use(
+    mapFront,
     settingsFront,
     driverFront,
     postalFront,
