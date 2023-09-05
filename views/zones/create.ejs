@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Zone</title>
+    <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Create Zone</h1>
+        <div>
+            <div class="mb-3">
+                <label for="zoneName" class="form-label">Zone Name</label>
+                <input type="text" id="zoneName" name="name" class="form-control" required>
+            </div>
+            <button class="btn btn-primary" onclick="createZone()">Create</button>
+          </div>
+        <a href="/zones" class="btn btn-secondary mt-3">Cancel</a>
+    </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="successModalLabel">Suksess</h5>
+                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Endringene er lagret!
+              </div>
+          </div>
+      </div>
+      </div>
+
+    <!-- Add any JavaScript for interactivity here -->
+    <script>
+      async function createZone(){
+        try{
+          // Retrieve data from input fields
+          const zoneInput = document.getElementById('zoneName').value;
+
+          let response = await fetch('/api/zones',{
+            method: 'POST',
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            body:JSON.stringify({
+              name: zoneInput
+            })
+          })
+
+          if(response.status == 200){
+            $('#successModal').modal('show');
+            setTimeout(() =>{
+              location.reload()
+            },2000)
+          }else{
+            alert('Nothing')
+          }
+          }catch(error){
+            alert(error.message)
+        }
+      }
+    </script> <!-- Add your custom JavaScript file here -->
+</body>
+</html>
