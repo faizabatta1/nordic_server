@@ -480,6 +480,13 @@ textarea{
 
       async function sendNotificationToDevice(){
         try{
+          let imeisSelectedContainer = document.getElementById('imei-options')
+          let finalSelectedImeis = imeisSelectedContainer.getElementsByTagName('div')
+          let toSendImeis = []
+          for(let i = 0;i < finalSelectedImeis.length;i++){
+            toSendImeis.push(finalSelectedImeis.item(i).textContent)
+          }
+
           let response = await fetch('/api/notifications/devices',{
             method:'POST',
             headers:{
@@ -488,7 +495,7 @@ textarea{
             body: JSON.stringify({
               title: document.getElementById('imei-title').value,
               body: document.getElementById('imei-body').value,
-              devices: document.getElementById('deviceSelect').value
+              imeis: toSendImeis
             })
           })
         }catch(error){
