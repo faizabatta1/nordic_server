@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Zone</title>
+    <link rel="stylesheet" href="/your-custom-css-file.css"> <!-- Add your custom CSS file here -->
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Zone</h1>
+        <form method="POST" action="/zones/update/<%= zone._id %>">
+            <div class="form-group">
+                <label for="zoneName">Zone Name</label>
+                <input type="text" id="zoneName" name="zoneName" class="form-control" value="<%= zone.name %>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+
+    <!-- Add any JavaScript for interactivity here -->
+    <script src="/your-custom-js-file.js"></script> <!-- Add your custom JavaScript file here -->
+</body>
+</html>

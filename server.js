@@ -208,8 +208,18 @@ const usersFront = require('./routes/usersFront')
 const carFront = require('./routes/carFront')
 const locationFront = require('./routes/locationFront')
 const settingsFront = require('./routes/settingsFront')
+const zonesFront = require('./routes/zonesFront')
 
-app.use(settingsFront,driverFront,groupFront,fieldFront,pdfFront,usersFront,carFront,locationFront)
+app.use(
+    settingsFront,
+    driverFront,
+    groupFront,
+    fieldFront,
+    pdfFront,
+    usersFront,
+    carFront,
+    locationFront
+)
 
 
 const Violation = require('./models/Violation')
