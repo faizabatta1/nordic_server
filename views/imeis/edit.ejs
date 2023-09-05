@@ -91,7 +91,7 @@
                     location.href = '/imeis'
                   },2000)
                 } else {
-                    document.getElementById('errorModalBody').innerHTML = (await response.json()).toString();
+                    document.getElementById('errorModalBody').innerHTML = 'Error';
 $('#errorModal').modal('show');
                     // Handle errors here, e.g., display an error message
                     console.error('Error updating imei:', response.statusText);
