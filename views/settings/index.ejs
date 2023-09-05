@@ -226,14 +226,6 @@ textarea{
     <div class="d-flex justify-content-end p-2 mb-2">
       <button data-toggle="modal" data-target="#createIMEIModal" class="btn btn-info me-3">New IMEI</button>
       <button data-toggle="modal" data-target="#createZoneModal" class="btn btn-info">New Zone</button>
-      <!-- Buttons to open modals -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imeisModal">
-        Open IMEIs Modal
-      </button>
-
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zonesModal">
-        Open Zones Modal
-      </button>
     </div>
 
     <div class="card p-4 mb-2">
@@ -365,146 +357,11 @@ textarea{
   </div>
 </div>
 
-<!-- IMEIs Modal -->
-<div class="modal fade" id="imeisModal" tabindex="-1" role="dialog" aria-labelledby="imeisModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="imeisModalLabel">IMEIs</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Content fetched from API will be displayed here -->
-        <div id="imeisContent"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Zones Modal -->
-<div class="modal fade" id="zonesModal" tabindex="-1" role="dialog" aria-labelledby="zonesModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="zonesModalLabel">Zones</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Content fetched from API will be displayed here -->
-        <div id="zonesContent"></div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 
     
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      // Function to fetch data from the API and populate the modals
-      function fetchDataAndPopulateIMEIModal(apiUrl, targetElementId) {
-        fetch(apiUrl)
-          .then((response) => response.json())
-          .then((data) => {
-            const targetElement = document.getElementById(targetElementId);
-            targetElement.innerHTML = '';
-  
-            // Process and display data as needed
-            data.forEach((item) => {
-              const itemDiv = document.createElement('div');
-              itemDiv.classList.add('mb-2');
-              itemDiv.textContent = item.serial; // Adjust this to match your data structure
-  
-              targetElement.appendChild(itemDiv);
-            });
-          })
-          .catch((error) => {
-            console.error('Error fetching data:', error);
-          });
-      }
 
-      function fetchDataAndPopulateZoneModal(apiUrl, targetElementId) {
-  fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      const targetElement = document.getElementById(targetElementId);
-      targetElement.innerHTML = '';
-
-      let input = document.createElement('input')
-      input.className = 'form-control mb-2'
-      input.placeholder = 'Search Zone'
-
-      input.addEventListener('keyup', (e) => {
-        const searchQuery = e.target.value.toLowerCase();
-        const items = targetElement.getElementsByClassName('zone-item');
-        
-        
-        // Loop through items and hide those that don't match the search query
-        for (const item of items) {
-          const itemName = item.querySelector('.zone-name').textContent.toLowerCase();
-          if (!itemName.includes(searchQuery)) {
-            item.style.display = 'none';
-          }else{
-            console.log(itemName);
-            $("#zoneModal").val(null).trigger("change");
-            item.style.display = ''
-          }
-        }
-      });
-
-      targetElement.appendChild(input);
-
-      // Process and display data as needed
-      data.forEach((item) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'zone-item mb-2 p-2 card d-flex justify-content-between align-items-center flex-row';
-        let valueP = document.createElement('div')
-        valueP.className = 'zone-name'
-        valueP.textContent = item.name; // Adjust this to match your data structure
-        let groupDiv = document.createElement('div')
-        let editButton = document.createElement('div')
-        editButton.className = 'btn btn-info btn-sm me-2'
-        editButton.textContent = 'Edit'
-        let deleteButton = document.createElement('div')
-        deleteButton.className = 'btn btn-danger btn-sm'
-        deleteButton.textContent = 'Delete'
-
-        editButton.addEventListener('click',(e) =>{
-
-        })
-
-        deleteButton.addEventListener('click',(e) =>{
-
-        })
-        groupDiv.appendChild(editButton)
-        groupDiv.appendChild(deleteButton)
-
-        itemDiv.appendChild(valueP)
-        itemDiv.appendChild(groupDiv)
-
-        targetElement.appendChild(itemDiv);
-      });
-    })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-    });
-}
-
-      // Fetch and populate IMEIs data when the IMEIs modal is shown
-      $('#imeisModal').on('show.bs.modal', function () {
-        fetchDataAndPopulateIMEIModal('/api/imeis', 'imeisContent');
-      });
-  
-      // Fetch and populate Zones data when the Zones modal is shown
-      $('#zonesModal').on('show.bs.modal', function () {
-        fetchDataAndPopulateZoneModal('/api/zones', 'zonesContent');
-      });
-    </script>
 
 <script>
   async function initializeData(){
