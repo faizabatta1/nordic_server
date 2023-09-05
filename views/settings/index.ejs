@@ -284,7 +284,7 @@ textarea{
   </div>
 
 <!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+<div class="modal fade" id="successModal" tabindex="9999" aria-labelledby="successModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
@@ -456,16 +456,11 @@ if(response.status == 200){
           })
 
           if(response.status == 200){
-            $('#createZoneModal').on('hidden.bs.modal', function () {
-            // Show the success modal after the createZoneModal is fully hidden
+            $('#createZoneModal').modal('hide');
             $('#successModal').modal('show');
-            setTimeout(() => {
-              location.reload();
-            }, 2000);
-          });
-
-      // Hide the createZoneModal
-      $('#createZoneModal').modal('hide');
+            setTimeout(() =>{
+              location.reload()
+            },2000)
           }else{
             $('#createZoneModal').modal('hide');
             alert('Nothing')
