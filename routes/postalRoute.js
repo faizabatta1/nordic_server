@@ -2,6 +2,19 @@ const express = require('express')
 const router = express.Router()
 const Postal = require('../models/PostalViolation')
 
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/images/drivers/')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  },
+})
+
+const upload = multer({ storage: storage })
+
 router.get('/postals',async (req,res) =>{
   try{
     let postals = await Postal.find()
@@ -11,10 +24,23 @@ router.get('/postals',async (req,res) =>{
   }
 })
 
-router.post('/postals',async (req,res) =>{
+router.post('/postals',upload.single('violation'),async (req,res) =>{
   try{
     console.log(req.body)
-    let postal = new Postal(req.body)
+    const {
+      number,
+      pnid,
+      reason
+    } = req.body
+
+    let postal = new Postal({
+      violationNumber: number,
+      pnid: pnid,
+      reason: reason,
+      image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
+    })
+
+    console.log(postal)
     await postal.save()
     return res.sendStatus(200)
   }catch(error){
