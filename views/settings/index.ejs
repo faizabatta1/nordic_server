@@ -412,38 +412,36 @@ textarea{
 <script>
       async function saveIMEIData() {
         try{
+// Retrieve data from input fields
+const imeiInput = document.getElementById('imeiInput').value;
 
+let response = await fetch('/api/imeis',{
+  method: 'POST',
+  headers:{
+    'Content-Type': 'application/json; charset=utf-8'
+  },
+  body:JSON.stringify({
+    serial: imeiInput
+  })
+})
+
+if(response.status == 200){
+  $('#createIMEIModal').modal('hide');
+  $('#successModal').modal('show');
+  setTimeout(() =>{
+    location.reload()
+  },2000)
+}else{
+  $('#createIMEIModal').modal('hide');
+  alert('Nothing')
+}
         }catch(error){
-          // Retrieve data from input fields
-          const imeiInput = document.getElementById('imeiInput').value;
-
-          let response = await fetch('/api/imeis',{
-            method: 'POST',
-            headers:{
-              'Content-Type': 'application/json; charset=utf-8'
-            },
-            body:JSON.stringify({
-              serial: imeiInput
-            })
-          })
-
-          if(response.status == 200){
-            $('#createIMEIModal').modal('hide');
-            $('#successModal').modal('show');
-            setTimeout(() =>{
-              location.reload()
-            },2000)
-          }else{
-            $('#createIMEIModal').modal('hide');
-            alert('Nothing')
-          }
+          alert(error.message)          
         }
       }
   
       async function saveZoneData() {
         try{
-
-        }catch(error){
           // Retrieve data from input fields
           const zoneInput = document.getElementById('zoneNameInput').value;
 
@@ -467,6 +465,8 @@ textarea{
             $('#createZoneModal').modal('hide');
             alert('Nothing')
           }
+          }catch(error){
+            alert(error.message)
         }
       }
 </script>
