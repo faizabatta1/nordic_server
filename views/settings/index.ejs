@@ -376,10 +376,10 @@ textarea{
 
     div.addEventListener('click',(e) =>{
       if(!zoneSelected.includes(e.target.textContent)){
-        e.target.classList.add('option-selected')
+        e.target.classList.add('selected-option')
         zoneSelected.push(zones[i].name)
       }else{
-        e.target.classList.remove('option-selected')
+        e.target.classList.remove('selected-option')
         zoneSelected = zoneSelected.filter(el => el != e.target.textContent)
       }
     })
@@ -394,10 +394,10 @@ textarea{
 
     div.addEventListener('click',(e) =>{
       if(!imeiSelected.includes(e.target.textContent)){
-        e.target.classList.add('option-selected')
+        e.target.classList.add('selected-option')
         imeiSelected.push(imeis[i])
       }else{
-        e.target.classList.remove('option-selected')
+        e.target.classList.remove('selected-option')
         imeiSelected = imeiSelected.filter(el => el != e.target.textContent)
       }
     })
