@@ -60,20 +60,30 @@
     // Your existing code here
 
     // Function to filter violation cards based on user input
-    function filterViolations() {
-        const searchInput = document.getElementById('searchInput');
-        const filter = searchInput.value.toLowerCase();
-        const violationCards = document.querySelectorAll('.violation-card');
+function filterViolations() {
+    const searchInput = document.getElementById('searchInput');
+    const filter = searchInput.value.toLowerCase();
+    const violationCards = document.querySelectorAll('.violation-card');
 
-        violationCards.forEach((card) => {
-            const cardContent = card.textContent.toLowerCase();
+    violationCards.forEach((card) => {
+        const cardContent = card.textContent.toLowerCase();
+        if (cardContent.includes(filter)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+
+        // Additionally, hide or remove "removed" blocks within each card
+        const removedBlocks = card.querySelectorAll('.violation-description.removed');
+        removedBlocks.forEach((removedBlock) => {
             if (cardContent.includes(filter)) {
-                card.style.display = 'block';
+                removedBlock.style.display = 'block';
             } else {
-                card.style.display = 'none';
+                removedBlock.style.display = 'none'; // Or use 'remove' to completely remove them
             }
         });
-    }
+    });
+}
 
     // Add an event listener to the search input for filtering violations
     const searchInput = document.getElementById('searchInput');
