@@ -91,10 +91,9 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/0.3.1/medium-zoom.min.js"></script>
 
-    <!-- Add any JavaScript for interactivity here -->
-    <script src="/your-custom-js-file.js"></script>
-    <script>
+<script>
 
 // JavaScript to handle showing the image in a modal
 const showImageButtons = document.querySelectorAll('.show-image');
@@ -105,8 +104,18 @@ showImageButtons.forEach(button => {
         const imageUrl = this.getAttribute('data-image-url');
         const modalBody = document.getElementById('imageModalBody');
 
-        // Set the image source in the modal body
-        modalBody.innerHTML = `<img src="${imageUrl}" alt="Postal Violation Image" class="img-fluid">`;
+        // Create an image element and set its source
+        const imageElement = document.createElement('img');
+        imageElement.src = imageUrl;
+        imageElement.alt = "Postal Violation Image";
+        imageElement.classList.add('img-fluid');
+
+        // Append the image element to the modal body
+        modalBody.innerHTML = '';
+        modalBody.appendChild(imageElement);
+
+        // Initialize Medium Zoom for the image
+        const zoom = mediumZoom(imageElement);
 
         // Show the image modal
         imageModal.show();
