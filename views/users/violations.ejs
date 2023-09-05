@@ -68,18 +68,22 @@ function filterViolations() {
     violationCards.forEach((card) => {
         const cardContent = card.textContent.toLowerCase();
         if (cardContent.includes(filter)) {
-            card.style.display = 'block';
+            card.style.display = '';
+            card.parentElement.style.display = ''
         } else {
             card.style.display = 'none';
+            card.parentElement.style.display = 'none'
         }
 
         // Additionally, hide or remove "removed" blocks within each card
         const removedBlocks = card.querySelectorAll('.violation-description.removed');
         removedBlocks.forEach((removedBlock) => {
             if (cardContent.includes(filter)) {
-                removedBlock.style.display = 'block';
+                removedBlock.style.display = '';
+                removedBlock.parentElement.style.display = ''
             } else {
                 removedBlock.style.display = 'none'; // Or use 'remove' to completely remove them
+                removedBlock.parentElement.style.display = 'none'
             }
         });
     });
