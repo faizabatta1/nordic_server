@@ -407,7 +407,28 @@ textarea{
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       // Function to fetch data from the API and populate the modals
-      function fetchDataAndPopulateModal(apiUrl, targetElementId) {
+      function fetchDataAndPopulateIMEIModal(apiUrl, targetElementId) {
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            const targetElement = document.getElementById(targetElementId);
+            targetElement.innerHTML = '';
+  
+            // Process and display data as needed
+            data.forEach((item) => {
+              const itemDiv = document.createElement('div');
+              itemDiv.classList.add('mb-2');
+              itemDiv.textContent = item.serial; // Adjust this to match your data structure
+  
+              targetElement.appendChild(itemDiv);
+            });
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }
+
+      function fetchDataAndPopulateZoneModal(apiUrl, targetElementId) {
         fetch(apiUrl)
           .then((response) => response.json())
           .then((data) => {
@@ -427,15 +448,14 @@ textarea{
             console.error('Error fetching data:', error);
           });
       }
-  
       // Fetch and populate IMEIs data when the IMEIs modal is shown
       $('#imeisModal').on('show.bs.modal', function () {
-        fetchDataAndPopulateModal('/api/imeis', 'imeisContent');
+        fetchDataAndPopulateIMEIModal('/api/imeis', 'imeisContent');
       });
   
       // Fetch and populate Zones data when the Zones modal is shown
       $('#zonesModal').on('show.bs.modal', function () {
-        fetchDataAndPopulateModal('/api/zones', 'zonesContent');
+        fetchDataAndPopulateZoneModal('/api/zones', 'zonesContent');
       });
     </script>
 
