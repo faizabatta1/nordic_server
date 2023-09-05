@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit IMEI</title>
+    <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+<body>
+  <%- include('../components/navbar.ejs') %>
+
+    <div class="container">
+        <h1>Edit IMEI</h1>
+        <div id="edit-zone-form">
+            <div class="form-group">
+                <label for="imeiName">IMEI Serial</label>
+                <input type="text" id="imeiName" name="imeiName" class="form-control" value="<%= imei.serial %>" required>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-3">
+              <button id="updateButton" class="btn btn-primary btn-sm me-3 ps-3 pe-3">Update</button>
+              <a href="/imeis" class="btn btn-secondary btn-sm ps-3 pe-3">Cancel</a>
+  
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="successModalLabel">Suksess</h5>
+                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Endringene er lagret!
+              </div>
+          </div>
+      </div>
+      </div>
+      <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Add any JavaScript for interactivity here -->
+    <script>
+        // JavaScript for handling the update without form submission
+        const updateButton = document.getElementById('updateButton');
+        const imeiId = '<%= serial._id %>';
+
+        updateButton.addEventListener('click', () => {
+            const imeiName = document.getElementById('imeiName').value;
+            
+            // Create a JSON object with the updated data
+            const updatedImei = {
+                serial: imei
+            };
+
+            // Send a fetch request to update the zone
+            fetch(`/api/imeis/${imeiId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedImei)
+            })
+            .then(response => {
+                if (response.ok) {
+                  $('#successModal').modal('show');
+                  setTimeout(() =>{
+                    location.href = '/imeis'
+                  },2000)
+                } else {
+                    // Handle errors here, e.g., display an error message
+                    console.error('Error updating zone:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
