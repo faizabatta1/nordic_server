@@ -180,7 +180,25 @@ const violationRouter = require('./routes/violationRoute')
 const informationRouter = require('./routes/information')
 const accidentRouter = require('./routes/accident')
 const vpsRouter = require('./routes/vpsRouter')
-app.use('/api',vpsRouter,violationRouter,accidentRouter,informationRouter,driverRouter,settingsRouter,groupRouter,fieldRouter,userRouter,pdfRouter,carRouter, locationRouter)
+const zoneRouter = require('./routes/zoneRouter')
+const imeiRouter = require('./routes/imeiRouter')
+app.use(
+    '/api',
+    vpsRouter,
+    violationRouter,
+    accidentRouter,
+    informationRouter,
+    driverRouter,
+    settingsRouter,
+    groupRouter,
+    fieldRouter,
+    userRouter,
+    pdfRouter,
+    carRouter,
+    locationRouter,
+    imeiRouter,
+    zoneRouter
+    )
 
 const driverFront = require('./routes/driverFront')
 const groupFront = require('./routes/groupFront')

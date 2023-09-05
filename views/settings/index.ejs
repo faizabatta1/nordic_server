@@ -54,6 +54,7 @@ textarea{
   color: white;
   font-weight: bolder;
   border-radius: 12px;
+  user-select: none;
 }
 
 .selected-option{
@@ -275,17 +276,7 @@ textarea{
         <div class="form-group">
           <label for="zoneSelect">Select Zone</label>
           <div class="wrap-options">
-            <div class="pe-4 ps-4 text-center cg" id="zoneSelect">
-              Alex
-            </div>
-
-            <div class="pe-4 ps-4 text-center cg">
-              Matr
-            </div>
-
-            <div class="pe-4 ps-4 text-center cg">
-              Asiu
-            </div>
+            
           </div>
         </div>
         <div class="d-flex justify-content-end">
@@ -366,20 +357,40 @@ textarea{
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  let selected = []
-  let options = document.getElementsByClassName('cg')
-  for(let i = 0; i < options.length; i++){
-    let element = options.item(i)
+  let zones = await (await fetch('/api/zones')).json()
+  let imeis = await (await fetch('/api/imeis')).json()
 
-    element.addEventListener('click',(e) =>{
-      e.preventDefault()
+  let zoneSelected = []
+  let imeiSelected = []
+  
+  for(let i = 0; i < zones.length; i++){
+    let div = document.createElement('div')
+    div.textContent = zones[i]
 
-      if(!selected.includes(e.target.textContent)){
-        selected.push(e.target.textContent)
-        console.log(selected);
+    div.addEventListener('click',(e) =>{
+      if(!zoneSelected.includes(e.target.textContent)){
+        e.target.classList.add('option-selected')
+        zoneSelected.push(zones[i])
+      }else{
+        e.target.classList.remove('option-selected')
+        zoneSelected = zoneSelected.filter(el => el != e.target.textContent)
       }
+    })
+  }
 
-      e.target.classList.toggle('selected-option')
+
+  for(let i = 0; i < imeis.length; i++){
+    let div = document.createElement('div')
+    div.textContent = imeis[i]
+
+    div.addEventListener('click',(e) =>{
+      if(!imeiSelected.includes(e.target.textContent)){
+        e.target.classList.add('option-selected')
+        imeiSelected.push(imeis[i])
+      }else{
+        e.target.classList.remove('option-selected')
+        imeiSelected = imeiSelected.filter(el => el != e.target.textContent)
+      }
     })
   }
 </script>
@@ -408,7 +419,7 @@ textarea{
           // Close the modal
           $('#createZoneModal').modal('hide');
       }
-  </script>
+</script>
   
 
     <script>
