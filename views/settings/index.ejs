@@ -357,7 +357,8 @@ textarea{
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  let zones = await (await fetch('/api/zones')).json()
+  async function initializeData(){
+    let zones = await (await fetch('/api/zones')).json()
   let imeis = await (await fetch('/api/imeis')).json()
 
   let zoneSelected = []
@@ -392,6 +393,7 @@ textarea{
         imeiSelected = imeiSelected.filter(el => el != e.target.textContent)
       }
     })
+  }
   }
 </script>
 
