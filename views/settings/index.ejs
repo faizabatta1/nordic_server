@@ -56,6 +56,7 @@ textarea{
   border-radius: 12px;
   user-select: none;
   padding: 4px 20px;
+  transition: 0.8 ease-in;
 }
 
 .selected-option{
@@ -249,13 +250,8 @@ textarea{
           <label for="imei-body">Enter Content</label>
           <input type="text" placeholder="Content" id="imei-body" class="form-control"/>
         </div>
-        <div class="form-group">
-          <label for="deviceSelect">Select Device IMEI:</label>
-          <select class="form-select" id="deviceSelect">
-            <option value="imei1">IMEI 1</option>
-            <option value="imei2">IMEI 2</option>
-            <!-- Add more options for other devices as needed -->
-          </select>
+        <div class="wrap-options" id="imei-options">
+            
         </div>
         <div class="d-flex justify-content-end">
           <button onclick="sendNotificationToDevice()" class="btn btn-info">Send Notification</button>
@@ -361,8 +357,10 @@ textarea{
   async function initializeData(){
 
     let zonesOptions = document.getElementById('zones-options')
+    let imeiOptions = document.getElementById('imei-options')
+  
     let zones = await (await fetch('/api/zones')).json()
-  let imeis = await (await fetch('/api/imeis')).json()
+    let imeis = await (await fetch('/api/imeis')).json()
 
   console.log(zones);
   console.log(imeis);
@@ -401,6 +399,8 @@ textarea{
         imeiSelected = imeiSelected.filter(el => el != e.target.textContent)
       }
     })
+
+    imeiOptions.appendChild(div)
   }
   }
 
