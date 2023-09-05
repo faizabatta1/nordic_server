@@ -398,6 +398,8 @@ textarea{
         e.target.classList.remove('selected-option')
         imeiSelected = imeiSelected.filter(el => el != e.target.textContent)
       }
+
+      console.log(imeiSelected)
     })
 
     imeiOptions.appendChild(div)
@@ -456,7 +458,7 @@ textarea{
       async function sendNotificationsToZones(){
         try{
           let zonesSelectedContainer = document.getElementById('zones-options')
-          let finalSelectedZones = zonesSelectedContainer.getElementsByTagName('div')
+          let finalSelectedZones = zonesSelectedContainer.getElementsByClassName('selected-option')
           let toSendZones = []
           for(let i = 0;i < finalSelectedZones.length;i++){
             toSendZones.push(finalSelectedZones.item(i).textContent)
@@ -481,7 +483,7 @@ textarea{
       async function sendNotificationToDevice(){
         try{
           let imeisSelectedContainer = document.getElementById('imei-options')
-          let finalSelectedImeis = imeisSelectedContainer.getElementsByTagName('div')
+          let finalSelectedImeis = imeisSelectedContainer.getElementsByClassName('selected-option')
           let toSendImeis = []
           for(let i = 0;i < finalSelectedImeis.length;i++){
             toSendImeis.push(finalSelectedImeis.item(i).textContent)
