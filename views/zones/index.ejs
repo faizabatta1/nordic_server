@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Zones</title>
     <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 <body>
     <div class="container">
-        <h1>Manage Zones</h1>
-        <button id="newZoneButton" class="btn btn-info">New Zone</button>
-        <table class="table">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-4 mb-3">Manage Zones</h1>
+            </div>
+            <div class="col text-end">
+                <button id="newZoneButton" class="btn btn-info mt-4">New Zone</button>
+            </div>
+        </div>
+
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Zone Name</th>
-                    <th>Actions</th>
+                    <th scope="col">Zone Name</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,8 +29,8 @@
                     <tr>
                         <td><%= zone.name %></td>
                         <td>
-                            <a href="/zones/<%= zone._id %>/edit" class="btn btn-success">Edit</a>
-                            <button class="btn btn-danger delete-zone" data-zone-id="<%= zone._id %>">Delete</button>
+                            <a href="/zones/<%= zone._id %>/edit" class="btn btn-success btn-sm">Edit</a>
+                            <button class="btn btn-danger btn-sm delete-zone" data-zone-id="<%= zone._id %>">Delete</button>
                         </td>
                     </tr>
                 <% }); %>
