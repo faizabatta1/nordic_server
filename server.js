@@ -38,7 +38,7 @@ app.set('view engine', 'ejs')
 
 app.post('/api/notifications/users', (req,res) =>{
     console.log(req.body)
-    io.emit('single', JSON.stringify(req.body))
+    io.emit('users', JSON.stringify(req.body))
     return res.sendStatus(200)
 })
 
