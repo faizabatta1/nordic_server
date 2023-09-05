@@ -442,13 +442,12 @@ textarea{
             input.addEventListener('input', (e) => {
             const searchQuery = e.target.value.toLowerCase();
             const items = targetElement.getElementsByClassName('zone-item');
-              console.log(items);
             // Loop through items and hide those that don't match the search query
             for (const item of items) {
-              console.log(item);
               const itemName = item.querySelector('.zone-name').textContent.toLowerCase();
               if (itemName.includes(searchQuery)) {
-                item.style.display = 'block';
+                console.log(itemName)
+                item.style.display = '';
               } else {
                 item.style.display = 'none';
               }
