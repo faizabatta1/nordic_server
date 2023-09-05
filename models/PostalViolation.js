@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const postalViolationSchema = new mongoose.Schema({
   violationNumber:{
-    type: Number,
+    type: String,
     required: true
   },
   pnid:{
