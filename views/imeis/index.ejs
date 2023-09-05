@@ -63,7 +63,7 @@
                 <% imeis.forEach(function(imei) { %>
                     <tr>
                         <td><%= imei.serial %></td>
-                        <td><%= imei.zone %></td>
+                        <td><%= imei.zone.name %></td>
                         <td class="controls">
                             <a href="/imeis/<%= imei._id %>/edit" class="btn btn-info btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm delete-zone" data-imei-id="<%= imei._id %>">Delete</button>
