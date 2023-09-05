@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
 <body>
+  <%- include('../components/navbar.ejs') %>
+
     <div class="container">
         <h1>Edit Zone</h1>
         <div id="edit-zone-form">
@@ -14,9 +16,12 @@
                 <label for="zoneName">Zone Name</label>
                 <input type="text" id="zoneName" name="zoneName" class="form-control" value="<%= zone.name %>" required>
             </div>
-            <button id="updateButton" class="btn btn-primary">Update</button>
+            <div class="d-flex justify-content-center align-items-center">
+              <button id="updateButton" class="btn btn-primary btn-sm me-3 ps-3 pe-3">Update</button>
+              <a href="/zones" class="btn btn-secondary btn-sm mt-3 ps-3 pe-3">Cancel</a>
+  
+            </div>
         </div>
-        <a href="/zones" class="btn btn-secondary mt-3">Back to Zones</a>
     </div>
 
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
