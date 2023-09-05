@@ -438,15 +438,15 @@ textarea{
             // Process and display data as needed
             data.forEach((item) => {
               const itemDiv = document.createElement('div');
-              itemDiv.classList.add('mb-2 card d-flex justify-content-center');
+              itemDiv.className = 'mb-2 card d-flex justify-content-center';
               let valueP = document.createElement('div')
               valueP.textContent = item.name; // Adjust this to match your data structure
               let groupDiv = document.createElement('div')
               let editButton = document.createElement('div')
-              editButton.classList.add('btn btn-info')
+              editButton.className = 'btn btn-info'
               editButton.textContent = 'Edit'
               let deleteButton = document.createElement('div')
-              deleteButton.classList.add('btn btn-danger')
+              deleteButton.className = 'btn btn-danger'
               deleteButton.textContent = 'Delete'
 
               editButton.addEventListener('click',(e) =>{
