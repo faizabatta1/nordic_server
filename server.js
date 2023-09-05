@@ -225,6 +225,7 @@ app.use(
 )
 
 
+
 const Violation = require('./models/Violation')
 app.get('/',async (req,res) =>{
     let violations = await Violation.find({});
