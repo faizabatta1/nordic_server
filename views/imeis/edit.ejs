@@ -46,11 +46,11 @@
         const imeiId = '<%= imei._id %>';
 
         updateButton.addEventListener('click', () => {
-            const imeiName = document.getElementById('imeiName').value;
+            const imeiSerial = document.getElementById('imeiName').value;
             
             // Create a JSON object with the updated data
             const updatedImei = {
-                serial: imei
+                serial: imeiSerial
             };
 
             // Send a fetch request to update the zone
