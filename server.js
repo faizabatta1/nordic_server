@@ -209,6 +209,7 @@ const carFront = require('./routes/carFront')
 const locationFront = require('./routes/locationFront')
 const settingsFront = require('./routes/settingsFront')
 const zonesFront = require('./routes/zonesFront')
+const imeiFront = require('./routes/imeiFront')
 
 app.use(
     settingsFront,
