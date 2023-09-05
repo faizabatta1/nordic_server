@@ -439,20 +439,19 @@ textarea{
       input.className = 'form-control mb-2'
       input.placeholder = 'Search Zone'
 
-      input.addEventListener('input', (e) => {
+      input.addEventListener('keyup', (e) => {
         const searchQuery = e.target.value.toLowerCase();
         const items = targetElement.getElementsByClassName('zone-item');
         
-        // Set display to 'block' for all items initially
-        for (const item of items) {
-          item.style.display = 'block';
-        }
         
         // Loop through items and hide those that don't match the search query
         for (const item of items) {
           const itemName = item.querySelector('.zone-name').textContent.toLowerCase();
           if (!itemName.includes(searchQuery)) {
             item.style.display = 'none';
+          }else{
+            console.log(itemName);
+            item.style.display = ''
           }
         }
       });
