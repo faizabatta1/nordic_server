@@ -20,16 +20,20 @@
     </style>
 </head>
 <body>
-    <% include('../components/navbar.ejs') %>
+    <%- include('../components/navbar.ejs') %>
     
     <div class="container">
         <div class="row mt-4 mb-3">
-            <div class="col">
+            <div class="col md-6">
                 <h1>Maps</h1>
+            </div>
+
+            <div class="col md-6 text-end">
+              <a href="/maps/news" class="btn btn-info btn-sm">New Map</a>
             </div>
         </div>
 
-        <table class="table table-striped table-bordered text-center">
+        <table class="table table-striped table-bordered text-center table-hover">
             <thead>
                 <tr>
                     <th scope="col">Color</th>
