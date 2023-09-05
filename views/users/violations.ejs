@@ -59,7 +59,7 @@
     async function displayViolations() {
     
         let response = await fetch(`/api/violations/user/${'<%- accountId %>'}`)
-        let violationData = await response.json()
+        let violationsData = await response.json()
 
 
         const violationsContainer = document.getElementById('violations');
