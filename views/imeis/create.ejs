@@ -15,8 +15,14 @@
                 <label for="serial" class="form-label">IMEI Serial</label>
                 <input type="text" id="serial" name="serial" class="form-control" required>
             </div>
+            <div class="mb-3">
+              <label for="zone" class="form-label">Select Zone</label>
+              <select id="zone" name="zone" class="form-select" required>
+                  <!-- Options will be added dynamically using JavaScript -->
+              </select>
+          </div>
             <div class="d-flex justify-content-center align-items-center mt-3">
-              <button class="btn btn-primary me-3 ps-3 pe-3" onclick="createZone()">Create</button>
+              <button class="btn btn-primary me-3 ps-3 pe-3" onclick="createIMEI()">Create</button>
             <a href="/imeis" class="btn btn-secondary ps-3 pe-3">Cancel</a>
             </div>
           </div>
@@ -35,12 +41,48 @@
           </div>
       </div>
       </div>
+
+      <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="errorModalBody">
+                    <!-- Error message content will be inserted here using JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
       <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Add any JavaScript for interactivity here -->
     <script>
-      async function createZone(){
+// Function to populate the zone dropdown with data from /api/zones
+async function populateZoneDropdown() {
+            try {
+                const zoneDropdown = document.getElementById('zone');
+
+                // Fetch zones data from /api/zones
+                const response = await fetch('/api/zones');
+                const zones = await response.json();
+
+                // Populate the dropdown options
+                zones.forEach((zone) => {
+                    const option = document.createElement('option');
+                    option.value = zone._id;
+                    option.text = zone.name;
+                    zoneDropdown.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching and populating zones:', error);
+            }
+        }
+
+      async function createIMEI(){
         try{
           // Retrieve data from input fields
           const serial = document.getElementById('serial').value;
@@ -61,12 +103,20 @@
               location.href = '/imeis'
             },2000)
           }else{
-            alert('Nothing')
+            document.getElementById('errorModalBody').innerHTML = (await response.json()).toString();
+            $('#errorModal').modal('show');
           }
           }catch(error){
-            alert(error.message)
+            document.getElementById('errorModalBody').innerHTML = error.message;
+$('#errorModal').modal('show');
         }
       }
+
+      // Invoke the code when the DOM content is loaded
+      document.addEventListener('DOMContentLoaded', () => {
+            // Populate the zone dropdown when the page loads
+            populateZoneDropdown();
+        });
     </script> <!-- Add your custom JavaScript file here -->
 </body>
 </html>

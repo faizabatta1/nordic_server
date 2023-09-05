@@ -37,6 +37,21 @@
           </div>
       </div>
       </div>
+
+      <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="errorModalBody">
+                    <!-- Error message content will be inserted here using JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
       <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Add any JavaScript for interactivity here -->
@@ -68,11 +83,15 @@
                     location.href = '/imeis'
                   },2000)
                 } else {
+                    document.getElementById('errorModalBody').innerHTML = (await response.json()).toString();
+$('#errorModal').modal('show');
                     // Handle errors here, e.g., display an error message
                     console.error('Error updating zone:', response.statusText);
                 }
             })
             .catch(error => {
+                document.getElementById('errorModalBody').innerHTML = error.message;
+$('#errorModal').modal('show');
                 console.error('Error:', error);
             });
         });

@@ -4,6 +4,7 @@ const IMEISchema = new mongoose.Schema({
   serial: {
     type: String,
     required: true,
+    unique:true
     // validate: {
     //   validator: function (value) {
     //     // Use a regular expression to validate the IMEI format (15 digits)
