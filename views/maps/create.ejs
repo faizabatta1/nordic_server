@@ -108,8 +108,13 @@ function displayGeoJSONData(data) {
         // Create a Data layer and add it to the map
         const dataLayer = new google.maps.Data({ map: map });
 
-        // Load GeoJSON data into the Data layer
-        dataLayer.addGeoJson(geoJson);
+        if(data != ''){
+          // Load GeoJSON data into the Data layer
+          dataLayer.addGeoJson(geoJson);        
+        }else{
+          // Load GeoJSON data into the Data layer
+          dataLayer.removeGeoJson(geoJson);
+        }
 
         // Set the style for the GeoJSON features (customize as needed)
         dataLayer.setStyle({
