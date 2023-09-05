@@ -185,4 +185,16 @@ try {
   }
 })
 
+router.get('/violations/user/:id',async (req,res) =>{
+  try{
+    let violations = await Violation.find({
+      accountId: req.params.id
+    })
+
+    return res.status(200).json(violations)
+  }catch(error){
+    return res.status(500).json(error.message)
+  }
+})
+
 module.exports = router

@@ -19,7 +19,9 @@ router.get('/users/create', (req,res) =>{
 })
 
 router.get('/users/:id/violations', (req,res) =>{
-    return res.status(200).render('users/violations')
+    return res.status(200).render('users/violations',{
+        accountId: req.params.id
+    })
 })
 
 router.get('/users/:id/edit', async (req,res) =>{
