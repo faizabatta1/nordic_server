@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Zones</title>
     <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .controls{
+        display: flex;
+      }
+
+      .controls > *{
+        flex-grow: 1;
+      }
+
+      .controls > :first-child{
+        margin-right: 10px;
+      }
+    </style>
 </head>
 <body>
   <%- include('../components/navbar.ejs') %>
@@ -30,8 +43,8 @@
                 <% zones.forEach(function(zone) { %>
                     <tr>
                         <td><%= zone.name %></td>
-                        <td>
-                            <a href="/zones/<%= zone._id %>/edit" class="btn btn-success btn-sm">Edit</a>
+                        <td class="controls">
+                            <a href="/zones/<%= zone._id %>/edit" class="btn btn-info btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm delete-zone" data-zone-id="<%= zone._id %>">Delete</button>
                         </td>
                     </tr>

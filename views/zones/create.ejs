@@ -59,7 +59,7 @@
           if(response.status == 200){
             $('#successModal').modal('show');
             setTimeout(() =>{
-              location.reload()
+              location.href = '/zones'
             },2000)
           }else{
             alert('Nothing')
