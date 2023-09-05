@@ -410,28 +410,64 @@ textarea{
 </script>
 
 <script>
-      function saveIMEIData() {
+      async function saveIMEIData() {
+        try{
+
+        }catch(error){
           // Retrieve data from input fields
           const imeiInput = document.getElementById('imeiInput').value;
-  
-          // Replace this with your logic to save IMEI data
-          // Example: $.post('/save-imei', { imei: imeiInput }, function(response) { });
-          console.log(`IMEI Number: ${imeiInput}`);
-        
-          // Close the modal
-          $('#createIMEIModal').modal('hide');
+
+          let response = await fetch('/api/imeis',{
+            method: 'POST',
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            body:JSON.stringify({
+              serial: imeiInput
+            })
+          })
+
+          if(response.status == 200){
+            $('#createIMEIModal').modal('hide');
+            $('#successModal').modal('show');
+            setTimeout(() =>{
+              location.reload()
+            },2000)
+          }else{
+            $('#createIMEIModal').modal('hide');
+            alert('Nothing')
+          }
+        }
       }
   
-      function saveZoneData() {
+      async function saveZoneData() {
+        try{
+
+        }catch(error){
           // Retrieve data from input fields
-          const zoneNameInput = document.getElementById('zoneNameInput').value;
-  
-          // Replace this with your logic to save Zone data
-          // Example: $.post('/save-zone', { zoneName: zoneNameInput }, function(response) { });
-          console.log(`Zone Name: ${zoneNameInput}`);
-  
-          // Close the modal
-          $('#createZoneModal').modal('hide');
+          const zoneInput = document.getElementById('zoneNameInput').value;
+
+          let response = await fetch('/api/zones',{
+            method: 'POST',
+            headers:{
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            body:JSON.stringify({
+              name: zoneInput
+            })
+          })
+
+          if(response.status == 200){
+            $('#createZoneModal').modal('hide');
+            $('#successModal').modal('show');
+            setTimeout(() =>{
+              location.reload()
+            },2000)
+          }else{
+            $('#createZoneModal').modal('hide');
+            alert('Nothing')
+          }
+        }
       }
 </script>
   
