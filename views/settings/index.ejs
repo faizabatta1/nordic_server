@@ -439,6 +439,21 @@ textarea{
             input.className = 'form-control mb-2'
             input.placeholder = 'Search Zone'
 
+            input.addEventListener('input', (e) => {
+            const searchQuery = e.target.value.toLowerCase();
+            const items = targetElement.getElementsByClassName('zone-item');
+
+            // Loop through items and hide those that don't match the search query
+            for (const item of items) {
+              const itemName = item.querySelector('.zone-name').textContent.toLowerCase();
+              if (itemName.includes(searchQuery)) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            }
+          });
+
             targetElement.appendChild(input)
   
             // Process and display data as needed
@@ -449,7 +464,7 @@ textarea{
               valueP.textContent = item.name; // Adjust this to match your data structure
               let groupDiv = document.createElement('div')
               let editButton = document.createElement('div')
-              editButton.className = 'btn btn-info btn-sm'
+              editButton.className = 'btn btn-info btn-sm me-2'
               editButton.textContent = 'Edit'
               let deleteButton = document.createElement('div')
               deleteButton.className = 'btn btn-danger btn-sm'
