@@ -451,6 +451,7 @@ textarea{
             item.style.display = 'none';
           }else{
             console.log(itemName);
+            $("#zoneModal").val(null).trigger("change");
             item.style.display = ''
           }
         }
