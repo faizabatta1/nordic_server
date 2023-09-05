@@ -24,4 +24,12 @@ router.get('/zones/:id/edit',async (req,res) =>{
   }
 })
 
+router.get('/zones/new',async (req,res) =>{
+  try{
+    return res.status(200).render('zones/create')
+  }catch(error){
+    return res.status(500).json(error.message)
+  }
+})
+
 module.exports = router
