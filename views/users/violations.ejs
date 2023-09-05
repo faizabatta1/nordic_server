@@ -58,7 +58,7 @@
     // Function to display violations
     async function displayViolations() {
     
-        let response = await fetch(`/api/violations/user/${<%- accountId %>}`)
+        let response = await fetch(`/api/violations/user/${'<%- accountId %>'}`)
         let violationData = await response.json()
 
 
