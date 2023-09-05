@@ -275,7 +275,7 @@ textarea{
         </div>
         <div class="form-group">
           <label for="zoneSelect">Select Zone</label>
-          <div class="wrap-options">
+          <div class="wrap-options" id="zones-options">
             
           </div>
         </div>
@@ -358,8 +358,13 @@ textarea{
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   async function initializeData(){
+
+    let zonesOptions = document.getElementById('zones-options')
     let zones = await (await fetch('/api/zones')).json()
   let imeis = await (await fetch('/api/imeis')).json()
+
+  console.log(zones);
+  console.log(imeis);
 
   let zoneSelected = []
   let imeiSelected = []
@@ -377,6 +382,8 @@ textarea{
         zoneSelected = zoneSelected.filter(el => el != e.target.textContent)
       }
     })
+
+    zonesOptions.appendChild(div)
   }
 
 
