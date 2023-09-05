@@ -4,21 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Zone</title>
-    <link rel="stylesheet" href="/your-custom-css-file.css"> <!-- Add your custom CSS file here -->
-</head>
+    <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
 <body>
     <div class="container">
         <h1>Edit Zone</h1>
-        <form method="POST" action="/zones/update/<%= zone._id %>">
+        <div id="edit-zone-form">
             <div class="form-group">
                 <label for="zoneName">Zone Name</label>
                 <input type="text" id="zoneName" name="zoneName" class="form-control" value="<%= zone.name %>" required>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
+            <button id="updateButton" class="btn btn-primary">Update</button>
+        </div>
+        <a href="/zones" class="btn btn-secondary mt-3">Back to Zones</a>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <!-- Add any JavaScript for interactivity here -->
-    <script src="/your-custom-js-file.js"></script> <!-- Add your custom JavaScript file here -->
+    <script>
+        // JavaScript for handling the update without form submission
+        const updateButton = document.getElementById('updateButton');
+        const zoneId = '<%= zone._id %>';
+
+        updateButton.addEventListener('click', () => {
+            const zoneName = document.getElementById('zoneName').value;
+            
+            // Create a JSON object with the updated data
+            const updatedZone = {
+                name: zoneName
+            };
+
+            // Send a fetch request to update the zone
+            fetch(`/zones/${zoneId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedZone)
+            })
+            .then(response => {
+                if (response.ok) {
+                  $('#successModal').modal('show');
+                  setTimeout(() =>{
+                    location.href = '/zones'
+                  },2000)
+                } else {
+                    // Handle errors here, e.g., display an error message
+                    console.error('Error updating zone:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 </html>
