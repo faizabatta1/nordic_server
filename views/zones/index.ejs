@@ -72,6 +72,20 @@
         </table>
     </div>
 
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="successModalLabel">Suksess</h5>
+                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Endringene er lagret!
+              </div>
+          </div>
+      </div>
+      </div>
+
     <!-- JavaScript for Bootstrap Modal and Delete Action -->
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script>
@@ -96,7 +110,9 @@
                 .then(response => {
                     if (response.ok) {
                         // Delete successful, navigate to the /zones page
-                        window.location.href = '/zones';
+                        setTimeout(() =>{
+                          location.reload();
+                        },2000)
                     } else {
                         console.error('Error deleting zone:', response.statusText);
                     }
@@ -106,6 +122,7 @@
                 });
             }
             $('#confirmDeleteModal').modal('hide');
+            $('#successModal').modal('show');
         });
     </script>
 </body>
