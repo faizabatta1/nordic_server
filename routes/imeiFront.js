@@ -4,7 +4,11 @@ const IMEI = require('../models/IMEI')
 
 router.get('/imeis',async (req,res) =>{
   try{
-    let imeis = await IMEI.find()
+    let imeis = await IMEI.find().populate({
+      path: 'zone',
+      ref: 'Zone'
+    })
+    
     return res.status(200).render('imeis/index',{
       imeis
     })

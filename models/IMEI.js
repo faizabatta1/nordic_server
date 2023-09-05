@@ -14,6 +14,10 @@ const IMEISchema = new mongoose.Schema({
     //   message: 'Invalid IMEI format. IMEI must be a 15-digit number.',
     // },
   },
+  zone:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Zone'
+  }
 });
 
 const IMEI = mongoose.model('IMEI', IMEISchema);

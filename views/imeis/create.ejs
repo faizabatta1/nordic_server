@@ -86,6 +86,7 @@ async function populateZoneDropdown() {
         try{
           // Retrieve data from input fields
           const serial = document.getElementById('serial').value;
+          const selectedZoneId = document.getElementById('zone').value;
 
           let response = await fetch('/api/imeis',{
             method: 'POST',
@@ -93,7 +94,8 @@ async function populateZoneDropdown() {
               'Content-Type': 'application/json; charset=utf-8'
             },
             body:JSON.stringify({
-              serial: serial
+              serial: serial,
+              zone: selectedZoneId
             })
           })
 
