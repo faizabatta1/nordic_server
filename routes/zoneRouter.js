@@ -13,6 +13,7 @@ router.get('/zones',async (req,res) =>{
 
 router.post('/zones',async (req,res) =>{
   try{
+    console.log(req.body)
     let zone = new Zone(req.body)
     await zone.save()
     return res.sendStatus(200)
