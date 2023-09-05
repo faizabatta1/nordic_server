@@ -186,7 +186,7 @@ const postalRouter = require('./routes/postalRoute')
 app.use(
     '/api',
     vpsRouter,
-    postalRouter
+    postalRouter,
     violationRouter,
     accidentRouter,
     informationRouter,
