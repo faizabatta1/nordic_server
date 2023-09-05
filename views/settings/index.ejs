@@ -371,12 +371,12 @@ textarea{
   
   for(let i = 0; i < zones.length; i++){
     let div = document.createElement('div')
-    div.textContent = zones[i]
+    div.textContent = zones[i].name
 
     div.addEventListener('click',(e) =>{
       if(!zoneSelected.includes(e.target.textContent)){
         e.target.classList.add('option-selected')
-        zoneSelected.push(zones[i])
+        zoneSelected.push(zones[i].name)
       }else{
         e.target.classList.remove('option-selected')
         zoneSelected = zoneSelected.filter(el => el != e.target.textContent)
