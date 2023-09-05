@@ -429,70 +429,72 @@ textarea{
       }
 
       function fetchDataAndPopulateZoneModal(apiUrl, targetElementId) {
-        fetch(apiUrl)
-          .then((response) => response.json())
-          .then((data) => {
-            const targetElement = document.getElementById(targetElementId);
-            targetElement.innerHTML = '';
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const targetElement = document.getElementById(targetElementId);
+      targetElement.innerHTML = '';
 
-            let input = document.createElement('input')
-            input.className = 'form-control mb-2'
-            input.placeholder = 'Search Zone'
+      let input = document.createElement('input')
+      input.className = 'form-control mb-2'
+      input.placeholder = 'Search Zone'
 
-            input.addEventListener('input', (e) => {
-            const searchQuery = e.target.value.toLowerCase();
-            const items = targetElement.getElementsByClassName('zone-item');
-            for(let toHide of items){
-                  toHide.style.display = 'none'
-                }
-            // Loop through items and hide those that don't match the search query
-            for (const item of items) {
-              const itemName = item.querySelector('.zone-name').textContent.toLowerCase();
-              if (itemName.includes(searchQuery)) {
-                item.style.display = '';
-              } else {
-                item.style.display = 'none';
-              }
-            }
-          });
+      input.addEventListener('input', (e) => {
+        const searchQuery = e.target.value.toLowerCase();
+        const items = targetElement.getElementsByClassName('zone-item');
+        
+        // Set display to 'block' for all items initially
+        for (const item of items) {
+          item.style.display = 'block';
+        }
+        
+        // Loop through items and hide those that don't match the search query
+        for (const item of items) {
+          const itemName = item.querySelector('.zone-name').textContent.toLowerCase();
+          if (!itemName.includes(searchQuery)) {
+            item.style.display = 'none';
+          }
+        }
+      });
 
-            targetElement.appendChild(input)
-  
-            // Process and display data as needed
-            // data.forEach((item) => {
-            //   const itemDiv = document.createElement('div');
-            //   itemDiv.className = 'zone-item mb-2 p-2 card d-flex justify-content-between align-items-center flex-row';
-            //   let valueP = document.createElement('div')
-            //   valueP.className = 'zone-name'
-            //   valueP.textContent = item.name; // Adjust this to match your data structure
-            //   let groupDiv = document.createElement('div')
-            //   let editButton = document.createElement('div')
-            //   editButton.className = 'btn btn-info btn-sm me-2'
-            //   editButton.textContent = 'Edit'
-            //   let deleteButton = document.createElement('div')
-            //   deleteButton.className = 'btn btn-danger btn-sm'
-            //   deleteButton.textContent = 'Delete'
+      targetElement.appendChild(input);
 
-            //   editButton.addEventListener('click',(e) =>{
+      // Process and display data as needed
+      data.forEach((item) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'zone-item mb-2 p-2 card d-flex justify-content-between align-items-center flex-row';
+        let valueP = document.createElement('div')
+        valueP.className = 'zone-name'
+        valueP.textContent = item.name; // Adjust this to match your data structure
+        let groupDiv = document.createElement('div')
+        let editButton = document.createElement('div')
+        editButton.className = 'btn btn-info btn-sm me-2'
+        editButton.textContent = 'Edit'
+        let deleteButton = document.createElement('div')
+        deleteButton.className = 'btn btn-danger btn-sm'
+        deleteButton.textContent = 'Delete'
 
-            //   })
+        editButton.addEventListener('click',(e) =>{
 
-            //   deleteButton.addEventListener('click',(e) =>{
-                
-            //   })
-            //   groupDiv.appendChild(editButton)
-            //   groupDiv.appendChild(deleteButton)
+        })
 
-            //   itemDiv.appendChild(valueP)
-            //   itemDiv.appendChild(groupDiv)
+        deleteButton.addEventListener('click',(e) =>{
 
-            //   targetElement.appendChild(itemDiv);
-            // });
-          })
-          .catch((error) => {
-            console.error('Error fetching data:', error);
-          });
-      }
+        })
+        groupDiv.appendChild(editButton)
+        groupDiv.appendChild(deleteButton)
+
+        itemDiv.appendChild(valueP)
+        itemDiv.appendChild(groupDiv)
+
+        targetElement.appendChild(itemDiv);
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+}
+
       // Fetch and populate IMEIs data when the IMEIs modal is shown
       $('#imeisModal').on('show.bs.modal', function () {
         fetchDataAndPopulateIMEIModal('/api/imeis', 'imeisContent');
