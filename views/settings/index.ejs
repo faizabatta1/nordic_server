@@ -456,11 +456,16 @@ if(response.status == 200){
           })
 
           if(response.status == 200){
-            $('#createZoneModal').modal('hide');
+            $('#createZoneModal').on('hidden.bs.modal', function () {
+            // Show the success modal after the createZoneModal is fully hidden
             $('#successModal').modal('show');
-            setTimeout(() =>{
-              location.reload()
-            },2000)
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          });
+
+      // Hide the createZoneModal
+      $('#createZoneModal').modal('hide');
           }else{
             $('#createZoneModal').modal('hide');
             alert('Nothing')
