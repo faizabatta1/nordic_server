@@ -156,7 +156,7 @@ function filterViolations() {
         const value = selectVio.value;
 
         try {
-            let responseData = await fetchData(`/api/violations/${value}`);
+            let responseData = await fetchData(`/api/violations/removed/${value}`);
             vioHolder.textContent = responseData;
         } catch (error) {
             console.error(error);
