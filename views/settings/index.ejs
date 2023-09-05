@@ -455,6 +455,13 @@ textarea{
 
       async function sendNotificationsToZones(){
         try{
+          let zonesSelectedContainer = document.getElementById('zones-options')
+          let finalSelectedZones = zonesSelectedContainer.getElementsByTagName('div')
+          let toSendZones = []
+          for(let i = 0;i < finalSelectedZones.length;i++){
+            toSendZones.push(finalSelectedZones.item(i).textContent)
+          }
+
           let response = await fetch('/api/notifications/zones',{
             method:'POST',
             headers:{
@@ -463,7 +470,7 @@ textarea{
             body: JSON.stringify({
               title: document.getElementById('zone-title').value,
               body: document.getElementById('zone-body').value,
-              zones: document.getElementById('zoneSelect').value
+              zones: toSendZones
             })
           })
         }catch(error){
