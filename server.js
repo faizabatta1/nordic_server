@@ -184,9 +184,11 @@ const zoneRouter = require('./routes/zoneRouter')
 const imeiRouter = require('./routes/imeiRouter')
 const postalRouter = require('./routes/postalRoute')
 const mapRouter = require('./routes/mapRouter')
+
 app.use(
     '/api',
     vpsRouter,
+    mapRouter,
     postalRouter,
     violationRouter,
     accidentRouter,
