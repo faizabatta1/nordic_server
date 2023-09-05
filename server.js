@@ -218,7 +218,8 @@ app.use(
     pdfFront,
     usersFront,
     carFront,
-    locationFront
+    locationFront,
+    zonesFront
 )
 
 
@@ -247,6 +248,7 @@ const combinedViolations = violations.reduce((result, v) => {
         violations: violationsJSON
     })
 })
+
 
 const port = process.env.port || 9090
 server.listen(port, () => console.log(`Server is running on port ${port}`))
