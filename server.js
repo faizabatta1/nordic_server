@@ -220,7 +220,8 @@ app.use(
     usersFront,
     carFront,
     locationFront,
-    zonesFront
+    zonesFront,
+    imeiFront
 )
 
 
