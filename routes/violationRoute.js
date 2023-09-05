@@ -187,6 +187,7 @@ try {
 
 router.get('/violations/user/:id',async (req,res) =>{
   try{
+    console.log(req.params.id)
     let violations = await Violation.find({
       accountId: req.params.id
     })
