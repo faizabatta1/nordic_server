@@ -37,7 +37,7 @@ app.set('view engine', 'ejs')
 
 const NotificationModel = require('./models/NotificationModel')
 
-app.post('/api/notifications/users', (req,res) =>{
+app.post('/api/notifications/users', async (req,res) =>{
     
 	const now = new Date();
     const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
@@ -57,7 +57,7 @@ app.post('/api/notifications/users', (req,res) =>{
     return res.sendStatus(200)
 })
 
-app.post('/api/notifications/zones', (req,res) =>{
+app.post('/api/notifications/zones', async (req,res) =>{
     const now = new Date();
     const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
     const localDateString = localDate.toISOString().split('T')[0];
@@ -77,7 +77,7 @@ app.post('/api/notifications/zones', (req,res) =>{
     return res.sendStatus(200)
 })
 
-app.post('/api/notifications/devices', (req,res) =>{
+app.post('/api/notifications/devices', async (req,res) =>{
     const now = new Date();
     const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
     const localDateString = localDate.toISOString().split('T')[0];
