@@ -20,6 +20,7 @@ router.get('/maps/zone/:id',async (req,res) =>{
     return res.status(200).json(map)
 
   }catch(error){
+    console.log(error)
     return res.status(500).json(error.message)
   }
 })
