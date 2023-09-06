@@ -72,8 +72,8 @@
                 imeiFilter.innerHTML = '<option value="*">All</option>';
                 imeis.forEach((imei) => {
                     const option = document.createElement('option');
-                    option.value = imei;
-                    option.textContent = imei;
+                    option.value = imei._id;
+                    option.textContent = imei.serial;
                     imeiFilter.appendChild(option);
                 });
             } catch (error) {
@@ -90,8 +90,8 @@
                 zoneFilter.innerHTML = '<option value="*">All</option>';
                 zones.forEach((zone) => {
                     const option = document.createElement('option');
-                    option.value = zone;
-                    option.textContent = zone;
+                    option.value = zone._id;
+                    option.textContent = zone.name;
                     zoneFilter.appendChild(option);
                 });
             } catch (error) {
