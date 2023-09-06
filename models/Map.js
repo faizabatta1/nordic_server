@@ -22,12 +22,12 @@ const mapSchema = new mongoose.Schema({
   },
 
   longitude:{
-    type: String,
+    type: Number,
     required: true
   },
 
   latitude:{
-    type: String,
+    type: Number,
     required: true
   }
 })
