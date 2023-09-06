@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 
 const notificationSchema = new mongoose.Schema({
-  createdAt:{
+  date:{
+    type: String,
+    required: true
+  },
+  fullDate:{
     type: String,
     required: true
   },
