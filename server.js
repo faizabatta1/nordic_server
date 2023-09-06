@@ -263,10 +263,12 @@ const zonesFront = require('./routes/zonesFront')
 const imeiFront = require('./routes/imeiFront')
 const postalFront = require('./routes/postalFront')
 const mapFront = require('./routes/mapFront')
+const notificationFront = require('./routes/notificationFront')
 
 
 app.use(
     mapFront,
+    notificationFront,
     settingsFront,
     driverFront,
     postalFront,
@@ -310,4 +312,4 @@ const combinedViolations = violations.reduce((result, v) => {
 
 
 const port = process.env.port || 9090
-server.listen(port, () => console.log(`Server is running on port ${port}`))
+server.listen(port, () => console.log(`Server is runn
