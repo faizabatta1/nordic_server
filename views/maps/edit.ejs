@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <form action="/maps/<%= map._id %>/update" method="POST">
+        <form>
             <div class="mb-3">
                 <label for="longitude" class="form-label">Longitude</label>
                 <input type="text" class="form-control" id="longitude" name="longitude" value="<%= map.longitude %>" required>
@@ -33,18 +33,88 @@
                 <label for="data" class="form-label">Data</label>
                 <textarea class="form-control" id="data" name="data" rows="4" required><%= map.data %></textarea>
             </div>
+            
             <div class="mb-3">
-                <label for="zone" class="form-label">Zone</label>
-                <select class="form-select" id="zone" name="zone">
-                    <option value="">Select Zone</option>
-                    <% zones.forEach(function(zone) { %>
-                        <option value="<%= zone._id %>" <%= map.zone && map.zone._id === zone._id ? 'selected' : '' %>><%= zone.name %></option>
-                    <% }); %>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+              <label for="zone" class="form-label">Select Zone</label>
+              <select id="zone" name="zone" class="form-select" required>
+                  <!-- Options will be added dynamically using JavaScript -->
+              </select>
+          </div>
+            <button type="button" class="btn btn-primary" id="updateButton">Save Changes</button>
         </form>
     </div>
+
+    <script>
+      // Function to populate the zone dropdown with data from /api/zones
+      async function populateZoneDropdown() {
+          try {
+              const zoneDropdown = document.getElementById('zone');
+
+              // Fetch zones data from /api/zones
+              const response = await fetch('/api/zones');
+              const zones = await response.json();
+
+              // Populate the dropdown options
+              zones.forEach((zone) => {
+                  const option = document.createElement('option');
+                  option.value = zone._id;
+                  option.text = zone.name;
+                  zoneDropdown.appendChild(option);
+              });
+          } catch (error) {
+              console.error('Error fetching and populating zones:', error);
+          }
+      }
+
+      // Function to update the map using Fetch
+      async function updateMap() {
+          try {
+              const mapId = '<%= map._id %>';
+              const longitude = document.getElementById('longitude').value;
+              const latitude = document.getElementById('latitude').value;
+              const data = document.getElementById('data').value;
+              const zone = document.getElementById('zone').value;
+
+              const formData = {
+                  longitude,
+                  latitude,
+                  data,
+                  zone
+              };
+
+              const response = await fetch(`/api/maps/${mapId}`, {
+                  method: 'PUT',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(formData)
+              });
+
+              if (response.ok) {
+                  alert('Map updated successfully!');
+                  // Redirect to the map details page or any other desired action
+              } else {
+                  console.error('Error updating map:', response.statusText);
+                  alert('Failed to update the map. Please try again.');
+              }
+          } catch (error) {
+              console.error('Error updating map:', error);
+              alert('An error occurred while updating the map. Please try again later.');
+          }
+      }
+
+      // Invoke the code when the DOM content is loaded
+      document.addEventListener('DOMContentLoaded', () => {
+          // Populate the zone dropdown when the page loads
+          populateZoneDropdown();
+
+          // Add click event listener to the update button
+          const updateButton = document.getElementById('updateButton');
+          updateButton.addEventListener('click', () => {
+              updateMap();
+          });
+      });
+    </script>
 
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -28,11 +28,6 @@
       <div id="map"></div>
 
         <div class="mb-3">
-            <label for="color" class="form-label">Color</label>
-            <input type="text" id="color" name="color" class="form-control" required placeholder="color of the area">
-            <div class="live-preview" id="colorPreview"></div>
-        </div>
-        <div class="mb-3">
           <label for="initialCoordinates" class="form-label">Initial Coordinates (Latitude, Longitude)</label>
           <div class="d-flex justify-content-between align-items-center">
             <input type="text" id="lati" name="lati" class="form-control me-2" required placeholder="Latitude">
@@ -45,15 +40,6 @@
         <select id="zone" name="zone" class="form-select" required>
             <!-- Options will be added dynamically using JavaScript -->
         </select>
-    </div>
-
-    <div class="mb-3">
-      <label for="type" class="form-label">Select Type</label>
-      <select name="type" id="type" class="form-select" required>
-        <option value="circle">Circle</option>
-        <option value="line">Line</option>
-        <option value="marker">Marker</option>
-      </select>
     </div>
 
         <div class="mb-3">
@@ -119,18 +105,14 @@ async function populateZoneDropdown() {
     const createButton = document.getElementById('createButton');
 
     createButton.addEventListener('click', () => {
-        const color = colorInput.value;
         const data = document.getElementById('data').value;
-        const type = document.getElementById('type').value;
         const latitude = document.getElementById('lati').value
         const longitude = document.getElementById('long').value
         const zone = document.getElementById('zone').value
 
         // Create a JSON object with the map data
         const newMap = {
-            color: color,
             data: data,
-            type: type,
             latitude: latitude,
             longitude: longitude,
             zone: zone
