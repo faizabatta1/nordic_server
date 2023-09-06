@@ -51,19 +51,48 @@ app.post('/api/notifications/users', (req,res) =>{
     })
 
     await notification.save()
-    
+
     console.log(req.body)
     io.emit('users', JSON.stringify(req.body))
     return res.sendStatus(200)
 })
 
 app.post('/api/notifications/zones', (req,res) =>{
+    const now = new Date();
+    const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+    const localDateString = localDate.toISOString().split('T')[0];
+
+    let notification = new NotificationModel({
+        title: req.body.title,
+        body: req.body.body,
+        zones: req.body.zones,
+        imeis:[],
+        date:localDateString,
+        fullDate: localDate.toString()
+    })
+
+    await notification.save()
     console.log(req.body)
     io.emit('zones', JSON.stringify(req.body))
     return res.sendStatus(200)
 })
 
 app.post('/api/notifications/devices', (req,res) =>{
+    const now = new Date();
+    const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+    const localDateString = localDate.toISOString().split('T')[0];
+
+    let notification = new NotificationModel({
+        title: req.body.title,
+        body: req.body.body,
+        zones: req.body.zones,
+        imeis:[],
+        date:localDateString,
+        fullDate: localDate.toString()
+    })
+
+    await notification.save()
+
     console.log(req.body)
     io.emit('devices', JSON.stringify(req.body))
     return res.sendStatus(200)
