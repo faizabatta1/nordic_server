@@ -21,13 +21,15 @@
         </div>
 
         <form>
-            <div class="mb-3">
+            <div class="mb-3 d-flex justify-content-between align-items-center">
+              <div class="me-2">
                 <label for="longitude" class="form-label">Longitude</label>
                 <input type="text" class="form-control" id="longitude" name="longitude" value="<%= map.longitude %>" required>
             </div>
-            <div class="mb-3">
+            <div>
                 <label for="latitude" class="form-label">Latitude</label>
                 <input type="text" class="form-control" id="latitude" name="latitude" value="<%= map.latitude %>" required>
+            </div>
             </div>
             <div class="mb-3">
                 <label for="data" class="form-label">Data</label>
