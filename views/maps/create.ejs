@@ -34,9 +34,27 @@
         </div>
         <div class="mb-3">
           <label for="initialCoordinates" class="form-label">Initial Coordinates (Latitude, Longitude)</label>
-          <input type="text" id="initialCoordinates" name="initialCoordinates" class="form-control" required placeholder="start point of the map">
-          <div class="live-preview" id="coordinatesPreview"></div>
+          <div class="d-flex justify-content-between align-items-center">
+            <input type="text" id="lati" name="lati" class="form-control" required placeholder="Latitude">
+            <input type="text" id="long" name="long" class="form-control" required placeholder="Longitude">
+          </div>
       </div>
+
+      <div class="mb-3">
+        <label for="zone" class="form-label">Select Zone</label>
+        <select id="zone" name="zone" class="form-select" required>
+            <!-- Options will be added dynamically using JavaScript -->
+        </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="type" class="form-label">Select Type</label>
+      <select name="type" id="type">
+        <option value="circle">Circle</option>
+        <option value="line">Line</option>
+        <option value="marker">Marker</option>
+      </select>
+    </div>
 
         <div class="mb-3">
             <label for="data" class="form-label">GeoJSON Data</label>
@@ -52,6 +70,35 @@
 <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_RMmoc5iVAGRDfxi8WLjQc27_QocN-eI&libraries=places"></script>
 <script>
+  // Function to populate the zone dropdown with data from /api/zones
+async function populateZoneDropdown() {
+            try {
+                const zoneDropdown = document.getElementById('zone');
+
+                // Fetch zones data from /api/zones
+                const response = await fetch('/api/zones');
+                const zones = await response.json();
+
+                // Populate the dropdown options
+                zones.forEach((zone) => {
+                    const option = document.createElement('option');
+                    option.value = zone._id;
+                    option.text = zone.name;
+                    zoneDropdown.appendChild(option);
+                 });
+            } catch (error) {
+                console.error('Error fetching and populating zones:', error);
+            }
+        }
+
+        // Invoke the code when the DOM content is loaded
+      document.addEventListener('DOMContentLoaded', () => {
+            // Populate the zone dropdown when the page loads
+            populateZoneDropdown();
+        });
+</script>
+
+<script>
     // Google Maps
     const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 64.0, lng: 10.0 }, // Centered on Norway
@@ -61,16 +108,6 @@
           style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: google.maps.ControlPosition.TOP_RIGHT,
         }
-    });
-
-
-    // Initial coordinates live preview
-    const initialCoordinatesInput = document.getElementById('initialCoordinates');
-    const coordinatesPreview = document.getElementById('coordinatesPreview');
-
-    initialCoordinatesInput.addEventListener('input', () => {
-        const coordinates = initialCoordinatesInput.value;
-        coordinatesPreview.textContent = coordinates;
     });
 
     // Color live preview
@@ -101,7 +138,10 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newMap)
+            body: JSON.stringify({
+              ...newMap,
+
+            })
         })
         .then(response => {
             if (response.ok) {
