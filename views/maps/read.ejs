@@ -141,14 +141,9 @@
         $('#dataModal').on('shown.bs.modal', function () {
           const copyFullDataButton = document.getElementById('copyFullData');
           copyFullDataButton.addEventListener('click', () => {
-            const textToCopy = fullDataCode.textContent;
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
+        
+            fullData.select();
             document.execCommand('copy');
-            document.body.removeChild(textArea);
-            alert('Data copied to clipboard!');
           });
         });
       });
