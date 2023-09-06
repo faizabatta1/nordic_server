@@ -54,7 +54,16 @@
             </thead>
             <!-- Table Body -->
             <tbody id="notificationTableBody">
-                <!-- Notifications will be added dynamically using JavaScript -->
+                <% notifications.forEach(function(map) { %>
+
+                <td>${notification.date}</td>
+                    <td><%= notification.title %></td>
+                    <td><%= notification.body %></td>
+                    <td><%= notification.imeis %></td>
+                    <td><%= notification.zones %></td>
+
+                <% }); %>
+
             </tbody>
         </table>
     </div>
@@ -105,45 +114,8 @@
             const zoneFilterValue = document.getElementById('zoneFilter').value;
             const searchFilterValue = document.getElementById('searchFilter').value.toLowerCase();
             const dateFilterValue = document.getElementById('dateFilter').value;
-
-            // Fetch the notifications and filter them based on selected filters
-            fetch('/api/notifications')
-                .then((response) => response.json())
-                .then((notifications) => {
-                    const filteredNotifications = notifications.filter((notification) => {
-                        const imeiMatch = imeiFilterValue.includes('*') || notification.imeis.includes(imeiFilterValue);
-                        const zoneMatch = zoneFilterValue.includes('*') || notification.zones.includes(zoneFilterValue);
-                        const searchMatch = notification.title.toLowerCase().includes(searchFilterValue) ||
-                            notification.body.toLowerCase().includes(searchFilterValue);
-                        const dateMatch = dateFilterValue === '' || notification.date === dateFilterValue;
-                        return imeiMatch && zoneMatch && searchMatch && dateMatch;
-                    });
-
-                    // Display the filtered notifications in the table
-                    displayNotifications(notifications);
-                })
-                .catch((error) => {
-                    console.error('Error fetching notifications:', error);
-                });
         }
 
-        // Function to display notifications in the table
-        function displayNotifications(notifications) {
-            const tableBody = document.getElementById('notificationTableBody');
-            tableBody.innerHTML = '';
-
-            notifications.forEach((notification) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${notification.date}</td>
-                    <td>${notification.title}</td>
-                    <td>${notification.body}</td>
-                    <td>${notification.imeis.join(', ')}</td>
-                    <td>${notification.zones.join(', ')}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
 
         // Initialize Flatpickr for the date picker
         flatpickr('#dateFilter', {

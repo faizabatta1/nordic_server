@@ -6,7 +6,7 @@ router.get('/notifications',async (req,res) =>{
   try{
     let notifications = await NotificationModel.find()
     return res.status(200).render('notifications/read',{
-      
+      notifications
     })
   }catch(error){
 
