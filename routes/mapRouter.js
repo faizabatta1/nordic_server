@@ -16,6 +16,10 @@ router.get('/maps/zone/:id',async (req,res) =>{
     const { id } = req.params
     const map = await Map.findOne({ zone: id })
 
+    if(!map){
+      return res.status(404).json("Map Not Found")
+    }
+
     return res.status(200).json(map)
 
   }catch(error){
