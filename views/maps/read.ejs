@@ -130,36 +130,33 @@
     // Function to handle opening the modal and displaying full data
     const dataCells = document.querySelectorAll('.truncate-text');
     const fullDataCode = document.getElementById('fullDataCode');
+    const copyFullDataButton = document.getElementById('copyFullData');
   
     dataCells.forEach(cell => {
       cell.addEventListener('click', (event) => {
         const fullData = event.currentTarget.getAttribute('data-map-data');
         fullDataCode.textContent = fullData;
         $('#dataModal').modal('show');
-        
-        // Attach the copy listener after the modal is shown
-        $('#dataModal').on('shown.bs.modal', function () {
-          const copyFullDataButton = document.getElementById('copyFullData');
-          copyFullDataButton.addEventListener('click', () => {
-            const textToCopy = fullDataCode.textContent;
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            alert('Data copied to clipboard!');
-          });
-        });
       });
+    });
+  
+    // Function to handle copying the full data
+    copyFullDataButton.addEventListener('click', () => {
+      const textToCopy = fullDataCode.textContent;
+      const textArea = document.createElement('textarea');
+      textArea.value = textToCopy;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert('Data copied to clipboard!');
     });
   
     // Function to fully close the modal when the X button is clicked
     $('#dataModal').on('hidden.bs.modal', function () {
       $('#dataModal').modal('dispose');
     });
-</script>
-
+  </script>
 
     <!-- JavaScript for Delete Functionality -->
     <script>
