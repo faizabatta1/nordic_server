@@ -103,11 +103,7 @@ async function populateZoneDropdown() {
     const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 64.0, lng: 10.0 }, // Centered on Norway
         zoom: 6, // Adjust the zoom level as needed
-        mapTypeId: 'satellite', // Set the map type to satellite
-        mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-          position: google.maps.ControlPosition.TOP_RIGHT,
-        }
+        mapTypeId: 'satellite',
     });
 
     // Color live preview
@@ -125,11 +121,19 @@ async function populateZoneDropdown() {
     createButton.addEventListener('click', () => {
         const color = colorInput.value;
         const data = document.getElementById('data').value;
+        const type = document.getElementById('type').value;
+        const latitude = document.getElementById('latitude')
+        const longitude = document.getElementById('long')
+        const zone = document.getElementById('zone')
 
         // Create a JSON object with the map data
         const newMap = {
             color: color,
-            data: data
+            data: data,
+            type: type,
+            latitude: latitude,
+            longitude: longitude,
+            zone: zone
         };
 
         // Send a fetch request to create the map
@@ -138,10 +142,7 @@ async function populateZoneDropdown() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-              ...newMap,
-
-            })
+            body: JSON.stringify(newMap)
         })
         .then(response => {
             if (response.ok) {

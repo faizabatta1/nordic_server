@@ -19,6 +19,16 @@ const mapSchema = new mongoose.Schema({
   zone:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Zone'
+  },
+
+  longitude:{
+    type: String,
+    required: true
+  },
+
+  latitude:{
+    type: String,
+    required: true
   }
 })
 
