@@ -92,14 +92,6 @@ async function populateZoneDropdown() {
         mapTypeId: 'satellite',
     });
 
-    // Color live preview
-    const colorInput = document.getElementById('color');
-    const colorPreview = document.getElementById('colorPreview');
-
-    colorInput.addEventListener('input', () => {
-        const color = colorInput.value;
-        colorPreview.style.backgroundColor = color;
-    });
 
     // Create map
     const createButton = document.getElementById('createButton');
@@ -151,13 +143,8 @@ function displayGeoJSONData(data) {
         // Create a Data layer and add it to the map
         const dataLayer = new google.maps.Data({ map: map });
 
-        if(data != ''){
-          // Load GeoJSON data into the Data layer
           dataLayer.addGeoJson(geoJson);        
-        }else{
-          // Load GeoJSON data into the Data layer
-          dataLayer.removeGeoJson(geoJson);
-        }
+        
 
         // Set the style for the GeoJSON features (customize as needed)
         dataLayer.setStyle({
