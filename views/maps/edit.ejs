@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Map</title>
+    <link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <%- include('../components/navbar.ejs') %>
+    
+    <div class="container">
+        <div class="row mt-4 mb-3">
+            <div class="col-md-6">
+                <h1>Edit Map</h1>
+            </div>
+
+            <div class="col-md-6 text-end">
+              <a href="/maps" class="btn btn-secondary btn-sm">Cancel</a>
+            </div>
+        </div>
+
+        <form action="/maps/<%= map._id %>/update" method="POST">
+            <div class="mb-3">
+                <label for="longitude" class="form-label">Longitude</label>
+                <input type="text" class="form-control" id="longitude" name="longitude" value="<%= map.longitude %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="latitude" class="form-label">Latitude</label>
+                <input type="text" class="form-control" id="latitude" name="latitude" value="<%= map.latitude %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="data" class="form-label">Data</label>
+                <textarea class="form-control" id="data" name="data" rows="4" required><%= map.data %></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="zone" class="form-label">Zone</label>
+                <select class="form-select" id="zone" name="zone">
+                    <option value="">Select Zone</option>
+                    <% zones.forEach(function(zone) { %>
+                        <option value="<%= zone._id %>" <%= map.zone && map.zone._id === zone._id ? 'selected' : '' %>><%= zone.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
