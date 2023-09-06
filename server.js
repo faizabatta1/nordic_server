@@ -312,4 +312,4 @@ const combinedViolations = violations.reduce((result, v) => {
 
 
 const port = process.env.port || 9090
-server.listen(port, () => console.log(`Server is runn
+server.listen(port, () => console.log(`Server is running on port ${port}`))
