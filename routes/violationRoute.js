@@ -201,9 +201,12 @@ router.get('/violations/user/:id',async (req,res) =>{
 router.get('/violations/removed/:id',async (req,res) =>{
   try{
     let { id } = req.params
+    const { account } = req.headers
 
     if(id == 0){
-      let violations = await Violation.find({})
+      let violations = await Violation.find({
+        accountId: account
+      })
       let totalViolations = 0;
     
       violations.forEach(violation => {
