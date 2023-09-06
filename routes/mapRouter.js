@@ -24,4 +24,15 @@ router.get('/maps/zone/:id',async (req,res) =>{
   }
 })
 
+router.post('/maps',async (req,res) =>{
+  try{
+    let map = new Map(req.body)
+    await map.save()
+    return res.sendStatus(200)
+  }catch(error){
+    console.log(error.message)
+    return res.status(500).json(error.message)
+  }
+})
+
 module.exports = router
