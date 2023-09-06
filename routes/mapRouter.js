@@ -14,7 +14,7 @@ router.get('/maps', async (req,res)=>{
 router.get('/maps/zone/:id',async (req,res) =>{
   try{
     const { id } = req.params
-    const map = await Map.find({ zone: id }).populate({
+    const map = await Map.findOne({ zone: id }).populate({
       path: 'zone',
       ref: 'Zone'
     })
