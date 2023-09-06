@@ -15,7 +15,6 @@ router.get('/maps/zone/:id',async (req,res) =>{
   try{
     const { id } = req.params
     const map = await Map.findOne({ zone: id })
-    console.log(map)
 
     return res.status(200).json(map)
 

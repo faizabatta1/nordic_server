@@ -29,12 +29,18 @@
 
         <div class="mb-3">
             <label for="color" class="form-label">Color</label>
-            <input type="text" id="color" name="color" class="form-control" required>
+            <input type="text" id="color" name="color" class="form-control" required placeholder="color of the area">
             <div class="live-preview" id="colorPreview"></div>
         </div>
         <div class="mb-3">
+          <label for="initialCoordinates" class="form-label">Initial Coordinates (Latitude, Longitude)</label>
+          <input type="text" id="initialCoordinates" name="initialCoordinates" class="form-control" required placeholder="start point of the map">
+          <div class="live-preview" id="coordinatesPreview"></div>
+      </div>
+
+        <div class="mb-3">
             <label for="data" class="form-label">GeoJSON Data</label>
-            <textarea id="data" name="data" class="form-control" rows="5" required></textarea>
+            <textarea id="data" name="data" class="form-control" rows="5" required placeholder="Enter area json data"></textarea>
         </div>
         <div class="d-flex justify-content-center align-items-center mt-3 mb-3">
             <button class="btn btn-primary me-3 ps-3 pe-3" id="createButton">Create</button>
