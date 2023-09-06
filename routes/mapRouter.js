@@ -39,4 +39,14 @@ router.post('/maps',async (req,res) =>{
   }
 })
 
+router.put('/maps/:id',async (req,res) =>{
+  try{
+    await Map.updateOne({ _id: req.params.id},req.body)
+    return res.sendStatus(200)
+  }catch(error){
+    console.log(error.message)
+    return res.status(500).json(error.message)
+  }
+})
+
 module.exports = router
