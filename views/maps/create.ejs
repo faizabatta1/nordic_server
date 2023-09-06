@@ -35,7 +35,7 @@
         <div class="mb-3">
           <label for="initialCoordinates" class="form-label">Initial Coordinates (Latitude, Longitude)</label>
           <div class="d-flex justify-content-between align-items-center">
-            <input type="text" id="lati" name="lati" class="form-control" required placeholder="Latitude">
+            <input type="text" id="lati" name="lati" class="form-control me-2" required placeholder="Latitude">
             <input type="text" id="long" name="long" class="form-control" required placeholder="Longitude">
           </div>
       </div>
@@ -49,7 +49,7 @@
 
     <div class="mb-3">
       <label for="type" class="form-label">Select Type</label>
-      <select name="type" id="type">
+      <select name="type" id="type" class="form-select" required>
         <option value="circle">Circle</option>
         <option value="line">Line</option>
         <option value="marker">Marker</option>
