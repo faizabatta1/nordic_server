@@ -47,7 +47,7 @@ app.post('/api/notifications/users', async (req,res) =>{
         title: req.body.title,
         body: req.body.body,
         date:localDateString,
-        fullDate: localDate.toString()
+        fullDate: localDate.toDateString()
     })
 
     await notification.save()
@@ -68,7 +68,7 @@ app.post('/api/notifications/zones', async (req,res) =>{
         zones: req.body.zones,
         imeis:[],
         date:localDateString,
-        fullDate: localDate.toString()
+        fullDate: localDate.toDateString()
     })
 
     await notification.save()
@@ -88,7 +88,7 @@ app.post('/api/notifications/devices', async (req,res) =>{
         zones: req.body.zones,
         imeis:[],
         date:localDateString,
-        fullDate: localDate.toString()
+        fullDate: localDate.toDateString()
     })
 
     await notification.save()

@@ -111,8 +111,8 @@
                 .then((response) => response.json())
                 .then((notifications) => {
                     const filteredNotifications = notifications.filter((notification) => {
-                        const imeiMatch = imeiFilterValue === '*' || notification.imeis.includes(imeiFilterValue);
-                        const zoneMatch = zoneFilterValue === '*' || notification.zones.includes(zoneFilterValue);
+                        const imeiMatch = imeiFilterValue.includes('*') || notification.imeis.includes(imeiFilterValue);
+                        const zoneMatch = zoneFilterValue.includes('*') || notification.zones.includes(zoneFilterValue);
                         const searchMatch = notification.title.toLowerCase().includes(searchFilterValue) ||
                             notification.body.toLowerCase().includes(searchFilterValue);
                         const dateMatch = dateFilterValue === '' || notification.date === dateFilterValue;
