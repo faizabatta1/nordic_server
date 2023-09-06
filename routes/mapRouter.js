@@ -13,11 +13,13 @@ router.get('/maps', async (req,res)=>{
 
 router.get('/maps/zone/:id',async (req,res) =>{
   try{
+    console.log(req.params)
     const { id } = req.params
     const map = await Map.findOne({ zone: id }).populate({
       path: 'zone',
       ref: 'Zone'
     })
+    console.log(map)
 
     return res.status(200).json(map)
 
