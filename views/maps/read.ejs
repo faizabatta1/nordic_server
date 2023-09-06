@@ -117,7 +117,7 @@
         <pre><code id="fullDataCode"></code></pre>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary btn-sm float-end" id="copyFullData" data-clipboard-target="#dataModalLabel">Copy Data</button>
+        <button class="btn btn-primary btn-sm float-end" id="copyFullData">Copy Data</button>
       </div>
     </div>
   </div>
@@ -140,11 +140,16 @@
         // Attach the copy listener after the modal is shown
         $('#dataModal').on('shown.bs.modal', function () {
           const copyFullDataButton = document.getElementById('copyFullData');
-        //   copyFullDataButton.addEventListener('click', () => {
-        
-        //     fullData.select();
-        //     document.execCommand('copy');
-        //   });
+          copyFullDataButton.addEventListener('click', () => {
+            const textToCopy = fullDataCode.textContent;
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Data copied to clipboard!');
+          });
         });
       });
     });
