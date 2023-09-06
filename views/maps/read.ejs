@@ -72,8 +72,8 @@
                     <tr>
                         <td><%= map.longitude %></td>
                         <td><%= map.latitude %></td>
-                        <td class="truncate-text text-dark" data-toggle="modal" data-target="#dataModal" data-map-data="<%= map.data %>">
-                            show
+                        <td class="truncate-text" data-toggle="modal" data-target="#dataModal" data-map-data="<%= map.data %>">
+                            <a href="#">show</a>
                           </td>
                         <td><%= map.zone ? map.zone.name : 'N/A' %></td>
                         <td class="controls">
