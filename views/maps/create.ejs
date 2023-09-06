@@ -56,7 +56,21 @@
     const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 64.0, lng: 10.0 }, // Centered on Norway
         zoom: 6, // Adjust the zoom level as needed
-        mapTypeId: 'satellite' // Set the map type to satellite
+        mapTypeId: 'satellite', // Set the map type to satellite
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: google.maps.ControlPosition.TOP_RIGHT,
+        }
+    });
+
+
+    // Initial coordinates live preview
+    const initialCoordinatesInput = document.getElementById('initialCoordinates');
+    const coordinatesPreview = document.getElementById('coordinatesPreview');
+
+    initialCoordinatesInput.addEventListener('input', () => {
+        const coordinates = initialCoordinatesInput.value;
+        coordinatesPreview.textContent = coordinates;
     });
 
     // Color live preview
