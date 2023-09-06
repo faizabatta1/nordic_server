@@ -221,7 +221,8 @@ router.get('/violations/removed/:id',async (req,res) =>{
 console.log(localDate.toISOString())
 
       let violations = await Violation.find({
-        createdAt: localDateString
+        createdAt: localDateString,
+        accountId: account
       })
       let totalViolations = 0;
     
@@ -242,13 +243,14 @@ console.log(localDate.toISOString())
               createdAt: {
                 $gte: threeDaysAgo.toISOString(), // Filter for documents created after three days ago
                 $lt: now.toISOString() // Filter for documents created until now
-              }
+              },
+              accountId: account
             }
           },
           {
             $group: {
               _id: null,
-              totalViolations: { $sum: '$violations' } // Sum the violations field
+              totalViolations: { $sum: '$removed' } // Sum the violations field
             }
           }
         ]);
@@ -271,13 +273,14 @@ console.log(localDate.toISOString())
               createdAt: {
                 $gte: oneWeekAgo.toISOString(), // Filter for documents created after one week ago
                 $lt: now.toISOString() // Filter for documents created until now
-              }
+              },
+              accountId: account
             }
           },
           {
             $group: {
               _id: null,
-              totalViolations: { $sum: '$violations' } // Sum the violations field
+              totalViolations: { $sum: '$removed' } // Sum the violations field
             }
           }
         ]);
@@ -300,13 +303,14 @@ console.log(localDate.toISOString())
               createdAt: {
                 $gte: oneMonthAgo.toISOString(), // Filter for documents created after one month ago
                 $lt: now.toISOString() // Filter for documents created until now
-              }
+              },
+              accountId: account
             }
           },
           {
             $group: {
               _id: null,
-              totalViolations: { $sum: '$violations' } // Sum the violations field
+              totalViolations: { $sum: '$removed' } // Sum the violations field
             }
           }
         ]);
@@ -329,13 +333,14 @@ console.log(localDate.toISOString())
               createdAt: {
                 $gte: oneYearAgo.toISOString(), // Filter for documents created after one year ago
                 $lt: now.toISOString() // Filter for documents created until now
-              }
+              },
+              accountId: account
             }
           },
           {
             $group: {
               _id: null,
-              totalViolations: { $sum: '$violations' } // Sum the violations field
+              totalViolations: { $sum: '$removed' } // Sum the violations field
             }
           }
         ]);
@@ -356,13 +361,14 @@ try {
   const result = await Violation.aggregate([
     {
       $match: {
-        createdAt: formattedYesterday
-      }
+        createdAt: formattedYesterday,
+        accountId: account
+      },
     },
     {
       $group: {
         _id: null,
-        totalViolations: { $sum: '$violations' } // Sum the violations field
+        totalViolations: { $sum: '$removed' } // Sum the violations field
       }
     }
   ]);
