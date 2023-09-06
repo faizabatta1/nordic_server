@@ -35,6 +35,12 @@
     top: 30px;
     right: 15px; /* Adjust as needed */
   }
+
+  /* Style for the scrollable modal body */
+  .scrollable-modal-body {
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto;
+  }
     </style>
 </head>
 <body>
@@ -107,7 +113,7 @@
         <h5 class="modal-title" id="dataModalLabel">Full Data</h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body scrollable-modal-body">
         <pre><code id="fullDataCode"></code></pre>
       </div>
       <div class="modal-footer">
