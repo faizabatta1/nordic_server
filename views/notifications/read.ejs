@@ -115,7 +115,7 @@
             const searchFilterValue = document.getElementById('searchFilter').value.toLowerCase();
             // const dateFilterValue = document.getElementById('dateFilter').value;
             const tableRows = document.getElementsByTagName('tr');
-            
+
             for (let i = 1; i < tableRows.length; i++) {
             const columns = tableRows[i].getElementsByTagName('td');
             let rowContent = "";
@@ -123,7 +123,7 @@
                 rowContent += columns[j].innerText.toLowerCase() + " ";
             }
 
-            if (rowContent.includes(filter)) {
+            if (rowContent.includes(searchFilterValue)) {
                 tableRows[i].style.display = '';
             } else {
                 tableRows[i].style.display = 'none';
