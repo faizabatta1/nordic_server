@@ -17,6 +17,14 @@
       .controls > :first-child{
         margin-right: 10px;
       }
+
+      .truncate-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100px; /* Adjust the width as needed */
+        cursor: pointer; /* Add pointer cursor to indicate clickable */
+       }
     </style>
 </head>
 <body>
@@ -36,9 +44,9 @@
         <table class="table table-striped table-bordered text-center table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Color</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Latitude</th>
                     <th scope="col">Data</th>
-                    <th scope="col">Type</th>
                     <th scope="col">Zone</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -46,9 +54,11 @@
             <tbody>
                 <% maps.forEach(function(map) { %>
                     <tr>
-                        <td><%= map.color %></td>
-                        <td><%= map.data %></td>
-                        <td><%= map.type %></td>
+                        <td><%= map.longitude %></td>
+                        <td><%= map.latitude %></td>
+                        <td class="truncate-text" data-toggle="modal" data-target="#dataModal" data-map-data="<%= map.data %>">
+                            <%= map.data %>
+                          </td>
                         <td><%= map.zone ? map.zone.name : 'N/A' %></td>
                         <td class="controls">
                             <a href="/maps/<%= map._id %>/edit" class="btn btn-info btn-sm">Edit</a>
@@ -79,7 +89,53 @@
         </div>
     </div>
 
+    <!-- Add a Bootstrap Modal for displaying the full data -->
+<div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dataModalLabel">Full Data</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <pre><code id="fullDataCode"></code></pre>
+          <button class="btn btn-primary btn-sm" id="copyFullData">Copy Data</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Function to handle opening the modal and displaying full data
+        const dataCells = document.querySelectorAll('.truncate-text');
+        const fullDataCode = document.getElementById('fullDataCode');
+        const copyFullDataButton = document.getElementById('copyFullData');
+      
+        dataCells.forEach(cell => {
+          cell.addEventListener('click', (event) => {
+            const fullData = event.currentTarget.getAttribute('data-map-data');
+            fullDataCode.textContent = fullData;
+            $('#dataModal').modal('show');
+          });
+        });
+      
+        // Function to handle copying the full data
+        copyFullDataButton.addEventListener('click', () => {
+          const textToCopy = fullDataCode.textContent;
+          const textArea = document.createElement('textarea');
+          textArea.value = textToCopy;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          alert('Data copied to clipboard!');
+        });
+      </script>
 
     <!-- JavaScript for Delete Functionality -->
     <script>
