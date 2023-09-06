@@ -56,7 +56,7 @@
             <tbody id="notificationTableBody">
                 <% notifications.forEach(function(notification) { %>
 
-                <td>${notification.date}</td>
+                <td><%= notification.date %></td>
                     <td><%= notification.title %></td>
                     <td><%= notification.body %></td>
                     <td><%= notification.imeis %></td>
@@ -110,30 +110,46 @@
 
         // Function to filter notifications based on selected filters
         function filterNotifications() {
-            const imeiFilterValue = document.getElementById('imeiFilter').value;
-            const zoneFilterValue = document.getElementById('zoneFilter').value;
+            // const imeiFilterValue = document.getElementById('imeiFilter').value;
+            // const zoneFilterValue = document.getElementById('zoneFilter').value;
             const searchFilterValue = document.getElementById('searchFilter').value.toLowerCase();
-            const dateFilterValue = document.getElementById('dateFilter').value;
+            // const dateFilterValue = document.getElementById('dateFilter').value;
+            const tableRows = document.getElementsByTagName('tr');
+            
+            for (let i = 1; i < tableRows.length; i++) {
+            const columns = tableRows[i].getElementsByTagName('td');
+            let rowContent = "";
+            for (let j = 0; j < columns.length; j++) {
+                rowContent += columns[j].innerText.toLowerCase() + " ";
+            }
+
+            if (rowContent.includes(filter)) {
+                tableRows[i].style.display = '';
+            } else {
+                tableRows[i].style.display = 'none';
+            }
+        }
+            
         }
 
 
         // Initialize Flatpickr for the date picker
-        flatpickr('#dateFilter', {
-            mode: 'range',
-            dateFormat: 'Y-m-d',
-            onClose: filterNotifications,
-        });
+        // flatpickr('#dateFilter', {
+        //     mode: 'single',
+        //     dateFormat: 'Y-m-d',
+        //     onClose: filterNotifications,
+        // });
 
         // Add event listeners for filter elements
-        document.getElementById('imeiFilter').addEventListener('change', filterNotifications);
-        document.getElementById('zoneFilter').addEventListener('change', filterNotifications);
+        // document.getElementById('imeiFilter').addEventListener('change', filterNotifications);
+        // document.getElementById('zoneFilter').addEventListener('change', filterNotifications);
         document.getElementById('searchFilter').addEventListener('input', filterNotifications);
 
         // Initialize filters when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             populateImeiFilterDropdown();
             populateZoneFilterDropdown();
-            filterNotifications();
+            // filterNotifications();
         });
     </script>
 </body>
