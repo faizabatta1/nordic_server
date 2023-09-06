@@ -25,6 +25,16 @@
         max-width: 100px; /* Adjust the width as needed */
         cursor: pointer; /* Add pointer cursor to indicate clickable */
        }
+
+       .modal-content {
+    position: relative;
+  }
+
+  #copyFullData {
+    position: sticky;
+    top: 30px;
+    right: 15px; /* Adjust as needed */
+  }
     </style>
 </head>
 <body>
@@ -89,23 +99,23 @@
         </div>
     </div>
 
-<!-- Add a Bootstrap Modal for displaying the full data -->
+    <!-- Add a Bootstrap Modal for displaying the full data -->
 <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Add 'modal-lg' for a larger modal -->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="dataModalLabel">Full Data</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="sticky-top"> <!-- Add 'sticky-top' class for the sticky copy button -->
-            <button class="btn btn-primary btn-sm" id="copyFullData">Copy Data</button>
-          </div>
-          <pre><code id="fullDataCode"></code></pre>
-        </div>
+  <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Add 'modal-lg' for a larger modal -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dataModalLabel">Full Data</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <pre><code id="fullDataCode"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm float-end" id="copyFullData">Copy Data</button>
       </div>
     </div>
   </div>
+</div>
 
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
