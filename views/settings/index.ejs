@@ -418,6 +418,7 @@ async function populateZoneDropdown() {
   for(let i = 0; i < zones.length; i++){
     let div = document.createElement('div')
     div.textContent = zones[i].name
+    div.setAttribute('data-value',zones[i]._id)
 
     div.addEventListener('click',(e) =>{
       if(!zoneSelected.includes(e.target.textContent)){
