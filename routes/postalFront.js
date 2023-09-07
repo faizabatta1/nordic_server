@@ -13,4 +13,16 @@ router.get('/postals',async (req,res) =>{
   }
 })
 
+router.get('/postals/:id', async (req, res) => {
+  try {
+      const postal = await Postal.findById(req.params.id);
+      if (!postal) {
+          return res.status(404).json({ error: 'PDF not found' });
+      }
+      return res.status(200).render('postals/postal_show.ejs', { pdf });
+  } catch (error) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router
