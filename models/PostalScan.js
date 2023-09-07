@@ -31,6 +31,6 @@ const postalScanSchema = new mongoose.Schema({
   }
 });
 
-const PostalScan = mongoose.model('PostalViolation', postalScanSchema);
+const PostalScan = mongoose.model('PostalScan', postalScanSchema);
 
 module.exports = PostalScan;
