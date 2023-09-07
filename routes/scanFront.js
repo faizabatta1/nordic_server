@@ -5,7 +5,7 @@ const PostalScan = require('../models/PostalScan')
 router.get('/scans',async (req,res) =>{
   try{
     let scans = await PostalScan.find()
-    return res.status(200).render('postals/read',{
+    return res.status(200).render('scans/read',{
       scans: scans
     })
   }catch(error){
