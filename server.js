@@ -38,76 +38,90 @@ app.set('view engine', 'ejs')
 const NotificationModel = require('./models/NotificationModel')
 
 app.post('/api/notifications/users', async (req,res) =>{
+    try{
+        const now = new Date();
+        const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+        const localDateString = localDate.toISOString().split('T')[0];
     
-	const now = new Date();
-    const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
-    const localDateString = localDate.toISOString().split('T')[0];
-
-    let notification = new NotificationModel({
-        title: req.body.title,
-        body: req.body.body,
-        date:localDateString,
-        fullDate: localDate.toDateString()
-    })
-
-    await notification.save()
-
-    console.log(req.body)
-    io.emit('users', JSON.stringify(req.body))
-    return res.sendStatus(200)
+        let notification = new NotificationModel({
+            title: req.body.title,
+            body: req.body.body,
+            date:localDateString,
+            fullDate: localDate.toDateString()
+        })
+    
+        await notification.save()
+    
+        console.log(req.body)
+        io.emit('users', JSON.stringify(req.body))
+        return res.sendStatus(200)
+    }catch(error){
+        console.log(error.message)
+        return res.status(500).json(error.message)
+    }
 })
 
 const IMEI = require('./models/IMEI')
 
 app.post('/api/notifications/zones', async (req,res) =>{
-    const now = new Date();
-    const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
-    const localDateString = localDate.toISOString().split('T')[0];
-
-    let notification = new NotificationModel({
-        title: req.body.title,
-        body: req.body.body,
-        zones: req.body.zones,
-        imeis:[],
-        date:localDateString,
-        fullDate: localDate.toDateString()
-    })
-
-    await notification.save()
-
-    let imeis = await IMEI.find({
-        zone: {
-            $in: req.body.zones
-        }
-    })
-    console.log(req.body)
-    io.emit('zones', JSON.stringify({
-        title: req.body.title,
-        body: req.body.body,
-        imeis: imeis
-    }))
-    return res.sendStatus(200)
+    try{
+        const now = new Date();
+        const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+        const localDateString = localDate.toISOString().split('T')[0];
+    
+        let notification = new NotificationModel({
+            title: req.body.title,
+            body: req.body.body,
+            zones: req.body.zones,
+            imeis:[],
+            date:localDateString,
+            fullDate: localDate.toDateString()
+        })
+    
+        await notification.save()
+    
+        let imeis = await IMEI.find({
+            zone: {
+                $in: req.body.zones
+            }
+        })
+        console.log(req.body)
+        io.emit('zones', JSON.stringify({
+            title: req.body.title,
+            body: req.body.body,
+            imeis: imeis
+        }))
+        return res.sendStatus(200)
+    }catch(error){
+        console.log(error.message)
+        return res.status(500).json(error.message)
+    }
 })
 
 app.post('/api/notifications/devices', async (req,res) =>{
-    const now = new Date();
-    const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
-    const localDateString = localDate.toISOString().split('T')[0];
-
-    let notification = new NotificationModel({
-        title: req.body.title,
-        body: req.body.body,
-        zones: [],
-        imeis:req.body.imeis,
-        date:localDateString,
-        fullDate: localDate.toDateString()
-    })
-
-    await notification.save()
-
-    console.log(req.body)
-    io.emit('devices', JSON.stringify(req.body))
-    return res.sendStatus(200)
+    try{
+        const now = new Date();
+        const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+        const localDateString = localDate.toISOString().split('T')[0];
+    
+        let notification = new NotificationModel({
+            title: req.body.title,
+            body: req.body.body,
+            zones: [],
+            imeis:req.body.imeis,
+            date:localDateString,
+            fullDate: localDate.toDateString()
+        })
+    
+        await notification.save()
+    
+        console.log(req.body)
+        io.emit('devices', JSON.stringify(req.body))
+        return res.sendStatus(200)
+    }catch(error){
+        console.log(error.message)
+        return res.status(500).json(error.message)
+    }
 })
 
 app.get('/login', (req,res) =>{
