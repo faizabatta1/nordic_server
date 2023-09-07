@@ -596,6 +596,7 @@ function zoomed(event) {
 
     async function updateCount() {
         const vioHolder = document.getElementById('vio-num');
+        const vioRmHolder = document.getElementById('removed-num');
         const pdfHolder = document.getElementById('pdf-num');
         const userHolder = document.getElementById('user-num');
         const accidentHolder = document.getElementById('accident-num');
@@ -605,7 +606,9 @@ function zoomed(event) {
 
         try {
             let responseData = await fetchData(`/api/violations/${value}`);
+            let responseRmData = await fetchData(`/api/violations/removed/${value}`);
             vioHolder.textContent = responseData;
+            vioRmHolder.textContent = responseRmData;
         } catch (error) {
             console.error(error);
         }
