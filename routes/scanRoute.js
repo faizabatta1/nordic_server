@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const Postal = require('../models/PostalViolation')
 const PostalScan = require('../models/PostalScan')
 const Handlebars = require('handlebars')
 const puppeteer = require('puppeteer')
@@ -19,16 +18,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-router.get('/postals',async (req,res) =>{
+router.get('/scans',async (req,res) =>{
   try{
-    let postals = await Postal.find()
-    return res.status(200).json(postals)
+    let scans = await PostalScan.find()
+    return res.status(200).json(scans)
   }catch(error){
     return res.status(500).json(error.message)
   }
 })
 
-router.post('/postals',upload.single('violation'),async (req,res) =>{
+router.post('/scans',upload.single('violation'),async (req,res) =>{
   try{
     console.log(req.body)
     const {
@@ -70,16 +69,7 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     })
 
-    let scan = new PostalScan({
-      violationNumber: number,
-      pnid: pnid,
-      reason: reason,
-      link: process.env.BASE_URL + 'postals/' + filename,
-      image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
-    })
-
     await postal.save()
-    await scan.save()
     await browser.close();
     return res.sendStatus(200)
   }catch(error){
@@ -87,27 +77,27 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
   }
 })
 
-router.put('/postals/:id',async (req,res) =>{
+router.put('/scans/:id',async (req,res) =>{
   try{
-    await Postal.updateOne({ _id: req.params.id },req.body)
+    await PostalScan.updateOne({ _id: req.params.id },req.body)
     return res.sendStatus(200)
   }catch(error){
     return res.status(500).json(error.message)
   }
 })
 
-router.delete('/postals/:id',async (req,res) =>{
+router.delete('/scans/:id',async (req,res) =>{
   try{
-    await Postal.deleteOne({ _id: req.params.id })
+    await PostalScan.deleteOne({ _id: req.params.id })
     return res.sendStatus(200)
   }catch(error){
     return res.status(500).json(error.message)
   }
 })
 
-router.delete('/postals',async (req,res) =>{
+router.delete('/scans',async (req,res) =>{
   try{
-    await Postal.deleteMany({})
+    await PostalScan.deleteMany({})
     return res.sendStatus(200)
   }catch(error){
     return res.status(500).json(error.message)

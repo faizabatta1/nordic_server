@@ -229,10 +229,12 @@ const imeiRouter = require('./routes/imeiRouter')
 const postalRouter = require('./routes/postalRoute')
 const mapRouter = require('./routes/mapRouter')
 const notificationRouter = require('./routes/notificationRouter')
+const scanRouter = require('./routes/scanRoute')
 
 app.use(
     '/api',
     vpsRouter,
+    scanRouter,
     notificationRouter,
     mapRouter,
     postalRouter,
@@ -264,10 +266,12 @@ const imeiFront = require('./routes/imeiFront')
 const postalFront = require('./routes/postalFront')
 const mapFront = require('./routes/mapFront')
 const notificationFront = require('./routes/notificationFront')
+const scanFront = require('./routes/scanFront')
 
 
 app.use(
     mapFront,
+    scanFront,
     notificationFront,
     settingsFront,
     driverFront,
