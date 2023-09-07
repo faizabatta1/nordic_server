@@ -85,7 +85,12 @@ app.post('/api/notifications/zones', async (req,res) =>{
                 $in: req.body.zones
             }
         })
-        console.log(req.body)
+
+        imeis = imeis.map(e =>{
+            return e.serial
+        })
+
+        console.log(imeis)
         io.emit('zones', JSON.stringify({
             title: req.body.title,
             body: req.body.body,
