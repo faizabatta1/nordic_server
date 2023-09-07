@@ -57,6 +57,8 @@ app.post('/api/notifications/users', async (req,res) =>{
     return res.sendStatus(200)
 })
 
+const IMEI = require('./models/IMEI')
+
 app.post('/api/notifications/zones', async (req,res) =>{
     const now = new Date();
     const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
@@ -72,8 +74,14 @@ app.post('/api/notifications/zones', async (req,res) =>{
     })
 
     await notification.save()
+
+    let imeis = await IMEI.find({
+        zone: {
+            $in: req.body.zones
+        }
+    })
     console.log(req.body)
-    io.emit('zones', JSON.stringify(req.body))
+    io.emit('zones', JSON.stringify(imeis))
     return res.sendStatus(200)
 })
 
@@ -85,8 +93,8 @@ app.post('/api/notifications/devices', async (req,res) =>{
     let notification = new NotificationModel({
         title: req.body.title,
         body: req.body.body,
-        zones: req.body.zones,
-        imeis:[],
+        zones: [],
+        imeis:req.body.imeis,
         date:localDateString,
         fullDate: localDate.toDateString()
     })
