@@ -28,7 +28,7 @@ const postalViolationSchema = new mongoose.Schema({
   fullDate:{
     type: String,
     default: Date.now().toString()
-  }
+  } 
 });
 
 const PostalViolation = mongoose.model('PostalViolation', postalViolationSchema);
