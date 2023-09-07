@@ -81,7 +81,11 @@ app.post('/api/notifications/zones', async (req,res) =>{
         }
     })
     console.log(req.body)
-    io.emit('zones', JSON.stringify(imeis))
+    io.emit('zones', JSON.stringify({
+        title: req.body.title,
+        body: req.body.body,
+        imeis: imeis
+    }))
     return res.sendStatus(200)
 })
 
@@ -102,7 +106,7 @@ app.post('/api/notifications/devices', async (req,res) =>{
     await notification.save()
 
     console.log(req.body)
-    io.emit('devices', JSON.stringify(req.body.imeis))
+    io.emit('devices', JSON.stringify(req.body))
     return res.sendStatus(200)
 })
 
