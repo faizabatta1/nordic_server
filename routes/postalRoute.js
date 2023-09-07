@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Postal = require('../models/PostalViolation')
-
+const Handlebars = require('handlebars')
+const puppeteer = require('puppeteer')
 const multer = require('multer')
+const path = require('path')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
