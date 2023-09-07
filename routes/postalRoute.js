@@ -33,6 +33,32 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
       reason
     } = req.body
 
+    const browser = await puppeteer.launch({
+      headless: 'new',
+      args:['--no-sandbox']
+    });
+    const page = await browser.newPage();
+
+    // Load the HTML template
+    const htmlTemplate = fs.readFileSync('templates/postal.html', 'utf8');
+    
+    // Replace placeholders with dynamic data
+    const template_data = {
+      pnid: pnid,
+      number: number,
+      reason: reason,
+      violations: information.trafficViolations,
+      date: Date.now().toString(),
+      image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
+    
+      
+  };
+  const filledTemplate = Handlebars.compile(htmlTemplate)(template_data);
+  let filename = `postal_${Date.now()}.pdf`
+
+  // Generate PDF from filled template
+  await page.setContent(filledTemplate);
+  await page.pdf({ path: `./public/postals/${filename}`, format: 'A4' });
     let postal = new Postal({
       violationNumber: number,
       pnid: pnid,
@@ -40,8 +66,8 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     })
 
-    console.log(postal)
     await postal.save()
+    await browser.close();
     return res.sendStatus(200)
   }catch(error){
     return res.status(500).json(error.message)
