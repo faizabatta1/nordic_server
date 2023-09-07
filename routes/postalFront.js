@@ -19,8 +19,9 @@ router.get('/postals/:id', async (req, res) => {
       if (!postal) {
           return res.status(404).json({ error: 'PDF not found' });
       }
-      return res.status(200).render('postals/postal_show.ejs', { pdf });
+      return res.status(200).render('postals/postal_show.ejs', { postal });
   } catch (error) {
+    console.log(error.messa)
       return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
