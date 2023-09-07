@@ -554,6 +554,7 @@ if(response.status == 200){
             toSendZones.push(finalSelectedZones.item(i).getAttribute('data-value'))
           }
 
+          
           let response = await fetch('/api/notifications/zones',{
             method:'POST',
             headers:{
