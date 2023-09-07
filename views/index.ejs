@@ -606,7 +606,7 @@ function zoomed(event) {
 
         try {
             let responseData = await fetchData(`/api/violations/${value}`);
-            let responseRmData = await fetchData(`/api/violations/removed/${value}`);
+            let responseRmData = await fetchData(`/api/violations/removed/gn/${value}`);
             console.log(responseRmData);
             vioHolder.textContent = responseData;
             vioRmHolder.textContent = responseRmData;
