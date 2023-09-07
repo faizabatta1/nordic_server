@@ -5,6 +5,7 @@ const Handlebars = require('handlebars')
 const puppeteer = require('puppeteer')
 const multer = require('multer')
 const path = require('path')
+const fs = require('fs')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
