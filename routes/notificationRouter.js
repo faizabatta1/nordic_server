@@ -16,7 +16,7 @@ router.get('/notifications/imei/:id',async (req,res) =>{
     let { id } = req.params
     let notifications = await NotificationModel.find({
       imeis:{
-        $in: [id]
+        $in: [id,'*']
       }
     })
 

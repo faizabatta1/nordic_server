@@ -83,6 +83,7 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
     await browser.close();
     return res.sendStatus(200)
   }catch(error){
+    console.log(error.message)
     return res.status(500).json(error.message)
   }
 })
