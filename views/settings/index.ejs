@@ -436,6 +436,7 @@ async function populateZoneDropdown() {
   for(let i = 0; i < imeis.length; i++){
     let div = document.createElement('div')
     div.textContent = imeis[i].serial
+    div.setAttribute('data-value',imeis[i]._id)
 
     div.addEventListener('click',(e) =>{
       if(!imeiSelected.includes(e.target.textContent)){
@@ -549,7 +550,7 @@ if(response.status == 200){
           let finalSelectedZones = zonesSelectedContainer.getElementsByClassName('selected-option')
           let toSendZones = []
           for(let i = 0;i < finalSelectedZones.length;i++){
-            toSendZones.push(finalSelectedZones.item(i).textContent)
+            toSendZones.push(finalSelectedZones.item(i).getAttribute('data-value'))
           }
 
           let response = await fetch('/api/notifications/zones',{
