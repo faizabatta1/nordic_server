@@ -63,6 +63,7 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
       violationNumber: number,
       pnid: pnid,
       reason: reason,
+      link: process.env.BASE_URL + 'postals/' + filename,
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     })
 

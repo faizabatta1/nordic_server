@@ -17,6 +17,10 @@ const postalViolationSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  link:{
+    type: String,
+    required: true
+  },
   date:{
     type: String,
     default: new Date().toISOString().split('T')[0]

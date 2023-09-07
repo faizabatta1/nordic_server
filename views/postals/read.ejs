@@ -60,6 +60,7 @@
           <th scope="col">Violation Number</th>
           <th scope="col">PNID</th>
           <th scope="col">Reason</th>
+          <th scope="col">Pdf</th>
           <th scope="col">Image</th>
           <th scope="col">Actions</th>
         </tr>
@@ -70,6 +71,7 @@
             <td><%= postalViolation.violationNumber %></td>
             <td><%= postalViolation.pnid %></td>
             <td><%= postalViolation.reason %></td>
+            <td><a href="/postals/<%= pdf._id %>">Se Postal</a></td>
             <td>
               <button class="btn btn-info btn-sm show-image" data-image-url="<%= postalViolation.image %>">Show Image</button>
             </td>
