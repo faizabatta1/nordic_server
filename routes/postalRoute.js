@@ -50,7 +50,6 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
       pnid: pnid,
       number: number,
       reason: reason,
-      violations: information.trafficViolations,
       date: Date.now().toString(),
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     
