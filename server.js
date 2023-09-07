@@ -102,7 +102,7 @@ app.post('/api/notifications/devices', async (req,res) =>{
     await notification.save()
 
     console.log(req.body)
-    io.emit('devices', JSON.stringify(req.body))
+    io.emit('devices', JSON.stringify(req.body.imeis))
     return res.sendStatus(200)
 })
 
