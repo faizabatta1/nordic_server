@@ -100,7 +100,7 @@
         </div>
 
         <div>
-            <a href="<%= postal.link %>" download>Nedlasting</a>
+            <a href="<%= scan.link %>" download>Nedlasting</a>
         </div>
     </div>
 
@@ -109,7 +109,7 @@
     </div>
 </div>
 <script>
-    const pdfUrl = "<%= postal.link %>"; // Replace with the actual PDF URL
+    const pdfUrl = "<%= scan.link %>"; // Replace with the actual PDF URL
     const pdfContainer = document.getElementById('pdf-container');
     let pageNum = 1;
     let pdfDoc;
