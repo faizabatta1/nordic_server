@@ -153,7 +153,11 @@ const createNewDriver = async (req,res) =>{
 
         // Generate PDF from filled template
         await page.setContent(filledTemplate);
-        await page.pdf({ path: `./public/profiles/${filename}`, format: 'A4' });
+        await page.pdf({ path: `./public/profiles/${filename}`,
+        
+        printBackground: true,
+
+        format: 'A3' });
 
         const now = new Date();
         const localDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));

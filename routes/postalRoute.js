@@ -56,21 +56,16 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
     
       
   };
-  let height = await page.evaluate(
-    () => document.documentElement.offsetHeight
-);
-
-let width = await page.evaluate(
-  () => document.documentElement.offsetWidth
-);
   const filledTemplate = Handlebars.compile(htmlTemplate)(template_data);
   let filename = `postal_${Date.now()}.pdf`
-  await page.addStyleTag({
-    content: `@page { size:${width}px ${height}px;}`
-})
+  
   // Generate PDF from filled template
   await page.setContent(filledTemplate);
-  await page.pdf({ path: `./public/postals/${filename}`,printBackground: true,});
+  await page.pdf({ 
+    path: `./public/postals/${filename}`,
+    printBackground: true,
+    format: 'A0',
+  });
     let postal = new Postal({
       violationNumber: number,
       pnid: pnid,
