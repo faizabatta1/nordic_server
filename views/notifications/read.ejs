@@ -86,14 +86,11 @@
             // Get the modal element
             const modal = document.getElementById('listModal');
     
-            // Get the modal content element
-            const modalContent = document.getElementById('modal-content');
-    
             // Set the modal title
-            modalContent.querySelector('.modal-title').innerText = `${title} List`;
+            document.querySelector('.modal-title').innerText = `${title} List`;
     
             // Clear previous content
-            modalContent.querySelector('.modal-body').innerHTML = '';
+            document.querySelector('.modal-body').innerHTML = '';
     
             // Create a list element to display the data
             const list = document.createElement('ul');
