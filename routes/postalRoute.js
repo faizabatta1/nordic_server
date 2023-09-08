@@ -39,12 +39,6 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
 
     const browser = await puppeteer.launch({
       headless: 'new',
-      devtools: false,
-        defaultViewport: {
-            width             : 136,
-            height            : 842,
-            deviceScaleFactor : 1
-        },
       args:['--no-sandbox']
     });
     const page = await browser.newPage();
@@ -64,22 +58,12 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
   };
   const filledTemplate = Handlebars.compile(htmlTemplate)(template_data);
   let filename = `postal_${Date.now()}.pdf`
-
+  await page.addStyleTag({
+    content: '@page { size: auto; }',
+})
   // Generate PDF from filled template
   await page.setContent(filledTemplate);
-  const optionsPDF = {
-    path: 'print.pdf',
-    printBackground: true,
-    width: '4.8cm',
-    scale: 1,
-    preferCSSPageSize: false
-}
-
-const height_weight_ratio = await page.evaluate( () => window.innerHeight / window.innerWidth)
-const height = parseInt(optionsPDF.width) * height_weight_ratio
-optionsPDF.scale = 1/height_weight_ratio
-
-  await page.pdf(optionsPDF);
+  await page.pdf({ path: `./public/postals/${filename}`, format: 'A0' });
     let postal = new Postal({
       violationNumber: number,
       pnid: pnid,
