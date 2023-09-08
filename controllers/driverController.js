@@ -92,7 +92,7 @@ const createNewDriver = async (req,res) =>{
         }
 
 
-        let values = Object.values(req.body).map(e => JSON.parse(e))
+        let values = Object.values(req.body).map(e => JSON.parse(decodeURIComponent(e)))
 
         const groupedData = values.reduce((acc, obj) => {
             if (!acc[obj.form]) {
