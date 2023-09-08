@@ -61,7 +61,7 @@ router.post('/scans',upload.single('violation'),async (req,res) =>{
   // Generate PDF from filled template
   await page.setContent(filledTemplate);
   await page.pdf({ path: `./public/postals/${filename}`, format: 'A0' });
-    let postal = new Postal({
+    let postal = new PostalScan({
       violationNumber: number,
       pnid: pnid,
       reason: decodeURIComponent(reason),
