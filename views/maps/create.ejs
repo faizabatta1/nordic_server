@@ -89,7 +89,7 @@ async function populateZoneDropdown() {
     const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 59.911491, lng: 10.757933 }, // Centered on Norway
         zoom: 13, // Adjust the zoom level as needed
-        mapTypeId: 'satellite',
+        mapTypeId: google.maps.MapTypeId.HYBRID
     });
 
 
