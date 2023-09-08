@@ -39,13 +39,13 @@
             <!-- Table Body -->
             <tbody id="notificationTableBody">
                 <% notifications.forEach(function(notification) { %>
-
+                    <tr>
                 <td><%= notification.date %></td>
                     <td><%= notification.title %></td>
                     <td><%= notification.body %></td>
                     <td><%= notification.imeis %></td>
                     <td><%= notification.zones %></td>
-
+                </tr>
                 <% }); %>
 
             </tbody>
