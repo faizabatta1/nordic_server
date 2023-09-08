@@ -123,6 +123,14 @@
             align-items: flex-start
         }
 
+        .table-container,.img-container{
+            width:90%;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
     </style>
     <meta charset="UTF-8" />
 </head>
@@ -140,35 +148,35 @@
         <div></div>
     </div>
     <hr>
-    <table class="reports">
-        <colgroup>
-            <col style="width: auto;">
-            <col style="width: auto;">
-            <col style="width: 100%;">
-        </colgroup>
-        <tr>
-            <td colspan="2">Date</td>
-            <td>{{date}}</td>
-        </tr>
-        <tr>
-            <td colspan="2">Pnid</td>
-            <td>{{pnid}}</td>
-        </tr>
-        <tr>
-            <td colspan="2">Number</td>
-            <td>{{number}}</td>
-        </tr>
-        <tr>
-            <td colspan="2">Reason</td>
-            <td>{{reason}}</td>
-        </tr>
-    </table>
+    <div class="table-container">
+        <table class="reports">
+            <colgroup>
+                <col style="width: auto;">
+                <col style="width: auto;">
+                <col style="width: 100%;">
+            </colgroup>
+            <tr>
+                <td colspan="2">Date</td>
+                <td>{{date}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">Pnid</td>
+                <td>{{pnid}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">Number</td>
+                <td>{{number}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">Reason</td>
+                <td>{{reason}}</td>
+            </tr>
+        </table>
+    </div>
 
 
-    <div class="page-break-before: always; page-break-inside: avoid-page;">
-        <div class="holder" style="page-break-after: avoid-page;">
-            <img src="{{image}}" alt="{{image}}" style="page-break-inside: avoid;">
-        </div>
+    <div class="img-container">
+        <img src="{{image}}" alt="{{image}}">
     </div>
 </div>
 </div>
