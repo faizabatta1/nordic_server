@@ -538,6 +538,13 @@ if(response.status == 200){
             })
           })
 
+          if(response.status == 200){
+            $('#successModal').modal('show');
+            setTimeout(() =>{
+              $('#successModal').modal('hide')
+            },1000)
+          }
+
           console.log(response.body);
         }catch(error){
           console.log(error)
@@ -566,6 +573,13 @@ if(response.status == 200){
               zones: toSendZones
             })
           })
+
+          if(response.status == 200){
+            $('#successModal').modal('show');
+            setTimeout(() =>{
+              $('#successModal').modal('hide')
+            },1000)
+          }
         }catch(error){
           console.log(error)
         }
@@ -591,6 +605,13 @@ if(response.status == 200){
               imeis: toSendImeis
             })
           })
+
+          if(response.status == 200){
+            $('#successModal').modal('show');
+            setTimeout(() =>{
+              $('#successModal').modal('hide')
+            },1000)
+          }
         }catch(error){
           console.log(error)
         }
