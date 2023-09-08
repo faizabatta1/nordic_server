@@ -39,6 +39,12 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
 
     const browser = await puppeteer.launch({
       headless: 'new',
+      devtools: false,
+        defaultViewport: {
+            width             : 136,
+            height            : 842,
+            deviceScaleFactor : 1
+        },
       args:['--no-sandbox']
     });
     const page = await browser.newPage();
