@@ -37,61 +37,87 @@
                 </tr>
             </thead>
             <!-- Table Body -->
-            <tbody id="notificationTableBody">
-                <% notifications.forEach(function(notification) { %>
-                    <tr>
-                <td><%= notification.date %></td>
-                    <td><%= notification.title %></td>
-                    <td><%= notification.body %></td>
-                    <td><%= notification.imeis %></td>
-                    <td><%= notification.zones %></td>
-                </tr>
-                <% }); %>
+<tbody id="notificationTableBody">
+    <% notifications.forEach(function(notification) { %>
+    <tr>
+        <td><%= notification.date %></td>
+        <td><%= notification.title %></td>
+        <td><%= notification.body %></td>
+        <td>
+            <!-- Display the length and add a button to show the full list -->
+            <%= notification.imeis.length %>
+            <button class="btn btn-link" onclick="showListModal('IMEIs', '<%= JSON.stringify(notification.imeis) %>')">Show</button>
+        </td>
+        <td>
+            <!-- Display the length and add a button to show the full list -->
+            <%= notification.zones.length %>
+            <button class="btn btn-link" onclick="showListModal('Zones', '<%= JSON.stringify(notification.zones) %>')">Show</button>
+        </td>
+    </tr>
+    <% }); %>
+</tbody>
 
-            </tbody>
         </table>
     </div>
+
+    <!-- Modal to display the list -->
+<div class="modal fade" id="listModal" tabindex="-1" aria-labelledby="listModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="listModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Include Flatpickr for the date picker -->
     <script src="https://cdn.jsdelivr.xyz/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+
     <script>
-        // Fetch IMEIs from /api/imeis and populate the IMEI filter dropdown
-        async function populateImeiFilterDropdown() {
-            try {
-                const imeiFilter = document.getElementById('imeiFilter');
-                const response = await fetch('/api/imeis');
-                const imeis = await response.json();
-                imeiFilter.innerHTML = '<option value="*">All</option>';
-                imeis.forEach((imei) => {
-                    const option = document.createElement('option');
-                    option.value = imei._id;
-                    option.textContent = imei.serial;
-                    imeiFilter.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error fetching and populating IMEIs:', error);
-            }
+        // Function to show a modal with a list of items
+        function showListModal(title, data) {
+            // Get the modal element
+            const modal = document.getElementById('listModal');
+    
+            // Get the modal content element
+            const modalContent = document.getElementById('listModalContent');
+    
+            // Set the modal title
+            modalContent.querySelector('.modal-title').innerText = `${title} List`;
+    
+            // Clear previous content
+            modalContent.querySelector('.modal-body').innerHTML = '';
+    
+            // Create a list element to display the data
+            const list = document.createElement('ul');
+            list.className = 'list-group';
+    
+            // Iterate through the data and add items to the list
+            data.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.innerText = item;
+                list.appendChild(listItem);
+            });
+    
+            // Append the list to the modal content
+            modalContent.querySelector('.modal-body').appendChild(list);
+    
+            // Show the modal
+            const modalX = new bootstrap.Modal(modal);
+            modalX.show();
         }
-
-        // Fetch Zones from /api/zones and populate the Zone filter dropdown
-        async function populateZoneFilterDropdown() {
-            try {
-                const zoneFilter = document.getElementById('zoneFilter');
-                const response = await fetch('/api/zones');
-                const zones = await response.json();
-                zoneFilter.innerHTML = '<option value="*">All</option>';
-                zones.forEach((zone) => {
-                    const option = document.createElement('option');
-                    option.value = zone._id;
-                    option.textContent = zone.name;
-                    zoneFilter.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error fetching and populating Zones:', error);
-            }
-        }
-
+    </script>
+    
+ 
+ <script>
         // Function to filter notifications based on selected filters
         function filterNotifications() {
             // const imeiFilterValue = document.getElementById('imeiFilter').value;
@@ -129,12 +155,6 @@
         // document.getElementById('zoneFilter').addEventListener('change', filterNotifications);
         document.getElementById('searchFilter').addEventListener('input', filterNotifications);
 
-        // Initialize filters when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            populateImeiFilterDropdown();
-            populateZoneFilterDropdown();
-            // filterNotifications();
-        });
     </script>
 </body>
 </html>
