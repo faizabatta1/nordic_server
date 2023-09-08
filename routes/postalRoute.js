@@ -61,11 +61,11 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
 
   // Generate PDF from filled template
   await page.setContent(filledTemplate);
-  await page.pdf({ path: `./public/postals/${filename}`, format: 'A4' });
+  await page.pdf({ path: `./public/postals/${filename}`, format: 'A0' });
     let postal = new Postal({
       violationNumber: number,
       pnid: pnid,
-      reason: reason,
+      reason: decodeURIComponent(reason),
       link: process.env.BASE_URL + 'postals/' + filename,
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     })
