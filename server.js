@@ -11,6 +11,7 @@ const app = express()
 
 const server = http.createServer(app);
 const io = socketIo(server);
+io.set('transports', ['websocket']);
 
 // WebSocket connection handling
 io.on('connection', (socket) => {
