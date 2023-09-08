@@ -67,7 +67,19 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
 
   // Generate PDF from filled template
   await page.setContent(filledTemplate);
-  await page.pdf({ path: `./public/postals/${filename}`, format: 'A0' });
+  const optionsPDF = {
+    path: 'print.pdf',
+    printBackground: true,
+    width: '4.8cm',
+    scale: 1,
+    preferCSSPageSize: false
+}
+
+const height_weight_ratio = await page.evaluate( () => window.innerHeight / window.innerWidth)
+const height = parseInt(optionsPDF.width) * height_weight_ratio
+optionsPDF.scale = 1/height_weight_ratio
+
+  await page.pdf(optionsPDF);
     let postal = new Postal({
       violationNumber: number,
       pnid: pnid,
