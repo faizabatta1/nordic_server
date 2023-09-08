@@ -14,7 +14,9 @@ const io = socketIo(server);
 
 // WebSocket connection handling
 io.on('connection', (socket) => {
-    console.log('A user connected ' + socket.imei);
+    socket.on('imei', (imei) =>{
+        console.log('A user connected ' + imei);
+    })
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
