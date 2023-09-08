@@ -64,7 +64,7 @@
 const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: +'<%- map.latitude %>', lng: +'<%- map.longitude %>' }, // Centered on Norway
         zoom: 14, // Adjust the zoom level as needed
-        mapTypeId: 'satellite',
+        mapTypeId: google.maps.MapTypeId.HYBRID
     });
 
           // Function to parse and display GeoJSON data on the map
