@@ -43,8 +43,8 @@
                 <td><%= notification.date %></td>
                     <td><%= notification.title %></td>
                     <td><%= notification.body %></td>
-                    <td class="overflow-hidden"><%= notification.imeis %></td>
-                    <td class="overflow-hidden"><%= notification.zones %></td>
+                    <td><%= notification.imeis.length %></td>
+                    <td><%= notification.zones.length %></td>
                 </tr>
                 <% }); %>
 
