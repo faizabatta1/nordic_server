@@ -45,12 +45,17 @@ router.post('/scans',upload.single('violation'),async (req,res) =>{
     // Load the HTML template
     const htmlTemplate = fs.readFileSync('templates/postal.html', 'utf8');
     
+
+
+    const now = new Date();
+    const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+    const localDateString = localDate.toISOString().split('T')[0];
     // Replace placeholders with dynamic data
     const template_data = {
       pnid: pnid,
       number: number,
       reason: decodeURIComponent(reason),
-      date: new Date(+Date.now().toString()).toLocaleString(),
+      date: localDateString,
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     
       
