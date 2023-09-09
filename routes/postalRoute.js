@@ -33,10 +33,14 @@ router.get('/postals',async (req,res) =>{
   }
 })
 
-router.post('/postals',upload.single('violation'),async (req,res) =>{
+router.post('/postals',(req,res,next) => {
   res.header("Content-Type", 'application/json');
   res.header("Access-Control-Allow-Origin", "*");
+
+  return next()
+},upload.single('violation'),async (req,res) =>{
   
+
   try{
     console.log(req.body)
     const {
