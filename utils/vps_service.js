@@ -77,6 +77,11 @@ function prepareBackup(){
   && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=formfields  --out=formfields.json \
   && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=cars  --out=cars.json \
   && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=accidents  --out=accidents.json \
+  && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=imeis  --out=imeis.json \
+  && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=zones  --out=zones.json \
+  && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=maps  --out=maps.json \
+  && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=postalviolations  --out=postalviolations.json \
+  && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=postalscans  --out=postalscans.json \
   `, (err, stream) => {
    if (err) {
        console.log(err);
