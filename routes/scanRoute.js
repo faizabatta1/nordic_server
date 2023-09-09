@@ -49,7 +49,7 @@ router.post('/scans',upload.single('violation'),async (req,res) =>{
     const template_data = {
       pnid: pnid,
       number: number,
-      reason: reason,
+      reason: decodeURIComponent(reason),
       date: new Date(+Date.now().toString()).toLocaleString(),
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     

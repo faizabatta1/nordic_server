@@ -50,7 +50,7 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
     const template_data = {
       pnid: pnid,
       number: number,
-      reason: reason,
+      reason: decodeURIComponent(reason),
       date: new Date(+Date.now().toString()).toLocaleString(),
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     
@@ -74,16 +74,8 @@ router.post('/postals',upload.single('violation'),async (req,res) =>{
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     })
 
-    let scan = new PostalScan({
-      violationNumber: number,
-      pnid: pnid,
-      reason: reason,
-      link: process.env.BASE_URL + 'postals/' + filename,
-      image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
-    })
 
     await postal.save()
-    await scan.save()
     await browser.close();
     return res.sendStatus(200)
   }catch(error){
