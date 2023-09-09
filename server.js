@@ -3,26 +3,26 @@ require('./utils/mongodbConnection')
 const qr = require('qr-image');
 const fs = require('fs')
 
-const http = require('http');
-const socketIo = require('socket.io');
+// const http = require('http');
+// const socketIo = require('socket.io');
 
 const express = require('express')
 const app = express()
 
-const server = http.createServer(app);
-const io = socketIo(server);
-io.set('transports', ['websocket']);
+// const server = http.createServer(app);
+// const io = socketIo(server);
+// io.set('transports', ['websocket']);
 
 // WebSocket connection handling
-io.on('connection', (socket) => {
-    socket.on('imei', (imei) =>{
-        console.log('A user connected ' + imei);
-    })
+// io.on('connection', (socket) => {
+//     socket.on('imei', (imei) =>{
+//         console.log('A user connected ' + imei);
+//     })
 
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
-    });
-});
+//     socket.on('disconnect', () => {
+//         console.log('User disconnected');
+//     });
+// });
 
 
 const bodyParser = require('body-parser')
@@ -38,99 +38,99 @@ app.use(cors())
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs')
 
-const NotificationModel = require('./models/NotificationModel')
+// const NotificationModel = require('./models/NotificationModel')
 
-app.post('/api/notifications/users', async (req,res) =>{
-    try{
-        const now = new Date();
-        const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
-        const localDateString = localDate.toISOString().split('T')[0];
+// app.post('/api/notifications/users', async (req,res) =>{
+//     try{
+//         const now = new Date();
+//         const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+//         const localDateString = localDate.toISOString().split('T')[0];
     
-        let notification = new NotificationModel({
-            title: req.body.title,
-            body: req.body.body,
-            date:localDateString,
-            fullDate: localDate.toDateString()
-        })
+//         let notification = new NotificationModel({
+//             title: req.body.title,
+//             body: req.body.body,
+//             date:localDateString,
+//             fullDate: localDate.toDateString()
+//         })
     
-        await notification.save()
+//         await notification.save()
     
-        console.log(req.body)
-        io.emit('users', JSON.stringify(req.body))
-        return res.sendStatus(200)
-    }catch(error){
-        console.log(error.message)
-        return res.status(500).json(error.message)
-    }
-})
+//         console.log(req.body)
+//         io.emit('users', JSON.stringify(req.body))
+//         return res.sendStatus(200)
+//     }catch(error){
+//         console.log(error.message)
+//         return res.status(500).json(error.message)
+//     }
+// })
 
-const IMEI = require('./models/IMEI')
+// const IMEI = require('./models/IMEI')
 
-app.post('/api/notifications/zones', async (req,res) =>{
-    try{
-        const now = new Date();
-        const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
-        const localDateString = localDate.toISOString().split('T')[0];
+// app.post('/api/notifications/zones', async (req,res) =>{
+//     try{
+//         const now = new Date();
+//         const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+//         const localDateString = localDate.toISOString().split('T')[0];
     
-        let notification = new NotificationModel({
-            title: req.body.title,
-            body: req.body.body,
-            zones: req.body.zones,
-            imeis:[],
-            date:localDateString,
-            fullDate: localDate.toDateString()
-        })
+//         let notification = new NotificationModel({
+//             title: req.body.title,
+//             body: req.body.body,
+//             zones: req.body.zones,
+//             imeis:[],
+//             date:localDateString,
+//             fullDate: localDate.toDateString()
+//         })
     
-        await notification.save()
+//         await notification.save()
     
-        let imeis = await IMEI.find({
-            zone: {
-                $in: req.body.zones
-            }
-        })
+//         let imeis = await IMEI.find({
+//             zone: {
+//                 $in: req.body.zones
+//             }
+//         })
 
-        imeis = imeis.map(e =>{
-            return e.serial
-        })
+//         imeis = imeis.map(e =>{
+//             return e.serial
+//         })
 
-        console.log(imeis)
-        io.emit('zones', JSON.stringify({
-            title: req.body.title,
-            body: req.body.body,
-            imeis: imeis
-        }))
-        return res.sendStatus(200)
-    }catch(error){
-        console.log(error.message)
-        return res.status(500).json(error.message)
-    }
-})
+//         console.log(imeis)
+//         io.emit('zones', JSON.stringify({
+//             title: req.body.title,
+//             body: req.body.body,
+//             imeis: imeis
+//         }))
+//         return res.sendStatus(200)
+//     }catch(error){
+//         console.log(error.message)
+//         return res.status(500).json(error.message)
+//     }
+// })
 
-app.post('/api/notifications/devices', async (req,res) =>{
-    try{
-        const now = new Date();
-        const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
-        const localDateString = localDate.toISOString().split('T')[0];
+// app.post('/api/notifications/devices', async (req,res) =>{
+//     try{
+//         const now = new Date();
+//         const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+//         const localDateString = localDate.toISOString().split('T')[0];
     
-        let notification = new NotificationModel({
-            title: req.body.title,
-            body: req.body.body,
-            zones: [],
-            imeis:req.body.imeis,
-            date:localDateString,
-            fullDate: localDate.toDateString()
-        })
+//         let notification = new NotificationModel({
+//             title: req.body.title,
+//             body: req.body.body,
+//             zones: [],
+//             imeis:req.body.imeis,
+//             date:localDateString,
+//             fullDate: localDate.toDateString()
+//         })
     
-        await notification.save()
+//         await notification.save()
     
-        console.log(req.body)
-        io.emit('devices', JSON.stringify(req.body))
-        return res.sendStatus(200)
-    }catch(error){
-        console.log(error.message)
-        return res.status(500).json(error.message)
-    }
-})
+//         console.log(req.body)
+//         io.emit('devices', JSON.stringify(req.body))
+//         return res.sendStatus(200)
+//     }catch(error){
+//         console.log(error.message)
+//         return res.status(500).json(error.message)
+//     }
+// })
 
 app.get('/login', (req,res) =>{
     return res.status(200).render('auth/login')
@@ -351,4 +351,4 @@ const combinedViolations = violations.reduce((result, v) => {
 
 const port = process.env.port || 9090
 server.listen(port, () => console.log(`Socket Server is running on port ${port}`))
-app.listen(5555, () => console.log(`Normal Server is running on port ${5555}`))
+// app.listen(5555, () => console.log(`Normal Server is running on port ${5555}`))
