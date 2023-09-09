@@ -63,7 +63,8 @@ function prepareBackup(){
   
   // Restart your VPS by executing a command
   conn.exec(`
-  mkdir -p ~/backup \
+  sudo rm -rf ~/backup \
+  && mkdir -p ~/backup \
   && cp -R ~/workspace/Bilsjekkserverp/public ~/backup \
   && cd ~/backup \
   && mkdir ${localDateString} \
@@ -82,7 +83,6 @@ function prepareBackup(){
   && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=maps  --out=maps.json \
   && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=postalviolations  --out=postalviolations.json \
   && mongoexport --uri="mongodb://admin:admin123@127.0.0.1:27017/admin"  --collection=postalscans  --out=postalscans.json \
-  && rm -rf ~/backup
   `, (err, stream) => {
    if (err) {
        console.log(err);
