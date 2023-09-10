@@ -128,7 +128,53 @@
   </div>
 
   <script src="https://unpkg.com/medium-zoom@1.0.8/dist/medium-zoom.js"></script>
-  
+ 
+  <script>
+    const datePicker = document.getElementById('datePicker');
+    const cards = document.getElementsByClassName('card');
+
+    datePicker.addEventListener('change', function () {
+        const selectedDate = datePicker.value;
+
+        for (let i = 0; i < cards.length; i++) {
+            const dateInfo = cards[i].querySelector('.card-title').textContent;
+            if (dateInfo.includes(selectedDate)) {
+                cards[i].style.display = '';
+            } else {
+                cards[i].style.display = 'none';
+            }
+        }
+    });
+
+    const now = new Date();
+    const localDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
+    const localDateString = localDate.toISOString().split('T')[0];
+
+    for (let i = 0; i < cards.length; i++) {
+            const dateInfo = cards[i].querySelector('.card-title').textContent;
+            if (dateInfo == localDateString) {
+                cards[i].style.display = '';
+            } else {
+                cards[i].style.display = 'none';
+            }
+        }
+
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('keyup', function () {
+        const filter = searchInput.value.toLowerCase();
+
+        for (let i = 0; i < cards.length; i++) {
+            const cardContent = cards[i].textContent.toLowerCase();
+            if (cardContent.includes(filter)) {
+                cards[i].style.display = 'block !important';
+            } else {
+                cards[i].style.display = 'none !important';
+            }
+        }
+    });
+</script>
+
   <script>
     // JavaScript to handle showing the image on top of body elements
     const showImageButtons = document.querySelectorAll('.show-image');
