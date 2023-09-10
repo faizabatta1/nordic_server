@@ -159,6 +159,37 @@
   <script>
     const searchInput = document.getElementById('searchInput');
     const tableRows = document.getElementsByTagName('tr');
+    const datePicker = document.getElementById('datePicker');
+
+    datePicker.addEventListener('change', function () {
+        const selectedDate = datePicker.value;
+        console.log(selectedDate)
+
+        for (let i = 1; i < tableRows.length; i++) {
+            const dateCell = tableRows[i].getElementsByTagName('td')[0]; // Adjust the index as per your table structure
+            console.log(dateCell.innerText)
+            if (dateCell && dateCell.innerText == selectedDate) {
+                tableRows[i].style.display = '';
+            } else {
+                tableRows[i].style.display = 'none';
+            }
+        }
+    });
+
+    const now = new Date();
+    const localDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
+    const localDateString = localDate.toISOString().split('T')[0];
+    console.log(localDateString);
+
+    for (let i = 1; i < tableRows.length; i++) {
+            const dateCell = tableRows[i].getElementsByTagName('td')[0]; // Adjust the index as per your table structure
+            console.log(dateCell.innerText)
+            if (dateCell && dateCell.innerText == localDateString) {
+                tableRows[i].style.display = '';
+            } else {
+                tableRows[i].style.display = 'none';
+            }
+        }
 
 
 searchInput.addEventListener('keyup', function () {
