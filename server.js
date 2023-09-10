@@ -87,23 +87,26 @@ app.post('/api/notifications/zones', async (req,res) =>{
         const now = new Date();
         const localDate = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
         const localDateString = localDate.toISOString().split('T')[0];
-    
+   
+        
+        let imeis = await IMEI.find({
+            zone: {
+                $in: req.body.zones
+            }
+        })
+
         let notification = new NotificationModel({
             title: req.body.title,
             body: req.body.body,
             zones: req.body.zones,
-            imeis:[],
+            imeis:imeis,
             date:localDateString,
             fullDate: localDate.toDateString()
         })
     
         await notification.save()
     
-        let imeis = await IMEI.find({
-            zone: {
-                $in: req.body.zones
-            }
-        })
+        
 
         imeis = imeis.map(e =>{
             return e.serial

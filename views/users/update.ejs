@@ -33,6 +33,21 @@
     <div id="output"></div>
 </div>
 
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Suksess</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Endringene er lagret!
+            </div>
+        </div>
+    </div>
+    </div>
+
 
 
 <script>
@@ -71,11 +86,10 @@
         })
             .then(response => {
                 if (response.status === 200) {
-                    // Reload the page after successful deletion
-                    showAlert("User Was Updated","info")
+                    $('#successModal').modal('show');
                     setTimeout(() =>{
-                        location.href = '/users'
-                    },3000)
+                        $('#successModal').modal('hide');
+                    },1000)
                 } else {
                     showAlert("Kunne ikke oppdatere bruker","danger")
                 }
