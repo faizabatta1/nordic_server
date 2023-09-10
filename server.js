@@ -9,21 +9,7 @@ const socketIo = require('socket.io');
 const express = require('express')
 const app = express()
 
-const server = http.createServer(app);
-const io = socketIo(server,{
-    transports: ["websocket"], // Specify the transports you want to use
-  });
 
-// WebSocket connection handling
-io.on('connection', (socket) => {
-    socket.on('imei', (imei) =>{
-        console.log('A user connected ' + imei);
-    })
-
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
-    });
-});
 
 
 const bodyParser = require('body-parser')
@@ -38,6 +24,32 @@ app.use(cors())
 
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs')
+
+const server = http.createServer(app);
+const io = socketIo(server,{
+    transports: ["websocket"], // Specify the transports you want to use
+  });
+const IMEI = require('./models/IMEI')
+
+
+// WebSocket connection handling
+io.on('connection', (socket) => {
+    socket.on('imei', async (imei) =>{
+        let imei = new IMEI({
+            zone: null,
+            serial: imei
+        })
+        let isSaved = await imei.save()
+
+        if(isSaved){
+            console.log('A user connected ' + imei);
+        }
+    })
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
+});
 
 const NotificationModel = require('./models/NotificationModel')
 
@@ -65,7 +77,6 @@ app.post('/api/notifications/users', async (req,res) =>{
     }
 })
 
-const IMEI = require('./models/IMEI')
 
 app.post('/api/notifications/zones', async (req,res) =>{
     try{

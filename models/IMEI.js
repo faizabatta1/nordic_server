@@ -5,18 +5,14 @@ const IMEISchema = new mongoose.Schema({
     type: String,
     required: true,
     unique:true
-    // validate: {
-    //   validator: function (value) {
-    //     // Use a regular expression to validate the IMEI format (15 digits)
-    //     const imeiRegex = /^\d{15}$/;
-    //     return imeiRegex.test(value);
-    //   },
-    //   message: 'Invalid IMEI format. IMEI must be a 15-digit number.',
-    // },
+  },
+  name:{
+    type: String,
+    default: null
   },
   zone:{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Zone'
+    ref: 'Zone',
   }
 });
 
