@@ -48,7 +48,7 @@
   <%- include('../components/navbar.ejs') %>
 
   <div class="container">
-    <div class="form-group d-flex justify-content-between">
+    <div class="form-group d-flex justify-content-between mt-3">
       <input type="text" class="form-control mr-2" id="searchInput" placeholder="Søk etter dato, navn, bruker, ID eller lenke">
       <input type="date" class="form-control mr-2" id="datePicker" placeholder="Select a date">
       <button class="btn btn-danger btn-sm mr-2" data-toggle="modal" data-target="#deleteAllPostalsModal" style="width: 240px;" >Slett alle</button>
@@ -139,8 +139,47 @@
     </div>
 </div>
 
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">Suksess</h5>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Endringene er lagret!
+          </div>
+      </div>
+  </div>
+  </div>
+
   <script src="https://unpkg.com/medium-zoom@1.0.8/dist/medium-zoom.js"></script>
  
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.getElementsByTagName('tr');
+
+
+searchInput.addEventListener('keyup', function () {
+    const filter = searchInput.value.toLowerCase();
+
+    for (let i = 1; i < tableRows.length; i++) {
+        const columns = tableRows[i].getElementsByTagName('td');
+        let rowContent = "";
+        for (let j = 0; j < columns.length; j++) {
+            rowContent += columns[j].innerText.toLowerCase() + " ";
+        }
+
+        if (rowContent.includes(filter)) {
+            tableRows[i].style.display = '';
+        } else {
+            tableRows[i].style.display = 'none';
+        }
+    }
+});
+  </script>
+
   <script>
     async function deleteAllPostals(){
       try{
