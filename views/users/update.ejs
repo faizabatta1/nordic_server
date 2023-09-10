@@ -48,6 +48,21 @@
     </div>
     </div>
 
+    <!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Feil</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Noe gikk galt. Vennligst prøv igjen senere.
+            </div>
+        </div>
+    </div>
+  </div>
+
 
 
 <script>
@@ -91,12 +106,17 @@
                         $('#successModal').modal('hide');
                     },1000)
                 } else {
-                    showAlert("Kunne ikke oppdatere bruker","danger")
+                    $('#errorModal').modal('show');
+                    setTimeout(() =>{
+                        $('#errorModal').modal('hide');
+                    },1000)
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                showAlert("Det oppsto en feil under oppdatering av bruker.",'danger')
+                $('#errorModal').modal('show');
+                    setTimeout(() =>{
+                        $('#errorModal').modal('hide');
+                    },1000)
             });
     }
 </script>
