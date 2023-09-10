@@ -71,14 +71,9 @@
 <body>
   <%- include('../components/navbar.ejs') %>
 
-    <div class="row mt-4 mb-3">
-      <div class="col">
-        <h1>Postal Scans</h1>
-      </div>
-    </div>
 
     <div class="container custom-container">
-      <div class="custom-controls d-flex justify-content-between">
+      <div class="custom-controls d-flex justify-content-between mb-2">
         <input type="text" class="form-control mr-3" id="searchInput" placeholder="Search...">
         <input type="date" class="form-control" id="datePicker" placeholder="Select a date">
       </div>
@@ -89,7 +84,7 @@
             <div class="card-body">
               <h5 class="card-title">Violation Number: <%= postalViolation.violationNumber %></h5>
               <p class="card-text">PNID: <%= postalViolation.pnid %></p>
-              <p class="card-text">Reason: <%= postalViolation.reason %></p>
+              <p class="card-text">Date: <%= postalViolation.date %></p>
               <div class="d-flex justify-content-end align-items-center">
                 <a href="/scans/<%= postalViolation.id %>" class="btn btn-info btn-sm">See Postal</a>
               </div>
