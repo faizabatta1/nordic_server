@@ -85,6 +85,7 @@ router.post('/postals',(req,res,next) => {
     let postal = new Postal({
       violationNumber: number,
       pnid: pnid,
+      date: localDateString,
       reason: decodeURIComponent(reason),
       link: process.env.BASE_URL + 'postals/' + filename,
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')

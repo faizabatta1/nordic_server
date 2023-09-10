@@ -48,6 +48,12 @@
   <%- include('../components/navbar.ejs') %>
 
   <div class="container">
+    <div class="form-group d-flex justify-content-between">
+      <input type="text" class="form-control mr-2" id="searchInput" placeholder="Søk etter dato, navn, bruker, ID eller lenke">
+      <input type="date" class="form-control mr-2" id="datePicker" placeholder="Select a date">
+      <button class="btn btn-danger btn-sm mr-2" data-toggle="modal" data-target="#deleteAllPostalsModal" style="width: 240px;" >Slett alle</button>
+  </div>
+
     <div class="row mt-4 mb-3">
       <div class="col">
         <h1>Postal Violations</h1>
@@ -57,6 +63,7 @@
     <table class="table table-striped table-bordered text-center">
       <thead>
         <tr>
+          <th scope="col">Date</th>
           <th scope="col">Violation Number</th>
           <th scope="col">PNID</th>
           <th scope="col">Reason</th>
@@ -68,6 +75,7 @@
       <tbody>
         <% postalViolations.forEach(function(postalViolation) { %>
           <tr>
+            <td><%= postalViolation.date %></td>
             <td><%= postalViolation.violationNumber %></td>
             <td><%= postalViolation.pnid %></td>
             <td><%= postalViolation.reason %></td>
@@ -110,8 +118,49 @@
     </div>
   </div>
 
+
+  <div class="modal fade" id="deleteAllPostalsModal" tabindex="-1" aria-labelledby="deleteAllPdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAllPdfModalLabel">Slett PDF-bekreftelse</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete all postals?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteAllPostals()" id="confirmDeleteBtn">Slett</button>
+            </div>
+        </div>
+    </div>
+</div>
+
   <script src="https://unpkg.com/medium-zoom@1.0.8/dist/medium-zoom.js"></script>
-  
+ 
+  <script>
+    async function deleteAllPostals(){
+      try{
+        let response = await fetch('/api/postals',{
+          method: 'DELETE',
+        })
+
+        if(response.status == 200){
+          $('#successModal').modal('show');
+          setTimeout(() =>{
+            location.reload()
+          },2000)
+        }else{
+          alert(await response.json())
+        }
+      }catch(error){
+        alert(error.message)
+      }
+    }
+  </script>
   <script>
     // JavaScript to handle showing the image on top of body elements
     const showImageButtons = document.querySelectorAll('.show-image');
