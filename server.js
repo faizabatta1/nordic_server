@@ -10,8 +10,9 @@ const express = require('express')
 const app = express()
 
 const server = http.createServer(app);
-const io = socketIo(server);
-io.set('transports', ['websocket']);
+const io = socketIo(server,{
+    transports: ["websocket"], // Specify the transports you want to use
+  });
 
 // WebSocket connection handling
 io.on('connection', (socket) => {
