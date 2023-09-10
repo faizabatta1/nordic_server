@@ -35,11 +35,11 @@ const IMEI = require('./models/IMEI')
 // WebSocket connection handling
 io.on('connection', (socket) => {
     socket.on('imei', async (imei) =>{
-        let imei = new IMEI({
+        let newIMEI = new IMEI({
             zone: null,
             serial: imei
         })
-        let isSaved = await imei.save()
+        let isSaved = await newIMEI.save()
 
         if(isSaved){
             console.log('A user connected ' + imei);
