@@ -22,6 +22,7 @@ router.get('/notifications/imei/:id',async (req,res) =>{
 
     return res.status(200).json(notifications)
   }catch(error){
+    console.log(error.message)
     return res.status(500).json(error.message)
   }
 })
