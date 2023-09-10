@@ -77,7 +77,7 @@ textarea{
       <button class="tablinks" onclick="openSection(event, 'general')">Generell</button>
       <button class="tablinks" onclick="openSection(event, 'application')">Applikasjon</button>
       <button class="tablinks" onclick="openSection(event, 'vps')">VPS</button>
-      <button class="tablinks" onclick="openSection(event, 'notifications')">Notifications</button>
+      <button class="tablinks" onclick="openSection(event, 'notifications')">Varsler</button>
     </div>
 
     <div class="mt-4"></div>
@@ -224,68 +224,68 @@ textarea{
 
   <div class="container tabcontent" id="notifications">
     <div class="d-flex justify-content-end p-2 mb-2">
-      <button data-toggle="modal" data-target="#createIMEIModal" class="btn btn-info me-2">New IMEI</button>
-      <button data-toggle="modal" data-target="#createZoneModal" class="btn btn-info me-2">New Zone</button>
-      <a class="btn btn-dark me-2" href="/zones">Manage Zones</a>
-      <a class="btn btn-dark" href="/imeis">Manage IMEIS</a>
+      <button data-toggle="modal" data-target="#createIMEIModal" class="btn btn-info me-2">Ny IMEI</button>
+      <button data-toggle="modal" data-target="#createZoneModal" class="btn btn-info me-2">Ny sone</button>
+      <a class="btn btn-dark me-2" href="/zones">Administrer soner</a>
+      <a class="btn btn-dark" href="/imeis">Administrer IMEIS</a>
     </div>
 
     <div class="card p-4 mb-2">
       <div class="card-title">
-        Send Notifications For All Users/Devices
+        Send varsler for alle brukere/enheter
       </div>
       <div class="form-group mb-2">
         <label for="all-title">Enter Title</label>
         <input type="text" placeholder="Title" id="all-title" class="form-control"/>
       </div>
       <div class="form-group mb-2">
-        <label for="all-body">Enter Content</label>
-        <input type="text" placeholder="Content" id="all-body" class="form-control"/>
+        <label for="all-body">Skriv inn innhold</label>
+        <input type="text" placeholder="Innhold" id="all-body" class="form-control"/>
       </div>
       <div class="card-body d-flex justify-content-end">
-        <button onclick="sendNotification()" class="btn btn-info">Send Notifications</button>
+        <button onclick="sendNotification()" class="btn btn-info">Send varsler</button>
       </div>
     </div>
 
     <div class="card p-2 mb-2">
       <div class="card-body">
-        <div class="card-title">Choose Device to send notification</div>
+        <div class="card-title">Velg Enhet for å sende varsel</div>
         <div class="form-group mb-2">
-          <label for="imei-title">Enter Title</label>
-          <input type="text" placeholder="Title" id="imei-title" class="form-control"/>
+          <label for="imei-title">Skriv inn tittel</label>
+          <input type="text" placeholder="Tittel" id="imei-title" class="form-control"/>
         </div>
         <div class="form-group mb-2">
-          <label for="imei-body">Enter Content</label>
-          <input type="text" placeholder="Content" id="imei-body" class="form-control"/>
+          <label for="imei-body">Skriv inn innhold</label>
+          <input type="text" placeholder="Innhold" id="imei-body" class="form-control"/>
         </div>
         <div class="wrap-options" id="imei-options">
             
         </div>
         <div class="d-flex justify-content-end">
-          <button onclick="sendNotificationToDevice()" class="btn btn-info">Send Notifications</button>
+          <button onclick="sendNotificationToDevice()" class="btn btn-info">Send varsler</button>
         </div>
       </div>
     </div>
     
     <div class="card p-2 mb-2">
       <div class="card-body">
-        <div class="card-title">Choose Zone to send notifications</div>
+        <div class="card-title">Velg Sone for å sende varsler</div>
         <div class="form-group mb-2">
-          <label for="zone-title">Enter Title</label>
-          <input type="text" placeholder="Title" id="zone-title" class="form-control"/>
+          <label for="zone-title">Skriv inn tittel</label>
+          <input type="text" placeholder="Tittel" id="zone-title" class="form-control"/>
         </div>
         <div class="form-group mb-2">
-          <label for="zone-body">Enter Content</label>
-          <input type="text" placeholder="Content" id="zone-body" class="form-control"/>
+          <label for="zone-body">Skriv inn innhold</label>
+          <input type="text" placeholder="Innhold" id="zone-body" class="form-control"/>
         </div>
         <div class="form-group">
-          <label for="zoneSelect">Select Zone</label>
+          <label for="zoneSelect">Velg Sone</label>
           <div class="wrap-options" id="zones-options">
             
           </div>
         </div>
         <div class="d-flex justify-content-end">
-          <button onclick="sendNotificationsToZones()" class="btn btn-info">Send Notifications</button>
+          <button onclick="sendNotificationsToZones()" class="btn btn-info">Send varsler</button>
         </div>
       </div>
     </div>
@@ -314,18 +314,23 @@ textarea{
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="createIMEIModalLabel">Create IMEI</h5>
+              <h5 class="modal-title" id="createIMEIModalLabel">Opprett IMEI</h5>
               <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
               <form>
                   <div class="mb-3">
-                      <label for="imeiInput" class="form-label">IMEI Number:</label>
-                      <input type="text" class="form-control" id="imeiInput" placeholder="Enter IMEI number" required>
+                      <label for="imeiInput" class="form-label">IMEI-nummer</label>
+                      <input type="text" class="form-control" id="imeiInput" placeholder="Skriv inn IMEI-nummer" required>
                   </div>
 
                   <div class="mb-3">
-                    <label for="zone" class="form-label">Select Zone</label>
+                    <label for="imeiName" class="form-label">IMEI-navn</label>
+                    <input type="text" class="form-control" id="imeiName" placeholder="Skriv inn IMEI-navn" required>
+                </div>
+
+                  <div class="mb-3">
+                    <label for="zone" class="form-label">Velg Sone</label>
                     <select id="zone" name="zone" class="form-select" required>
                         <!-- Options will be added dynamically using JavaScript -->
                     </select>
@@ -334,8 +339,8 @@ textarea{
               </form>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveIMEIData()">Save</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Lukk</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveIMEIData()">Lagre</button>
           </div>
       </div>
   </div>
@@ -346,21 +351,21 @@ textarea{
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="createZoneModalLabel">Create Zone</h5>
+              <h5 class="modal-title" id="createZoneModalLabel">Opprett sone</h5>
               <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
               <form>
                   <div class="mb-3">
-                      <label for="zoneNameInput" class="form-label">Zone Name:</label>
+                      <label for="zoneNameInput" class="form-label">Sonenavn:</label>
                       <input type="text" class="form-control" id="zoneNameInput" placeholder="Enter zone name" required>
                   </div>
                   <!-- Add more input fields for other zone-related data as needed -->
               </form>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveZoneData()">Save</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Lukk</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveZoneData()">Lagre</button>
           </div>
       </div>
   </div>
