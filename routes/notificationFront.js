@@ -5,6 +5,7 @@ const NotificationModel = require('../models/NotificationModel')
 router.get('/notifications',async (req,res) =>{
   try{
     let notifications = await NotificationModel.find()
+    notifications = notifications.reverse()
     return res.status(200).render('notifications/read',{
       notifications
     })
@@ -12,5 +13,6 @@ router.get('/notifications',async (req,res) =>{
 
   }
 })
+
 
 module.exports = router
