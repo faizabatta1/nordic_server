@@ -16,6 +16,10 @@
                 <input type="text" id="serial" name="serial" class="form-control" required>
             </div>
             <div class="mb-3">
+              <label for="name" class="form-label">IMEI Name</label>
+              <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+            <div class="mb-3">
               <label for="zone" class="form-label">Select Zone</label>
               <select id="zone" name="zone" class="form-select" required>
                   <!-- Options will be added dynamically using JavaScript -->
@@ -86,6 +90,7 @@ async function populateZoneDropdown() {
         try{
           // Retrieve data from input fields
           const serial = document.getElementById('serial').value;
+          const name = document.getElementById('name').value;
           const selectedZoneId = document.getElementById('zone').value;
 
           let response = await fetch('/api/imeis',{
@@ -95,6 +100,7 @@ async function populateZoneDropdown() {
             },
             body:JSON.stringify({
               serial: serial,
+              name: name,
               zone: selectedZoneId
             })
           })

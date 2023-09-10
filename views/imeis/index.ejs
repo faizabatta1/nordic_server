@@ -55,6 +55,7 @@
             <thead>
                 <tr>
                     <th scope="col">IMEI Serial</th>
+                    <th scope="col">IMEI Name</th>
                     <th scope="col">Zone</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -63,6 +64,7 @@
                 <% imeis.forEach(function(imei) { %>
                     <tr>
                         <td><%= imei.serial %></td>
+                        <td><%= imei.name ?? '' %></td>
                         <td><%= imei.zone?.name ?? '' %></td>
                         <td class="controls">
                             <a href="/imeis/<%= imei._id %>/edit" class="btn btn-info btn-sm">Edit</a>

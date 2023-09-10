@@ -13,8 +13,12 @@
         <h1>Edit IMEI</h1>
         <div id="edit-zone-form">
             <div class="form-group">
-                <label for="imeiName">IMEI Serial</label>
-                <input type="text" id="imeiName" name="imeiName" class="form-control" value="<%= imei.serial %>" required>
+                <label for="imeiSerial">IMEI Serial</label>
+                <input type="text" id="imeiSerial" name="imeiSerial" class="form-control" value="<%= imei.serial %>" required>
+            </div>
+            <div class="form-group">
+                <label for="imeiName">IMEI Name</label>
+                <input type="text" id="imeiName" name="imeiName" class="form-control" value="<%= imei.name %>" required>
             </div>
             <div class="mb-3">
                 <label for="zone" class="form-label">Select Zone</label>
@@ -67,12 +71,14 @@
         const imeiId = '<%= imei._id %>';
 
         updateButton.addEventListener('click', () => {
-            const imeiSerial = document.getElementById('imeiName').value;
+            const imeiName = document.getElementById('imeiName').value;
+            const imeiSerial = document.getElementById('imeiSerial').value;
             const selectedZoneId = document.getElementById('zone').value;
 
             // Create a JSON object with the updated data
             const updatedImei = {
                 serial: imeiSerial,
+                name: imeiName,
                 zone: selectedZoneId
             };
 
