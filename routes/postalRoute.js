@@ -18,10 +18,7 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ 
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 100, // 100MB limit (adjust as needed)
-  }
+  storage: storage
 })
 
 router.get('/postals',async (req,res) =>{
