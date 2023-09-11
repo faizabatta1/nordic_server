@@ -19,6 +19,7 @@ const { storeArchieve } = require('./pdf_archieve_controller')
 const createNewDriver = async (req,res) =>{
     try{
         const { data, token } = req.headers
+        console.log(token);
         const information = JSON.parse(decodeURIComponent(data))
 
         let decodedToken = jwt.verify(token,'your-secret-key')
