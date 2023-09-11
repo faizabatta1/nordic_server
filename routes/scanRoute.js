@@ -79,10 +79,13 @@ router.post('/scans',upload.single('violation'),async (req,res) =>{
       image: process.env.BASE_URL + req.file.path.split('public')[1].replaceAll('\\','/')
     })
 
+    console.log(postal);
+
     await postal.save()
     await browser.close();
     return res.sendStatus(200)
   }catch(error){
+    console.log(error.message);
     return res.status(500).json(error.message)
   }
 })
