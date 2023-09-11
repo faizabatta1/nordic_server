@@ -33,15 +33,20 @@
             display: flex;
             flex-direction: column;
             align-items: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
             overflow-x: hidden;
             overflow-y: auto;
         }
 
         .pdf-page {
-            width: 100%;
             background-color: white;
-            border-bottom: 1px solid #ddd;
             text-align: center; /* Center content horizontally */
+        }
+
+        .pdf-canvas {
+            display: inline-block;
+            max-width: 100%;
+            height: auto;
         }
 
         .pdf-controls a {
