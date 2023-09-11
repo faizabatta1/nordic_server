@@ -34,9 +34,7 @@ const IMEI = require('./models/IMEI')
 
 // WebSocket connection handling
 io.on('connection', (socket) => {
-    socket.on('imei', async (imei) =>{
-        console.log('A user connected ' + imei);
-    })
+    console.log('A user connected ');
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
